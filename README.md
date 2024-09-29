@@ -1,2 +1,2 @@
-# personal-blog-react
-Personal Blog
+# Personal Blog: Front-end
+Personal blog created with react
