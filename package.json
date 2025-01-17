@@ -1,6 +1,6 @@
 {
-    "name": "personal-blog-react",
-    "description": "Personal blog and showcase",
+    "name": "cyberpunk-tech-wear-shop-react",
+    "description": "Cyberpunk Tech Wear Shop is a showcase website project. This project is built with javascript framework. Stacks that are used in this project are React in frontend and node.js with express framwork connected to PostgreSQL database in backend.",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
