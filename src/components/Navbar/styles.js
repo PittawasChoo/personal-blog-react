@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 export const ScRoot = styled.nav`
     width: 100%;
     position: fixed;
-    z-index: 3;
+    z-index: 99;
 `;
 
 export const ScGridContainer = styled(motion.div)`
@@ -28,7 +28,7 @@ export const ScLogoText = styled.span`
 `;
 
 export const ScLogoTextInvert = styled.span`
-    background-color: #826858;
+    background-color: #ff4f00;
     color: white;
     padding: 0 3px 0 3px;
     line-height: 16px;

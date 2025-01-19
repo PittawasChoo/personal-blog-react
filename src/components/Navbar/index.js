@@ -30,7 +30,10 @@ const Main = () => {
         <ScRoot>
             <ScGridContainer
                 variants={{
-                    showBackground: { backgroundColor: "#000000" },
+                    showBackground: {
+                        backgroundColor: "#000000",
+                        boxShadow: "-5px 2px 18px 2px rgba(0,0,0,0.4)",
+                    },
                     hideBackground: { backgroundColor: "#00000000" },
                 }}
                 animate={showBackground ? "showBackground" : "hideBackground"}
@@ -43,10 +46,10 @@ const Main = () => {
                 <ScProductsMenuContainer>
                     <ScMenuContainer>
                         <ScMenuLabel>
-                            NEW ARRIVAL<ScMenuNumber>01</ScMenuNumber>
+                            ALL PRODUCTS<ScMenuNumber>01</ScMenuNumber>
                         </ScMenuLabel>
                         <ScMenuLabel>
-                            ALL PRODUCTS<ScMenuNumber>02</ScMenuNumber>
+                            NEW ARRIVAL<ScMenuNumber>02</ScMenuNumber>
                         </ScMenuLabel>
                         <ScMenuLabel>
                             PROMOTION<ScMenuNumber>03</ScMenuNumber>

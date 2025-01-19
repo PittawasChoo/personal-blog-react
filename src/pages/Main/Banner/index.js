@@ -40,13 +40,13 @@ import {
     ScTradeMarkSymbol,
 } from "./styles";
 
-const Main = () => {
+const Banner = () => {
     const ref = useRef(null);
     const { scrollYProgress } = useScroll({
         target: ref,
         offset: ["start start", "end start"],
     });
-    const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "80%"]);
+    const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
     return (
         <ScRoot ref={ref}>
@@ -55,12 +55,12 @@ const Main = () => {
                 <ScGridItem />
                 <ScGridItemForOtherMenu />
                 <ScGridItem>
-                    <ScGridImage imgPath="/images/banner/grid-img.png" />
+                    <ScGridImage $imgPath="/images/banner/grid-img.png" />
                 </ScGridItem>
                 <ScGridItem />
                 <ScGridItem />
                 <ScGridItemForSecondGridImage>
-                    <ScGridImage imgPath="/images/banner/grid-img2.png" />
+                    <ScGridImage $imgPath="/images/banner/grid-img2.png" />
                 </ScGridItemForSecondGridImage>
                 <ScGridItemForCaution>
                     <ScCautionLogo />
@@ -107,13 +107,13 @@ const Main = () => {
                 </ScGridItemForSlogan>
                 <ScGridItemForSponsors>
                     <ScSponsorsLabelContainer>
-                        <ScSponsorsLabelIcon imgPath="/images/banner/left_symbol.png" />
+                        <ScSponsorsLabelIcon $imgPath="/images/banner/left_symbol.png" />
                         <ScSponsorsLabel>
                             THE LATEST TREND OF TECH WEAR AND
                             <br />
                             FUTURE TECHNOLOGY WORLD
                         </ScSponsorsLabel>
-                        <ScSponsorsLabelIcon imgPath="/images/banner/right_symbol.png" />
+                        <ScSponsorsLabelIcon $imgPath="/images/banner/right_symbol.png" />
                     </ScSponsorsLabelContainer>
                     <div
                         style={{
@@ -123,8 +123,8 @@ const Main = () => {
                             justifyContent: "center",
                         }}
                     >
-                        <ScSponsorLogo imgPath="/images/banner/sponsor_logo1.png" />
-                        <ScSponsorLogo imgPath="/images/banner/sponsor_logo3.png" />
+                        <ScSponsorLogo $imgPath="/images/banner/sponsor_logo1.png" />
+                        <ScSponsorLogo $imgPath="/images/banner/sponsor_logo3.png" />
                         <ScSponsorLogo2 />
                         <ScBarCode />
                     </div>
@@ -144,4 +144,4 @@ const Main = () => {
     );
 };
 
-export default Main;
+export default Banner;

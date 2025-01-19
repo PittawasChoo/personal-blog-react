@@ -1,4 +1,5 @@
 body {
+    overflow-x: hidden;
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
         "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
@@ -12,5 +13,10 @@ code {
 
 @font-face {
     font-family: "space-explorer";
-    src: local("space-explorer"), url(./constant/fonts/space-explorer.ttf) format("truetype");
+    src: local("space-explorer"), url(../public/fonts/Space-Explorer.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "oxanium";
+    src: local("oxanium"), url(../public/fonts/Oxanium-Regular.ttf) format("truetype");
 }
