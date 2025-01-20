@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ScWarningImg, ScWelcomeTextContainer, ScText } from "./styles";
+import { ScText, ScWarningImg, ScWelcomeTextContainer } from "./styles";
 
 const WelcomeText = () => {
     return (

@@ -32,11 +32,11 @@ import {
     ScShortWarning,
     ScSloganImage,
     ScSloganText,
+    ScSponsorLogo,
+    ScSponsorLogo2,
     ScSponsorsLabel,
     ScSponsorsLabelContainer,
     ScSponsorsLabelIcon,
-    ScSponsorLogo,
-    ScSponsorLogo2,
     ScTradeMarkSymbol,
 } from "./styles";
 
@@ -55,12 +55,12 @@ const Banner = () => {
                 <ScGridItem />
                 <ScGridItemForOtherMenu />
                 <ScGridItem>
-                    <ScGridImage $imgPath="/images/banner/grid-img.png" />
+                    <ScGridImage $imgUrl="/images/banner/grid-img.png" />
                 </ScGridItem>
                 <ScGridItem />
                 <ScGridItem />
                 <ScGridItemForSecondGridImage>
-                    <ScGridImage $imgPath="/images/banner/grid-img2.png" />
+                    <ScGridImage $imgUrl="/images/banner/grid-img2.png" />
                 </ScGridItemForSecondGridImage>
                 <ScGridItemForCaution>
                     <ScCautionLogo />
@@ -107,13 +107,13 @@ const Banner = () => {
                 </ScGridItemForSlogan>
                 <ScGridItemForSponsors>
                     <ScSponsorsLabelContainer>
-                        <ScSponsorsLabelIcon $imgPath="/images/banner/left_symbol.png" />
+                        <ScSponsorsLabelIcon $imgUrl="/images/banner/left_symbol.png" />
                         <ScSponsorsLabel>
                             THE LATEST TREND OF TECH WEAR AND
                             <br />
                             FUTURE TECHNOLOGY WORLD
                         </ScSponsorsLabel>
-                        <ScSponsorsLabelIcon $imgPath="/images/banner/right_symbol.png" />
+                        <ScSponsorsLabelIcon $imgUrl="/images/banner/right_symbol.png" />
                     </ScSponsorsLabelContainer>
                     <div
                         style={{
@@ -123,8 +123,8 @@ const Banner = () => {
                             justifyContent: "center",
                         }}
                     >
-                        <ScSponsorLogo $imgPath="/images/banner/sponsor_logo1.png" />
-                        <ScSponsorLogo $imgPath="/images/banner/sponsor_logo3.png" />
+                        <ScSponsorLogo $imgUrl="/images/banner/sponsor_logo1.png" />
+                        <ScSponsorLogo $imgUrl="/images/banner/sponsor_logo3.png" />
                         <ScSponsorLogo2 />
                         <ScBarCode />
                     </div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useScroll, useMotionValueEvent } from "framer-motion";
+import { useMotionValueEvent, useScroll } from "framer-motion";
 
 import {
     ScGridContainer,

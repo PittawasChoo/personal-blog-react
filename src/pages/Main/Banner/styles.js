@@ -34,7 +34,7 @@ export const ScGridImage = styled.div`
     width: 100%;
     height: 100%;
     background-color: rgb(20, 20, 20);
-    background-image: url(${(props) => props.$imgPath || ""});
+    background-image: url(${(props) => props.$imgUrl || ""});
     background-size: cover;
     background-position: center;
 `;
@@ -206,7 +206,7 @@ export const ScSponsorsLabelContainer = styled.div`
 export const ScSponsorsLabelIcon = styled.div`
     width: 12px;
     height: 12px;
-    background-image: url(${(props) => props.$imgPath || ""});
+    background-image: url(${(props) => props.$imgUrl || ""});
     background-size: cover;
     background-position: center;
     margin: 6px 0 6px 0;
@@ -221,7 +221,7 @@ export const ScSponsorsLabel = styled.div`
 export const ScSponsorLogo = styled.div`
     width: 35px;
     height: 35px;
-    background-image: url(${(props) => props.$imgPath || ""});
+    background-image: url(${(props) => props.$imgUrl || ""});
     background-size: cover;
     background-position: center;
     margin: 6px 0 6px 0;

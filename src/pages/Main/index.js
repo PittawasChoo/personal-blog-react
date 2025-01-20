@@ -7,31 +7,34 @@ import Banner from "./Banner";
 import Banner2 from "./Banner2";
 import Marquee from "./Marquee";
 import Trending from "./Trending";
-import Carousel from "./Carousel";
+import ProductCarousel from "./ProductCarousel";
+
+import { ScBanner2Container, ScFooterContainer, ScRoot, ScTrendingContainer } from "./styles";
 
 const Main = () => {
     return (
-        <div style={{ backgroundColor: "white" }}>
+        <ScRoot>
             <Navbar />
             <Banner />
             <Marquee />
 
-            <div style={{ padding: "120px 50px 120px 50px", width: "1400px", margin: "0 auto" }}>
+            <ScTrendingContainer>
                 <Trending />
-            </div>
+            </ScTrendingContainer>
 
-            <Carousel header="NEW ARRIVAL" />
+            <ProductCarousel header="NEW ARRIVAL" />
 
-            <div style={{ marginTop: "120px", marginBottom: "120px" }}>
+            <ScBanner2Container>
                 <Marquee />
                 <Banner2 />
                 <Marquee reverse />
-            </div>
+            </ScBanner2Container>
 
-            <Carousel header="PROMOTION" />
-            <div style={{ marginTop: "80px" }} />
-            <Footer />
-        </div>
+            <ProductCarousel header="PROMOTION" />
+            <ScFooterContainer>
+                <Footer />
+            </ScFooterContainer>
+        </ScRoot>
     );
 };
 
