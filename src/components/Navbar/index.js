@@ -1,20 +1,22 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { useMotionValueEvent, useScroll } from "framer-motion";
+
+import Logo from "components/Logo";
 
 import {
     ScGridContainer,
     ScLogoContainer,
-    ScLogoText,
-    ScLogoTextInvert,
     ScMenuContainer,
     ScMenuLabel,
     ScMenuNumber,
     ScOtherMenuContainer,
     ScProductsMenuContainer,
     ScRoot,
+    ScTextLink,
 } from "./styles";
 
-const Main = () => {
+const Navbar = ({ alwaysShowBackground = false }) => {
     const { scrollY } = useScroll();
     const [showBackground, setShowBackground] = useState(false);
 
@@ -36,31 +38,47 @@ const Main = () => {
                     },
                     hideBackground: { backgroundColor: "#00000000" },
                 }}
-                animate={showBackground ? "showBackground" : "hideBackground"}
+                animate={
+                    showBackground || alwaysShowBackground ? "showBackground" : "hideBackground"
+                }
                 transition={{ duration: 0.2, ease: "easeOut" }}
             >
-                <ScLogoContainer>
-                    <ScLogoText>CYBER</ScLogoText>
-                    <ScLogoTextInvert>WEAR</ScLogoTextInvert>
-                </ScLogoContainer>
+                <ScTextLink to="/">
+                    <ScLogoContainer>
+                        <Logo />
+                    </ScLogoContainer>
+                </ScTextLink>
                 <ScProductsMenuContainer>
                     <ScMenuContainer>
-                        <ScMenuLabel>
-                            ALL PRODUCTS<ScMenuNumber>01</ScMenuNumber>
-                        </ScMenuLabel>
-                        <ScMenuLabel>
-                            NEW ARRIVAL<ScMenuNumber>02</ScMenuNumber>
-                        </ScMenuLabel>
-                        <ScMenuLabel>
-                            PROMOTION<ScMenuNumber>03</ScMenuNumber>
-                        </ScMenuLabel>
+                        <ScTextLink to="/all-products">
+                            <ScMenuLabel>
+                                ALL PRODUCTS<ScMenuNumber>01</ScMenuNumber>
+                            </ScMenuLabel>
+                        </ScTextLink>
+                        <ScTextLink to="/new-arrival">
+                            <ScMenuLabel>
+                                NEW ARRIVAL<ScMenuNumber>02</ScMenuNumber>
+                            </ScMenuLabel>
+                        </ScTextLink>
+                        <ScTextLink to="/promotion">
+                            <ScMenuLabel>
+                                PROMOTION<ScMenuNumber>03</ScMenuNumber>
+                            </ScMenuLabel>
+                        </ScTextLink>
                     </ScMenuContainer>
                 </ScProductsMenuContainer>
                 <ScOtherMenuContainer>
                     <ScMenuContainer>
-                        <ScMenuLabel>
-                            ABOUT US<ScMenuNumber>04</ScMenuNumber>
-                        </ScMenuLabel>
+                        <ScTextLink to="/about-us">
+                            <ScMenuLabel>
+                                ABOUT US<ScMenuNumber>04</ScMenuNumber>
+                            </ScMenuLabel>
+                        </ScTextLink>
+                        <ScTextLink to="/contact-us">
+                            <ScMenuLabel>
+                                CONTACT US<ScMenuNumber>05</ScMenuNumber>
+                            </ScMenuLabel>
+                        </ScTextLink>
                     </ScMenuContainer>
                     <ScMenuContainer>
                         <ScMenuLabel>CART</ScMenuLabel>
@@ -73,4 +91,8 @@ const Main = () => {
     );
 };
 
-export default Main;
+Navbar.propTypes = {
+    alwaysShowBackground: PropTypes.bool,
+};
+
+export default Navbar;

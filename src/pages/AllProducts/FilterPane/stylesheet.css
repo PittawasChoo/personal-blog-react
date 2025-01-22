@@ -1,0 +1,7 @@
+.slide-pane__overlay {
+    z-index: 999;
+}
+
+.slide-pane__content {
+    padding: 0;
+}

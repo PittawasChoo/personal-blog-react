@@ -28,7 +28,7 @@ import {
     ScRoot,
 } from "./styles";
 
-const ProductCarousel = ({ header }) => {
+const ProductCarousel = ({ header, items }) => {
     let sliderRef = useRef(null);
     const next = () => {
         sliderRef.slickNext();
@@ -65,8 +65,8 @@ const ProductCarousel = ({ header }) => {
                                 <ScButton>
                                     VIEW ALL
                                     <img
-                                        src="images/shared/link-arrow.png"
-                                        alt="caution"
+                                        src="/images/shared/link-arrow.png"
+                                        alt="view all"
                                         width={16}
                                         height={16}
                                     />
@@ -78,16 +78,16 @@ const ProductCarousel = ({ header }) => {
                         <ScLongLine />
                         <ScPreviousButton onClick={previous}>
                             <img
-                                src="images/shared/orange-left-arrow.png"
-                                alt="caution"
+                                src="/images/shared/orange-left-arrow.png"
+                                alt="previous"
                                 width={10}
                                 height={10}
                             />
                         </ScPreviousButton>
                         <ScNextButton onClick={next}>
                             <img
-                                src="images/shared/orange-right-arrow.png"
-                                alt="caution"
+                                src="/images/shared/orange-right-arrow.png"
+                                alt="next"
                                 width={10}
                                 height={10}
                             />
@@ -108,66 +108,17 @@ const ProductCarousel = ({ header }) => {
                                 sliderRef = slider;
                             }}
                         >
-                            <SmallCard
-                                imgUrl={"/images/samples/sample1.png"}
-                                brand={"Nova Forge"}
-                                name={"Worker boots New Era - NF0092"}
-                                price={99123.45}
-                            />
-                            <SmallCard
-                                imgUrl={"/images/samples/sample1.png"}
-                                brand={"Nova Forge"}
-                                name={"Worker boots New Era - NF0092"}
-                                price={99123.45}
-                            />
-                            <SmallCard
-                                imgUrl={"/images/samples/sample2.png"}
-                                brand={"Nova Forge"}
-                                name={"Worker boots New Era - NF0092"}
-                                price={99123.45}
-                            />
-                            <SmallCard
-                                imgUrl={"/images/samples/sample2.png"}
-                                brand={"Nova Forge"}
-                                name={"Worker boots New Era - NF0092"}
-                                price={99123.45}
-                            />
-                            <SmallCard
-                                imgUrl={"/images/samples/sample3.png"}
-                                brand={"Nova Forge"}
-                                name={"Worker boots New Era - NF0092"}
-                                price={99123.45}
-                            />
-                            <SmallCard
-                                imgUrl={"/images/samples/sample3.png"}
-                                brand={"Nova Forge"}
-                                name={"Worker boots New Era - NF0092"}
-                                price={99123.45}
-                            />
-                            <SmallCard
-                                imgUrl={"/images/samples/sample4.png"}
-                                brand={"Nova Forge"}
-                                name={"Worker boots New Era - NF0092"}
-                                price={99123.45}
-                            />
-                            <SmallCard
-                                imgUrl={"/images/samples/sample4.png"}
-                                brand={"Nova Forge"}
-                                name={"Worker boots New Era - NF0092"}
-                                price={99123.45}
-                            />
-                            <SmallCard
-                                imgUrl={"/images/samples/sample3.png"}
-                                brand={"Nova Forge"}
-                                name={"Worker boots New Era - NF0092"}
-                                price={99123.45}
-                            />
-                            <SmallCard
-                                imgUrl={"/images/samples/sample3.png"}
-                                brand={"Nova Forge"}
-                                name={"Worker boots New Era - NF0092"}
-                                price={99123.45}
-                            />
+                            {items.map((item) => {
+                                return (
+                                    <SmallCard
+                                        imgUrl={item.imgUrl}
+                                        brand={item.brand}
+                                        name={item.name}
+                                        price={item.price}
+                                        promotionPrice={item.promotionPrice}
+                                    />
+                                );
+                            })}
                         </Slider>
                     </div>
                 </ScCarouselInnerContainer>
@@ -178,6 +129,7 @@ const ProductCarousel = ({ header }) => {
 
 ProductCarousel.propTypes = {
     header: PropTypes.string.isRequired,
+    items: PropTypes.array.isRequired,
 };
 
 export default ProductCarousel;

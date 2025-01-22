@@ -11,11 +11,13 @@ import {
     ScCardImage,
     ScCardName,
     ScCardPrice,
+    ScCardPriceBeforePromotion,
+    ScCardPromotionPrice,
     ScCardShadow,
     ScRoot,
 } from "./styles";
 
-const BigCard = ({ imgUrl, brand, name, price }) => {
+const BigCard = ({ imgUrl, brand, name, price, promotionPrice }) => {
     return (
         <ScRoot>
             <ScCardBorder>
@@ -26,7 +28,26 @@ const BigCard = ({ imgUrl, brand, name, price }) => {
                             <ScCardBrand>{brand}</ScCardBrand>
                             <ScCardName>{name}</ScCardName>
                         </div>
-                        <ScCardPrice>${FormatToLocaleString(price)}</ScCardPrice>
+                        {promotionPrice ? (
+                            <div
+                                style={{
+                                    display: "flex",
+                                    alignItems: "flex-end",
+                                    gap: "10px",
+                                }}
+                            >
+                                <ScCardPromotionPrice>
+                                    ${FormatToLocaleString(promotionPrice)}
+                                </ScCardPromotionPrice>
+                                {promotionPrice && (
+                                    <ScCardPriceBeforePromotion>
+                                        <s>${FormatToLocaleString(price)}</s>
+                                    </ScCardPriceBeforePromotion>
+                                )}
+                            </div>
+                        ) : (
+                            <ScCardPrice>${FormatToLocaleString(price)}</ScCardPrice>
+                        )}
                     </ScCardDetailContainer>
                 </ScCard>
             </ScCardBorder>
@@ -40,6 +61,7 @@ BigCard.propTypes = {
     brand: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
+    promotionPrice: PropTypes.number,
 };
 
 export default BigCard;

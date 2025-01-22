@@ -11,6 +11,10 @@ import ProductCarousel from "./ProductCarousel";
 
 import { ScBanner2Container, ScFooterContainer, ScRoot, ScTrendingContainer } from "./styles";
 
+import trendingOb from "./trending-ob.json";
+import newArrival from "./new-arrival.json";
+import promotion from "./promotion.json";
+
 const Main = () => {
     return (
         <ScRoot>
@@ -19,10 +23,10 @@ const Main = () => {
             <Marquee />
 
             <ScTrendingContainer>
-                <Trending />
+                <Trending items={trendingOb || []} />
             </ScTrendingContainer>
 
-            <ProductCarousel header="NEW ARRIVAL" />
+            <ProductCarousel header="NEW ARRIVAL" items={newArrival || []} />
 
             <ScBanner2Container>
                 <Marquee />
@@ -30,7 +34,7 @@ const Main = () => {
                 <Marquee reverse />
             </ScBanner2Container>
 
-            <ProductCarousel header="PROMOTION" />
+            <ProductCarousel header="PROMOTION" items={promotion || []} />
             <ScFooterContainer>
                 <Footer />
             </ScFooterContainer>

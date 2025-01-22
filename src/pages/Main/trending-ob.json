@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Worker boots New Era - NF0092",
+        "brand": "Nova Forge",
+        "price": 99123.45,
+        "promotionPrice": 10000,
+        "imgUrl": "/images/samples/sample1.png"
+    },
+    {
+        "name": "SynLux - Luxury Tactical Satchel",
+        "brand": "SynLux",
+        "price": 99123.45,
+        "promotionPrice": 20000,
+        "imgUrl": "/images/samples/sample2.png"
+    },
+    {
+        "name": "Double layer warmtech jacket - LN2613",
+        "brand": "Luminara",
+        "price": 99123.45,
+        "promotionPrice": 30000,
+        "imgUrl": "/images/samples/sample3.png"
+    },
+    {
+        "name": "Hard leather jacket - Military grade",
+        "brand": "Arasaka",
+        "price": 99123.45,
+        "promotionPrice": 40000,
+        "imgUrl": "/images/samples/sample4.png"
+    }
+]

@@ -11,11 +11,13 @@ import {
     ScCardImage,
     ScCardName,
     ScCardPrice,
+    ScCardPriceBeforePromotion,
+    ScCardPromotionPrice,
     ScCardShadow,
     ScRoot,
 } from "./styles";
 
-const SmallCard = ({ imgUrl, brand, name, price }) => {
+const SmallCard = ({ imgUrl, brand, name, price, promotionPrice }) => {
     return (
         <ScRoot>
             <ScCardBorder>
@@ -26,7 +28,26 @@ const SmallCard = ({ imgUrl, brand, name, price }) => {
                             <ScCardName>{name}</ScCardName>
                             <ScCardBrand>{brand}</ScCardBrand>
                         </div>
-                        <ScCardPrice>${FormatToLocaleString(price)}</ScCardPrice>
+                        {promotionPrice ? (
+                            <div
+                                style={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignItems: "end",
+                                }}
+                            >
+                                <ScCardPromotionPrice>
+                                    ${FormatToLocaleString(promotionPrice)}
+                                </ScCardPromotionPrice>
+                                {promotionPrice && (
+                                    <ScCardPriceBeforePromotion>
+                                        <s>${FormatToLocaleString(price)}</s>
+                                    </ScCardPriceBeforePromotion>
+                                )}
+                            </div>
+                        ) : (
+                            <ScCardPrice>${FormatToLocaleString(price)}</ScCardPrice>
+                        )}
                     </ScCardDetailContainer>
                 </ScCard>
             </ScCardBorder>
@@ -40,7 +61,7 @@ SmallCard.propTypes = {
     brand: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    minimal: PropTypes.bool,
+    promotionPrice: PropTypes.number,
 };
 
 export default SmallCard;

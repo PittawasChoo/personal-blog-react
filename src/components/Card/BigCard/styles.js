@@ -62,6 +62,18 @@ export const ScCardPrice = styled.div`
     font-weight: 800;
 `;
 
+export const ScCardPromotionPrice = styled.div`
+    font-size: 19px;
+    line-height: 19px;
+    font-weight: 800;
+`;
+
+export const ScCardPriceBeforePromotion = styled.div`
+    font-size: 14px;
+    line-height: 14px;
+    color: #999999;
+`;
+
 export const ScCardShadow = styled.div`
     clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
     height: 450px;

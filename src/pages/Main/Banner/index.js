@@ -37,6 +37,7 @@ import {
     ScSponsorsLabel,
     ScSponsorsLabelContainer,
     ScSponsorsLabelIcon,
+    ScSponsorsLogoContainer,
     ScTradeMarkSymbol,
 } from "./styles";
 
@@ -115,19 +116,12 @@ const Banner = () => {
                         </ScSponsorsLabel>
                         <ScSponsorsLabelIcon $imgUrl="/images/banner/right_symbol.png" />
                     </ScSponsorsLabelContainer>
-                    <div
-                        style={{
-                            display: "flex",
-                            gap: "10px",
-                            alignItems: "center",
-                            justifyContent: "center",
-                        }}
-                    >
+                    <ScSponsorsLogoContainer>
                         <ScSponsorLogo $imgUrl="/images/banner/sponsor_logo1.png" />
                         <ScSponsorLogo $imgUrl="/images/banner/sponsor_logo3.png" />
                         <ScSponsorLogo2 />
                         <ScBarCode />
-                    </div>
+                    </ScSponsorsLogoContainer>
                 </ScGridItemForSponsors>
             </ScGridBox>
 

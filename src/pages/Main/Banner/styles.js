@@ -218,6 +218,13 @@ export const ScSponsorsLabel = styled.div`
     margin: 0 15px;
 `;
 
+export const ScSponsorsLogoContainer = styled.div`
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+`;
+
 export const ScSponsorLogo = styled.div`
     width: 35px;
     height: 35px;

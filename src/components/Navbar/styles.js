@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export const ScRoot = styled.nav`
-    width: 100%;
+    width: 100vw;
     position: fixed;
     z-index: 99;
 `;
@@ -14,24 +15,17 @@ export const ScGridContainer = styled(motion.div)`
     font-family: space-explorer;
 `;
 
+export const ScTextLink = styled(Link)`
+    text-decoration: none;
+    color: inherit;
+`;
+
 export const ScLogoContainer = styled.div`
     background-color: white;
-    color: black;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 16px;
-`;
-
-export const ScLogoText = styled.span`
-    margin-right: 2px;
-`;
-
-export const ScLogoTextInvert = styled.span`
-    background-color: #ff4f00;
-    color: white;
-    padding: 0 3px 0 3px;
-    line-height: 16px;
+    height: 100%;
 `;
 
 export const ScProductsMenuContainer = styled.div`
