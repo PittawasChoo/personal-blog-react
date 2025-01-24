@@ -1,7 +1,18 @@
 import React from "react";
+import { FilterProvider } from "contexts/FilterContext";
 
-const Promotion = () => {
-    return <div>Promotion</div>;
+import ProductPage from "components/ProductsPage";
+
+import Products from "./Products";
+
+const AllProducts = () => {
+    return (
+        <FilterProvider>
+            <ProductPage title="PROMOTION">
+                <Products />
+            </ProductPage>
+        </FilterProvider>
+    );
 };
 
-export default Promotion;
+export default AllProducts;

@@ -43,7 +43,7 @@ export const ScHeaderContainer = styled.div`
 `;
 
 export const ScHeaderToolsContainer = styled.div`
-    margin-right: 40px;
+    margin-right: 5px;
     display: flex;
     gap: 30px;
     align-items: center;
@@ -107,37 +107,13 @@ export const ScToolButtonContainer = styled.div`
     position: relative;
 `;
 
-export const ScRedDot = styled.div`
+export const ScOrangeDot = styled.div`
     width: 7px;
     height: 7px;
-    background-color: red;
+    background-color: #ff4f00;
     border-radius: 50%;
     position: absolute;
     border: 1px solid white;
     top: -3px;
     right: -6px;
-`;
-
-export const ScBodyContainer = styled.div`
-    width: 100vw;
-    background-color: white;
-    margin-top: 200px;
-    padding: 50px 50px;
-    color: black;
-    display: flex;
-    justify-content: center;
-`;
-
-export const ScBody = styled.div`
-    width: 100vw;
-    max-width: 1600px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-`;
-
-export const ScCardContainer = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 40px;
 `;

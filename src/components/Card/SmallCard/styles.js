@@ -74,7 +74,7 @@ export const ScCardPromotionPrice = styled.div`
 export const ScCardPriceBeforePromotion = styled.div`
     font-size: 12px;
     line-height: 12px;
-    color: #999999;
+    color: red;
     margin-top: 5px;
 `;
 

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import SlidingPane from "react-sliding-pane";
 import Checkbox from "@mui/material/Checkbox";
 import { grey } from "@mui/material/colors";
+import { orderBy } from "lodash";
 
 import "react-sliding-pane/dist/react-sliding-pane.css";
 
@@ -21,7 +22,7 @@ import {
     ScRoot,
 } from "./styles";
 
-const SortPane = ({
+const FilterPane = ({
     brands,
     isOpen,
     onClose,
@@ -102,7 +103,10 @@ const SortPane = ({
                     <div>
                         {types.map((type) => {
                             return (
-                                <ScFilterOptionContainer onClick={() => toggleSelectedType(type)}>
+                                <ScFilterOptionContainer
+                                    key={type.id}
+                                    onClick={() => toggleSelectedType(type.id)}
+                                >
                                     <Checkbox
                                         size="small"
                                         sx={{
@@ -111,10 +115,10 @@ const SortPane = ({
                                                 color: grey[600],
                                             },
                                         }}
-                                        value={type}
-                                        checked={selectedTypes.includes(type)}
+                                        value={type.id}
+                                        checked={selectedTypes.includes(type.id)}
                                     />
-                                    <ScFilterOptionLabel>{type}</ScFilterOptionLabel>
+                                    <ScFilterOptionLabel>{type.name}</ScFilterOptionLabel>
                                 </ScFilterOptionContainer>
                             );
                         })}
@@ -129,7 +133,10 @@ const SortPane = ({
                     <div>
                         {sizes.map((size) => {
                             return (
-                                <ScFilterOptionContainer onClick={() => toggleSelectedSize(size)}>
+                                <ScFilterOptionContainer
+                                    key={size}
+                                    onClick={() => toggleSelectedSize(size)}
+                                >
                                     <Checkbox
                                         size="small"
                                         sx={{
@@ -154,9 +161,12 @@ const SortPane = ({
                         <ScFilterHeaderLabel>BRAND</ScFilterHeaderLabel>
                     </ScFilterHeaderContainer>
                     <div>
-                        {brands.map((brand) => {
+                        {orderBy(brands, "name").map((brand) => {
                             return (
-                                <ScFilterOptionContainer onClick={() => toggleSelectedBrand(brand)}>
+                                <ScFilterOptionContainer
+                                    key={brand.id}
+                                    onClick={() => toggleSelectedBrand(brand.id)}
+                                >
                                     <Checkbox
                                         size="small"
                                         sx={{
@@ -165,10 +175,10 @@ const SortPane = ({
                                                 color: grey[600],
                                             },
                                         }}
-                                        value={brand}
-                                        checked={selectedBrands.includes(brand)}
+                                        value={brand.id}
+                                        checked={selectedBrands.includes(brand.id)}
                                     />
-                                    <ScFilterOptionLabel>{brand}</ScFilterOptionLabel>
+                                    <ScFilterOptionLabel>{brand.name}</ScFilterOptionLabel>
                                 </ScFilterOptionContainer>
                             );
                         })}
@@ -181,7 +191,7 @@ const SortPane = ({
     );
 };
 
-SortPane.propTypes = {
+FilterPane.propTypes = {
     brands: PropTypes.array.isRequired,
     isOpen: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
@@ -195,4 +205,4 @@ SortPane.propTypes = {
     setSelectedTypes: PropTypes.func.isRequired,
 };
 
-export default SortPane;
+export default FilterPane;
