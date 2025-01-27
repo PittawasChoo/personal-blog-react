@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+
 import { motion, useScroll, useTransform } from "framer-motion";
 
 import {
@@ -47,7 +48,7 @@ const Banner = () => {
         target: ref,
         offset: ["start start", "end start"],
     });
-    const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+    const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "80%"]);
 
     return (
         <ScRoot ref={ref}>

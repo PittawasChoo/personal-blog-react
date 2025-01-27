@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const ScRoot = styled.div`
     background-color: white;
+    color: white;
 `;
 
 export const ScTrendingContainer = styled.div`

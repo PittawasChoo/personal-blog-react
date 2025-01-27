@@ -63,7 +63,7 @@ export const ScSearchContainer = styled.div`
     overflow: hidden;
 `;
 
-export const ScInput = styled.div`
+export const ScInput = styled.input`
     height: 30px;
     width: 240px;
     border: none;
@@ -116,4 +116,20 @@ export const ScOrangeDot = styled.div`
     border: 1px solid white;
     top: -3px;
     right: -6px;
+`;
+
+export const ScSortingLoadingContainer = styled.div`
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+export const ScErrorContainer = styled.div`
+    width: 220px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;

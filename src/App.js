@@ -13,9 +13,9 @@ import NewArrival from "pages/NewArrival";
 import Promotion from "pages/Promotion";
 
 // Create a client
-const DARK_THEME = createTheme({
+const THEME = createTheme({
     palette: {
-        mode: "dark",
+        mode: "light",
     },
 });
 
@@ -24,7 +24,7 @@ const App = () => {
 
     return (
         <QueryClientProvider client={queryClient}>
-            <ThemeProvider theme={DARK_THEME}>
+            <ThemeProvider theme={THEME}>
                 <CssBaseline />
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <Routes>

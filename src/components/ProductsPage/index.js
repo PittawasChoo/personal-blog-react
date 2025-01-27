@@ -1,20 +1,23 @@
 import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
+
+import CircularProgress from "@mui/material/CircularProgress";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
+import { useSearchParams } from "react-router-dom";
 
+import ErrorRetry from "components/ErrorRetry";
 import Footer from "components/Footer";
 import Navbar from "components/Navbar";
 
 import { FilterContext } from "contexts/FilterContext";
 
 import FilterPane from "./FilterPane";
-import sizes from "./sizes.json";
-
 import {
     ScDynamicSizeHeaderContainer,
+    ScErrorContainer,
     ScHeaderContainer,
     ScHeaderToolsContainer,
     ScInput,
@@ -26,46 +29,19 @@ import {
     ScRoot,
     ScSearchContainer,
     ScSearchIconContainer,
+    ScSortingLoadingContainer,
     ScToolButtonContainer,
 } from "./styles";
 
-const SORTING_OPTIONS = [
-    { label: "Featured", value: "featured" },
-    { label: "Name: A-Z", value: "nameAscending" },
-    { label: "Name: Z-A", value: "nameDescending" },
-    { label: "Price: Low-High", value: "priceAscending" },
-    { label: "Price: High-Low", value: "priceDescending" },
-    { label: "Newest", value: "dateAscending" },
-    { label: "Oldest", value: "dateDescending" },
-];
-
 const ProductPage = ({ title, children }) => {
-    const {
-        data: brandsData,
-        error: brandsFetchingError,
-        isFetching: isLoadingBrands,
-    } = useQuery({
-        queryKey: ["brands"],
-        queryFn: async () => {
-            const response = await fetch("http://localhost:3001/brands");
-            return await response.json();
-        },
-    });
-
-    const {
-        data: typesData,
-        error: typesFetchingError,
-        isFetching: isLoadingTypes,
-    } = useQuery({
-        queryKey: ["types"],
-        queryFn: async () => {
-            const response = await fetch("http://localhost:3001/types");
-            return await response.json();
-        },
-    });
-
-    const brands = brandsData || [];
-    const types = typesData || [];
+    // search params controller
+    const [searchParams, setSearchParams] = useSearchParams();
+    const onFilterChange = () => {
+        setSearchParams((searchParams) => {
+            searchParams.delete("page");
+            return searchParams;
+        });
+    };
 
     // context to set and pass to children component to be fetch parameters
     const {
@@ -103,6 +79,7 @@ const ProductPage = ({ title, children }) => {
     const handleSelectSorting = (selectedMethod) => {
         setSortBy(selectedMethod);
         setAnchorEl(null);
+        onFilterChange();
     };
 
     // header controller
@@ -122,6 +99,102 @@ const ProductPage = ({ title, children }) => {
         return scrollPosition <= 120 ? 200 - scrollPosition : 80;
     };
 
+    // get filter and sorting options
+    const {
+        data: brandsData,
+        isError: isBrandsFetchingError,
+        isFetching: isLoadingBrands,
+        refetch: refetchBrands,
+    } = useQuery({
+        queryKey: ["brands"],
+        queryFn: async () => {
+            const response = await fetch("http://localhost:3001/brands");
+            return await response.json();
+        },
+    });
+    const {
+        data: typesData,
+        isError: isTypesFetchingError,
+        isFetching: isLoadingTypes,
+        refetch: refetchTypes,
+    } = useQuery({
+        queryKey: ["types"],
+        queryFn: async () => {
+            const response = await fetch("http://localhost:3001/types");
+            return await response.json();
+        },
+    });
+    const {
+        data: sizesData,
+        isError: isSizesFetchingError,
+        isFetching: isLoadingSizes,
+        refetch: refetchSizes,
+    } = useQuery({
+        queryKey: ["sizes"],
+        queryFn: async () => {
+            const response = await fetch("http://localhost:3001/sizes");
+            return await response.json();
+        },
+    });
+    const {
+        data: sortingOptionsData,
+        isError: isSortingOptionsFetchingError,
+        isFetching: isLoadingSortingOptions,
+        refetch: refetchSortingOptions,
+    } = useQuery({
+        queryKey: ["sortings"],
+        queryFn: async () => {
+            const response = await fetch("http://localhost:3001/sorting-options");
+            return await response.json();
+        },
+    });
+
+    const brands = brandsData || [];
+    const types = typesData || [];
+    const sizes = sizesData || [];
+    const sortingOptions = sortingOptionsData || [];
+
+    const isLoadingFilterOptions = isLoadingBrands || isLoadingTypes || isLoadingSizes;
+    const isFilterOptionsFetchingError =
+        isBrandsFetchingError || isTypesFetchingError || isSizesFetchingError;
+    const refetchFilterOptions = () => {
+        refetchBrands();
+        refetchTypes();
+        refetchSizes();
+    };
+
+    const getSortingOptionsPopover = () => {
+        if (isLoadingSortingOptions) {
+            return (
+                <ScSortingLoadingContainer>
+                    <CircularProgress style={{ color: "grey" }} />
+                </ScSortingLoadingContainer>
+            );
+        } else if (isSortingOptionsFetchingError) {
+            return (
+                <ScErrorContainer>
+                    <ErrorRetry label="sorting options" onRetry={refetchSortingOptions} />
+                </ScErrorContainer>
+            );
+        } else {
+            return (
+                <>
+                    {sortingOptions.map((option) => {
+                        return (
+                            <MenuItem
+                                key={option.key}
+                                selected={sortBy === option.key}
+                                onClick={() => handleSelectSorting(option.key)}
+                            >
+                                {option.label}
+                            </MenuItem>
+                        );
+                    })}
+                </>
+            );
+        }
+    };
+
     return (
         <ScRoot>
             <FilterPane
@@ -136,6 +209,10 @@ const ProductPage = ({ title, children }) => {
                 setSelectedSizes={setSelectedSizes}
                 selectedTypes={selectedTypes}
                 setSelectedTypes={setSelectedTypes}
+                isLoading={isLoadingFilterOptions}
+                isError={isFilterOptionsFetchingError}
+                refetch={refetchFilterOptions}
+                onFilterChange={onFilterChange}
             />
 
             <Navbar alwaysShowBackground />
@@ -173,10 +250,20 @@ const ProductPage = ({ title, children }) => {
                                     value={searchInput}
                                     onChange={(e) => setSearchInput(e.target.value)}
                                     placeholder="Search"
+                                    onKeyUp={(event) => {
+                                        if (event.key === "Enter") {
+                                            setSearchParam(searchInput);
+                                        }
+                                    }}
                                 />
                                 <ScRemoveInput>
                                     {searchInput && (
-                                        <ScRemoveIconContainer onClick={() => setSearchInput("")}>
+                                        <ScRemoveIconContainer
+                                            onClick={() => {
+                                                setSearchInput("");
+                                                setSearchParam("");
+                                            }}
+                                        >
                                             <img
                                                 src="/images/shared/close.png"
                                                 alt="filter"
@@ -219,6 +306,8 @@ const ProductPage = ({ title, children }) => {
                                 SORT
                                 {sortBy !== "featured" && <ScOrangeDot />}
                             </ScToolButtonContainer>
+
+                            {/* Sorting Options */}
                             <Menu
                                 id="basic-menu"
                                 anchorEl={anchorEl}
@@ -228,17 +317,7 @@ const ProductPage = ({ title, children }) => {
                                     "aria-labelledby": "basic-button",
                                 }}
                             >
-                                {SORTING_OPTIONS.map((option) => {
-                                    return (
-                                        <MenuItem
-                                            key="value"
-                                            selected={sortBy === option.value}
-                                            onClick={() => handleSelectSorting(option.value)}
-                                        >
-                                            {option.label}
-                                        </MenuItem>
-                                    );
-                                })}
+                                {getSortingOptionsPopover()}
                             </Menu>
                         </ScHeaderToolsContainer>
                     </ScHeaderContainer>

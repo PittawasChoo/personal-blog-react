@@ -1,14 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
-import SlidingPane from "react-sliding-pane";
+
 import Checkbox from "@mui/material/Checkbox";
+import CircularProgress from "@mui/material/CircularProgress";
+import SlidingPane from "react-sliding-pane";
 import { grey } from "@mui/material/colors";
 import { orderBy } from "lodash";
 
-import "react-sliding-pane/dist/react-sliding-pane.css";
+import ErrorRetry from "components/ErrorRetry";
 
 import "./stylesheet.css";
 import {
+    ScErrorContainer,
     ScFilterContainer,
     ScFilterHeaderContainer,
     ScFilterHeaderLabel,
@@ -16,11 +19,14 @@ import {
     ScFilterOptionLabel,
     ScFixedHeader,
     ScFixedResetButton,
+    ScLoaderContainer,
     ScPaneHeaderLabel,
     ScPaneHeaderSpaceReserve,
     ScResetButtonSpaceReserve,
     ScRoot,
 } from "./styles";
+
+import "react-sliding-pane/dist/react-sliding-pane.css";
 
 const FilterPane = ({
     brands,
@@ -34,6 +40,10 @@ const FilterPane = ({
     setSelectedSizes,
     selectedTypes,
     setSelectedTypes,
+    isLoading,
+    isError,
+    refetch,
+    onFilterChange,
 }) => {
     const toggleSelectedType = (value) => {
         const isSelected = selectedTypes.includes(value);
@@ -45,6 +55,8 @@ const FilterPane = ({
             const updatedTypes = [...selectedTypes, value];
             setSelectedTypes(updatedTypes);
         }
+
+        onFilterChange();
     };
 
     const toggleSelectedSize = (value) => {
@@ -57,6 +69,8 @@ const FilterPane = ({
             const updatedSizes = [...selectedSizes, value];
             setSelectedSizes(updatedSizes);
         }
+
+        onFilterChange();
     };
 
     const toggleSelectedBrand = (value) => {
@@ -69,12 +83,123 @@ const FilterPane = ({
             const updatedBrands = [...selectedBrands, value];
             setSelectedBrands(updatedBrands);
         }
+
+        onFilterChange();
     };
 
     const resetFilter = () => {
         setSelectedBrands([]);
         setSelectedSizes([]);
         setSelectedTypes([]);
+    };
+
+    const getBodyContent = () => {
+        if (isLoading) {
+            return (
+                <ScLoaderContainer>
+                    <CircularProgress style={{ color: "grey" }} />
+                </ScLoaderContainer>
+            );
+        } else if (isError) {
+            return (
+                <ScErrorContainer>
+                    <ErrorRetry size="m" label="filter options" onRetry={refetch} />
+                </ScErrorContainer>
+            );
+        } else
+            return (
+                <>
+                    {/* Type */}
+                    <ScFilterContainer $hideBorderBottom={false}>
+                        <ScFilterHeaderContainer>
+                            <ScFilterHeaderLabel>TYPE</ScFilterHeaderLabel>
+                        </ScFilterHeaderContainer>
+                        <div>
+                            {types.map((type) => {
+                                return (
+                                    <ScFilterOptionContainer
+                                        key={type.id}
+                                        onClick={() => toggleSelectedType(type.id)}
+                                    >
+                                        <Checkbox
+                                            size="small"
+                                            sx={{
+                                                color: grey[800],
+                                                "&.Mui-checked": {
+                                                    color: grey[600],
+                                                },
+                                            }}
+                                            value={type.id}
+                                            checked={selectedTypes.includes(type.id)}
+                                        />
+                                        <ScFilterOptionLabel>{type.name}</ScFilterOptionLabel>
+                                    </ScFilterOptionContainer>
+                                );
+                            })}
+                        </div>
+                    </ScFilterContainer>
+
+                    {/* Size */}
+                    <ScFilterContainer $hideBorderBottom={false}>
+                        <ScFilterHeaderContainer>
+                            <ScFilterHeaderLabel>SIZE</ScFilterHeaderLabel>
+                        </ScFilterHeaderContainer>
+                        <div>
+                            {sizes.map((size) => {
+                                return (
+                                    <ScFilterOptionContainer
+                                        key={size}
+                                        onClick={() => toggleSelectedSize(size)}
+                                    >
+                                        <Checkbox
+                                            size="small"
+                                            sx={{
+                                                color: grey[800],
+                                                "&.Mui-checked": {
+                                                    color: grey[600],
+                                                },
+                                            }}
+                                            value={size}
+                                            checked={selectedSizes.includes(size)}
+                                        />
+                                        <ScFilterOptionLabel>{size}</ScFilterOptionLabel>
+                                    </ScFilterOptionContainer>
+                                );
+                            })}
+                        </div>
+                    </ScFilterContainer>
+
+                    {/* Brand */}
+                    <ScFilterContainer $hideBorderBottom={true}>
+                        <ScFilterHeaderContainer>
+                            <ScFilterHeaderLabel>BRAND</ScFilterHeaderLabel>
+                        </ScFilterHeaderContainer>
+                        <div>
+                            {orderBy(brands, "name").map((brand) => {
+                                return (
+                                    <ScFilterOptionContainer
+                                        key={brand.id}
+                                        onClick={() => toggleSelectedBrand(brand.id)}
+                                    >
+                                        <Checkbox
+                                            size="small"
+                                            sx={{
+                                                color: grey[800],
+                                                "&.Mui-checked": {
+                                                    color: grey[600],
+                                                },
+                                            }}
+                                            value={brand.id}
+                                            checked={selectedBrands.includes(brand.id)}
+                                        />
+                                        <ScFilterOptionLabel>{brand.name}</ScFilterOptionLabel>
+                                    </ScFilterOptionContainer>
+                                );
+                            })}
+                        </div>
+                    </ScFilterContainer>
+                </>
+            );
     };
 
     return (
@@ -90,101 +215,11 @@ const FilterPane = ({
                         onClick={onClose}
                     />
                 </ScFixedHeader>
-                <ScFixedResetButton onClick={resetFilter}>Reset</ScFixedResetButton>
-
-                {/* Header */}
                 <ScPaneHeaderSpaceReserve />
 
-                {/* Type */}
-                <ScFilterContainer $hideBorderBottom={false}>
-                    <ScFilterHeaderContainer>
-                        <ScFilterHeaderLabel>TYPE</ScFilterHeaderLabel>
-                    </ScFilterHeaderContainer>
-                    <div>
-                        {types.map((type) => {
-                            return (
-                                <ScFilterOptionContainer
-                                    key={type.id}
-                                    onClick={() => toggleSelectedType(type.id)}
-                                >
-                                    <Checkbox
-                                        size="small"
-                                        sx={{
-                                            color: grey[800],
-                                            "&.Mui-checked": {
-                                                color: grey[600],
-                                            },
-                                        }}
-                                        value={type.id}
-                                        checked={selectedTypes.includes(type.id)}
-                                    />
-                                    <ScFilterOptionLabel>{type.name}</ScFilterOptionLabel>
-                                </ScFilterOptionContainer>
-                            );
-                        })}
-                    </div>
-                </ScFilterContainer>
+                {getBodyContent()}
 
-                {/* Size */}
-                <ScFilterContainer $hideBorderBottom={false}>
-                    <ScFilterHeaderContainer>
-                        <ScFilterHeaderLabel>SIZE</ScFilterHeaderLabel>
-                    </ScFilterHeaderContainer>
-                    <div>
-                        {sizes.map((size) => {
-                            return (
-                                <ScFilterOptionContainer
-                                    key={size}
-                                    onClick={() => toggleSelectedSize(size)}
-                                >
-                                    <Checkbox
-                                        size="small"
-                                        sx={{
-                                            color: grey[800],
-                                            "&.Mui-checked": {
-                                                color: grey[600],
-                                            },
-                                        }}
-                                        value={size}
-                                        checked={selectedSizes.includes(size)}
-                                    />
-                                    <ScFilterOptionLabel>{size}</ScFilterOptionLabel>
-                                </ScFilterOptionContainer>
-                            );
-                        })}
-                    </div>
-                </ScFilterContainer>
-
-                {/* Brand */}
-                <ScFilterContainer $hideBorderBottom={true}>
-                    <ScFilterHeaderContainer>
-                        <ScFilterHeaderLabel>BRAND</ScFilterHeaderLabel>
-                    </ScFilterHeaderContainer>
-                    <div>
-                        {orderBy(brands, "name").map((brand) => {
-                            return (
-                                <ScFilterOptionContainer
-                                    key={brand.id}
-                                    onClick={() => toggleSelectedBrand(brand.id)}
-                                >
-                                    <Checkbox
-                                        size="small"
-                                        sx={{
-                                            color: grey[800],
-                                            "&.Mui-checked": {
-                                                color: grey[600],
-                                            },
-                                        }}
-                                        value={brand.id}
-                                        checked={selectedBrands.includes(brand.id)}
-                                    />
-                                    <ScFilterOptionLabel>{brand.name}</ScFilterOptionLabel>
-                                </ScFilterOptionContainer>
-                            );
-                        })}
-                    </div>
-                </ScFilterContainer>
-
+                <ScFixedResetButton onClick={resetFilter}>Reset</ScFixedResetButton>
                 <ScResetButtonSpaceReserve />
             </ScRoot>
         </SlidingPane>
@@ -203,6 +238,10 @@ FilterPane.propTypes = {
     setSelectedSizes: PropTypes.func.isRequired,
     selectedTypes: PropTypes.array.isRequired,
     setSelectedTypes: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    isError: PropTypes.bool.isRequired,
+    refetch: PropTypes.func.isRequired,
+    onFilterChange: PropTypes.func.isRequired,
 };
 
 export default FilterPane;

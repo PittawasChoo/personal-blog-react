@@ -8,6 +8,7 @@ export const ScRoot = styled.div`
     align-items: center;
     padding: 60px 0 40px 0;
     width: 100vw;
+    color: white;
 `;
 
 export const ScTopSectionContainer = styled.div`

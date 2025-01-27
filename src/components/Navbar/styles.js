@@ -6,6 +6,7 @@ export const ScRoot = styled.nav`
     width: 100vw;
     position: fixed;
     z-index: 99;
+    color: white;
 `;
 
 export const ScGridContainer = styled(motion.div)`

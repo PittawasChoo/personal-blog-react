@@ -6,8 +6,8 @@ import Footer from "components/Footer";
 import Banner from "./Banner";
 import Banner2 from "./Banner2";
 import Marquee from "./Marquee";
-import Trending from "./Trending";
 import ProductCarousel from "./ProductCarousel";
+import Trending from "./Trending";
 
 import { ScBanner2Container, ScFooterContainer, ScRoot, ScTrendingContainer } from "./styles";
 

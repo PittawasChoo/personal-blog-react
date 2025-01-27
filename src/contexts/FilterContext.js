@@ -2,7 +2,6 @@ import React, { createContext, useState } from "react";
 
 const FilterContext = createContext();
 
-// Create a Provider Component
 const FilterProvider = ({ children }) => {
     // search state
     const [searchParam, setSearchParam] = useState("");
