@@ -17,7 +17,7 @@ export const ScFixedHeader = styled.div`
     top: 0;
     z-index: 999;
     border-bottom: 1px solid #dddddd;
-    box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 1px 10px -2px rgba(0, 0, 0, 0.2);
     padding: 0 20px;
 `;
 
@@ -96,7 +96,7 @@ export const ScFixedResetButton = styled.div`
     bottom: 0;
     z-index: 999;
     border-top: 1px solid #dddddd;
-    box-shadow: 0px -1px 10px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px -1px 10px -2px rgba(0, 0, 0, 0.2);
     color: black;
     cursor: pointer;
     font-size: 12px;

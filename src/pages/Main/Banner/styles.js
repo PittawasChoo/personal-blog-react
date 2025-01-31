@@ -5,6 +5,7 @@ export const ScRoot = styled.div`
     width: 100%;
     position: relative;
     overflow: hidden;
+    color: white;
 `;
 
 export const ScGridBox = styled.div`

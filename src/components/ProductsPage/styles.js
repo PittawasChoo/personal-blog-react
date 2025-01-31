@@ -2,19 +2,6 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 
 export const ScRoot = styled.div`
-    background-color: black;
-    width: 100vw;
-`;
-
-export const ScNavbarSpaceReserve = styled.div`
-    width: 100vw;
-    height: 80px;
-    background-color: black;
-    position: absolute;
-`;
-
-export const ScPageContainer = styled.div`
-    padding-top: 80px;
     background-color: white;
 `;
 

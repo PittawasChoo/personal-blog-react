@@ -121,7 +121,7 @@ const ProductBody = () => {
             cart.push(addedProduct);
             localStorage.setItem("cart", JSON.stringify(cart));
 
-            notifySuccess("Added to cart");
+            notifyAddToCartSuccess(addedProduct, cart.length);
             window.dispatchEvent(new Event("cartUpdated"));
         }
     };

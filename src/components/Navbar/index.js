@@ -64,7 +64,7 @@ const Navbar = ({ alwaysShowBackground = false }) => {
                 variants={{
                     showBackground: {
                         backgroundColor: "#000000",
-                        boxShadow: "-5px 2px 18px 2px rgba(0,0,0,0.4)",
+                        boxShadow: "-5px 2px 18px -6px rgba(0,0,0,0.4)",
                     },
                     hideBackground: { backgroundColor: "#00000000" },
                 }}
@@ -113,7 +113,8 @@ const Navbar = ({ alwaysShowBackground = false }) => {
                     <ScMenuContainer>
                         <ScTextLink to="/cart">
                             <ScMenuLabel>
-                                CART{cartCount > 0 && <ScCartItems>{cartCount}</ScCartItems>}
+                                CART
+                                <ScCartItems $showCount={cartCount > 0}>{cartCount}</ScCartItems>
                             </ScMenuLabel>
                         </ScTextLink>
                         <ScMenuLabel>LOGIN</ScMenuLabel>

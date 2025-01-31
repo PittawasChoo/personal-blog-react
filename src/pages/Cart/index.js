@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-const Cart = () => {
+import { useLocation } from "react-router-dom";
+
+const Product = () => {
+    const location = useLocation();
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location.search]);
+
     return <div>Cart</div>;
 };
 
-export default Cart;
+export default Product;

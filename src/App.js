@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Routes, Route } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
+import Layout from "components/Layout";
+
 import AboutUs from "pages/AboutUs";
 import AllProducts from "pages/AllProducts";
 import Cart from "pages/Cart";
@@ -29,18 +31,20 @@ const App = () => {
             <ThemeProvider theme={THEME}>
                 <CssBaseline />
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <Routes>
-                        <Route path="/" element={<Main />} />
-                        <Route path="/all-products/*" element={<AllProducts />} />
-                        <Route path="/new-arrival/*" element={<NewArrival />} />
-                        <Route path="/promotion/*" element={<Promotion />} />
-                        <Route path="/about-us/*" element={<AboutUs />} />
-                        <Route path="/contact-us/*" element={<ContactUs />} />
-                        <Route path="/product/*" element={<Product />} />
-                        <Route path="/cart/*" element={<Cart />} />
-                        {/* Todo: not found page */}
-                        {/* <Route path="*" element={<PageNotFound />} /> */}
-                    </Routes>
+                    <Layout>
+                        <Routes>
+                            <Route path="/" element={<Main />} />
+                            <Route path="/all-products/*" element={<AllProducts />} />
+                            <Route path="/new-arrival/*" element={<NewArrival />} />
+                            <Route path="/promotion/*" element={<Promotion />} />
+                            <Route path="/about-us/*" element={<AboutUs />} />
+                            <Route path="/contact-us/*" element={<ContactUs />} />
+                            <Route path="/product/*" element={<Product />} />
+                            <Route path="/cart/*" element={<Cart />} />
+                            {/* Todo: not found page */}
+                            {/* <Route path="*" element={<PageNotFound />} /> */}
+                        </Routes>
+                    </Layout>
                 </LocalizationProvider>
             </ThemeProvider>
         </QueryClientProvider>

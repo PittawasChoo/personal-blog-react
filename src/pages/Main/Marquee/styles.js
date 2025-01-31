@@ -6,4 +6,5 @@ export const ScMarqueeContainer = styled.div`
     height: 40px;
     display: flex;
     align-items: center;
+    color: white;
 `;

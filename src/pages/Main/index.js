@@ -61,8 +61,7 @@ const Main = () => {
     const promotion = get(promotionData, "products", []);
 
     return (
-        <ScRoot>
-            <Navbar />
+        <>
             <Banner />
             <Marquee />
 
@@ -79,10 +78,7 @@ const Main = () => {
             </ScBanner2Container>
 
             <ProductCarousel header="PROMOTION" products={promotion} linkTo="/promotion" />
-            <ScFooterContainer>
-                <Footer />
-            </ScFooterContainer>
-        </ScRoot>
+        </>
     );
 };
 

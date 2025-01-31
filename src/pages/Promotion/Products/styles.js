@@ -4,8 +4,7 @@ export const ScBodyContainer = styled.div`
     width: 100vw;
     min-height: calc(100vh - 280px);
     background-color: white;
-    margin-top: 200px;
-    padding: 20px 50px 50px 50px;
+    padding: 240px 50px 50px 50px;
     color: black;
     display: flex;
     justify-content: center;
@@ -15,7 +14,7 @@ export const ScNoItemBodyContainer = styled.div`
     width: 100vw;
     min-height: calc(100vh - 280px);
     background-color: white;
-    margin-top: 200px;
+    padding-top: 200px;
     color: black;
     display: flex;
     justify-content: center;

@@ -60,7 +60,7 @@ export const ScMenuNumber = styled.div`
     margin-top: -5px;
 `;
 
-export const ScCartItems = styled.div`
+export const ScCartItems = styled(motion.div)`
     width: 18px;
     height: 18px;
     border-radius: 50%;
@@ -74,4 +74,5 @@ export const ScCartItems = styled.div`
     margin-left: -5px;
     font-family: oxanium;
     border: 1px solid black;
+    opacity: ${(props) => (props.$showCount ? "1" : "0")};
 `;
