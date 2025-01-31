@@ -26,9 +26,10 @@ import {
     ScPreviousButton,
     ScRightBox,
     ScRoot,
+    ScTextLink,
 } from "./styles";
 
-const ProductCarousel = ({ header, items }) => {
+const ProductCarousel = ({ header, products, linkTo }) => {
     let sliderRef = useRef(null);
     const next = () => {
         sliderRef.slickNext();
@@ -62,15 +63,17 @@ const ProductCarousel = ({ header, items }) => {
                             <ScDot />
                             <ScDot />
                             <ScButtonContainer>
-                                <ScButton>
-                                    VIEW ALL
-                                    <img
-                                        src="/images/shared/link-arrow.png"
-                                        alt="view all"
-                                        width={16}
-                                        height={16}
-                                    />
-                                </ScButton>
+                                <ScTextLink to={linkTo}>
+                                    <ScButton>
+                                        VIEW ALL
+                                        <img
+                                            src="/images/shared/link-arrow.png"
+                                            alt="view all"
+                                            width={16}
+                                            height={16}
+                                        />
+                                    </ScButton>
+                                </ScTextLink>
                             </ScButtonContainer>
                         </ScButtonLabel>
                     </ScHeaderContainer>
@@ -108,14 +111,16 @@ const ProductCarousel = ({ header, items }) => {
                                 sliderRef = slider;
                             }}
                         >
-                            {items.map((item) => {
+                            {products.map((product) => {
                                 return (
                                     <SmallCard
-                                        imgUrl={item.imgUrl}
-                                        brand={item.brand}
-                                        name={item.name}
-                                        price={item.price}
-                                        promotionPrice={item.promotionPrice}
+                                        key={product.id}
+                                        id={product.id}
+                                        imgUrl={`http://localhost:3001/images/${product.imgName}`}
+                                        brand={product.brand}
+                                        name={product.name}
+                                        price={Number(product.price)}
+                                        promotionPrice={Number(product.promotionPrice)}
                                     />
                                 );
                             })}
@@ -129,7 +134,8 @@ const ProductCarousel = ({ header, items }) => {
 
 ProductCarousel.propTypes = {
     header: PropTypes.string.isRequired,
-    items: PropTypes.array.isRequired,
+    products: PropTypes.array.isRequired,
+    linkTo: PropTypes.string.isRequired,
 };
 
 export default ProductCarousel;

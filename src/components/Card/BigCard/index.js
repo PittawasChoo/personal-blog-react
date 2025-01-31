@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { Link } from "react-router-dom";
+
 import { FormatToLocaleString } from "modules/number/formatToLocaleString";
 
 import {
@@ -14,49 +16,47 @@ import {
     ScCardPriceBeforePromotion,
     ScCardPromotionPrice,
     ScCardShadow,
+    ScPriceContainer,
     ScRoot,
 } from "./styles";
 
-const BigCard = ({ imgUrl, brand, name, price, promotionPrice }) => {
+const BigCard = ({ id, imgUrl, brand, name, price, promotionPrice }) => {
     return (
-        <ScRoot>
-            <ScCardBorder>
-                <ScCard>
-                    <ScCardImage $imgUrl={imgUrl} />
-                    <ScCardDetailContainer>
-                        <div>
-                            <ScCardBrand>{brand}</ScCardBrand>
-                            <ScCardName>{name}</ScCardName>
-                        </div>
-                        {promotionPrice ? (
-                            <div
-                                style={{
-                                    display: "flex",
-                                    alignItems: "flex-end",
-                                    gap: "10px",
-                                }}
-                            >
-                                <ScCardPromotionPrice>
-                                    ${FormatToLocaleString(promotionPrice)}
-                                </ScCardPromotionPrice>
-                                {promotionPrice && (
-                                    <ScCardPriceBeforePromotion>
-                                        <s>${FormatToLocaleString(price)}</s>
-                                    </ScCardPriceBeforePromotion>
-                                )}
+        <Link to={`/product?id=${id}`}>
+            <ScRoot>
+                <ScCardBorder>
+                    <ScCard>
+                        <ScCardImage $imgUrl={imgUrl} />
+                        <ScCardDetailContainer>
+                            <div>
+                                <ScCardBrand>{brand}</ScCardBrand>
+                                <ScCardName>{name}</ScCardName>
                             </div>
-                        ) : (
-                            <ScCardPrice>${FormatToLocaleString(price)}</ScCardPrice>
-                        )}
-                    </ScCardDetailContainer>
-                </ScCard>
-            </ScCardBorder>
-            <ScCardShadow />
-        </ScRoot>
+                            {promotionPrice ? (
+                                <ScPriceContainer>
+                                    <ScCardPromotionPrice>
+                                        ${FormatToLocaleString(promotionPrice)}
+                                    </ScCardPromotionPrice>
+                                    {promotionPrice && (
+                                        <ScCardPriceBeforePromotion>
+                                            <s>${FormatToLocaleString(price)}</s>
+                                        </ScCardPriceBeforePromotion>
+                                    )}
+                                </ScPriceContainer>
+                            ) : (
+                                <ScCardPrice>${FormatToLocaleString(price)}</ScCardPrice>
+                            )}
+                        </ScCardDetailContainer>
+                    </ScCard>
+                </ScCardBorder>
+                <ScCardShadow />
+            </ScRoot>
+        </Link>
     );
 };
 
 BigCard.propTypes = {
+    id: PropTypes.string.isRequired,
     imgUrl: PropTypes.string.isRequired,
     brand: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

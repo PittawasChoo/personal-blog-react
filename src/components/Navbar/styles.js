@@ -59,3 +59,19 @@ export const ScMenuNumber = styled.div`
     font-size: 8px;
     margin-top: -5px;
 `;
+
+export const ScCartItems = styled.div`
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ff4f00;
+    font-size: 8px;
+    line-height: 10px;
+    margin-top: -7px;
+    margin-left: -5px;
+    font-family: oxanium;
+    border: 1px solid black;
+`;

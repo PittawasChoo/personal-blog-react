@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import { useMotionValueEvent, useScroll } from "framer-motion";
@@ -6,6 +6,7 @@ import { useMotionValueEvent, useScroll } from "framer-motion";
 import Logo from "components/Logo";
 
 import {
+    ScCartItems,
     ScGridContainer,
     ScLogoContainer,
     ScMenuContainer,
@@ -18,9 +19,9 @@ import {
 } from "./styles";
 
 const Navbar = ({ alwaysShowBackground = false }) => {
-    const { scrollY } = useScroll();
     const [showBackground, setShowBackground] = useState(false);
 
+    const { scrollY } = useScroll();
     useMotionValueEvent(scrollY, "change", (latest) => {
         if (latest > 0) {
             setShowBackground(true);
@@ -28,6 +29,34 @@ const Navbar = ({ alwaysShowBackground = false }) => {
             setShowBackground(false);
         }
     });
+
+    const [cartCount, setCartCount] = useState(0);
+
+    useEffect(() => {
+        const getCartCount = () => {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const itemsCount = cart.reduce((acc, cur) => {
+                return acc + cur.quantity;
+            }, 0);
+            setCartCount(itemsCount);
+        };
+
+        getCartCount();
+
+        const handleStorageChange = (event) => {
+            if (event.key === "cart") getCartCount();
+        };
+
+        window.addEventListener("storage", handleStorageChange);
+
+        const handleCustomEvent = () => getCartCount();
+        window.addEventListener("cartUpdated", handleCustomEvent);
+
+        return () => {
+            window.removeEventListener("storage", handleStorageChange);
+            window.removeEventListener("cartUpdated", handleCustomEvent);
+        };
+    }, []);
 
     return (
         <ScRoot>
@@ -82,7 +111,11 @@ const Navbar = ({ alwaysShowBackground = false }) => {
                         </ScTextLink>
                     </ScMenuContainer>
                     <ScMenuContainer>
-                        <ScMenuLabel>CART</ScMenuLabel>
+                        <ScTextLink to="/cart">
+                            <ScMenuLabel>
+                                CART{cartCount > 0 && <ScCartItems>{cartCount}</ScCartItems>}
+                            </ScMenuLabel>
+                        </ScTextLink>
                         <ScMenuLabel>LOGIN</ScMenuLabel>
                         <ScMenuLabel>REGISTER</ScMenuLabel>
                     </ScMenuContainer>

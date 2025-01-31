@@ -1,21 +1,65 @@
 import React from "react";
 
-import Navbar from "components/Navbar";
+import { get } from "lodash";
+import { useQuery } from "@tanstack/react-query";
+
 import Footer from "components/Footer";
+import Navbar from "components/Navbar";
+import RecommendProducts from "components/RecommendProducts";
 
 import Banner from "./Banner";
 import Banner2 from "./Banner2";
 import Marquee from "./Marquee";
 import ProductCarousel from "./ProductCarousel";
-import Trending from "./Trending";
 
 import { ScBanner2Container, ScFooterContainer, ScRoot, ScTrendingContainer } from "./styles";
 
-import trendingOb from "./trending-ob.json";
-import newArrival from "./new-arrival.json";
-import promotion from "./promotion.json";
-
 const Main = () => {
+    const {
+        data: newArrivalData,
+        isError: isErrorFetchingNewArrival,
+        isFetching: isFetchingNewArrival,
+        refetch: refetchNewArrival,
+    } = useQuery({
+        queryKey: ["new-arrival"],
+        queryFn: async () => {
+            const response = await fetch("http://localhost:3001/new-arrival", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    limit: 12,
+                }),
+            });
+            return await response.json();
+        },
+    });
+
+    const {
+        data: promotionData,
+        isError: isErrorFetchingPromotion,
+        isFetching: isFetchingPromotion,
+        refetch: refetchPromotion,
+    } = useQuery({
+        queryKey: ["promotion"],
+        queryFn: async () => {
+            const response = await fetch("http://localhost:3001/promotion", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    limit: 12,
+                }),
+            });
+            return await response.json();
+        },
+    });
+
+    const newArrival = get(newArrivalData, "products", []);
+    const promotion = get(promotionData, "products", []);
+
     return (
         <ScRoot>
             <Navbar />
@@ -23,10 +67,10 @@ const Main = () => {
             <Marquee />
 
             <ScTrendingContainer>
-                <Trending items={trendingOb || []} />
+                <RecommendProducts />
             </ScTrendingContainer>
 
-            <ProductCarousel header="NEW ARRIVAL" items={newArrival || []} />
+            <ProductCarousel header="NEW ARRIVAL" products={newArrival} linkTo="/new-arrival" />
 
             <ScBanner2Container>
                 <Marquee />
@@ -34,7 +78,7 @@ const Main = () => {
                 <Marquee reverse />
             </ScBanner2Container>
 
-            <ProductCarousel header="PROMOTION" items={promotion || []} />
+            <ProductCarousel header="PROMOTION" products={promotion} linkTo="/promotion" />
             <ScFooterContainer>
                 <Footer />
             </ScFooterContainer>

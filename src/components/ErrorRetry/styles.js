@@ -17,3 +17,11 @@ export const ScErrorText = styled.div`
 export const ScButtonText = styled.span`
     margin-left: 5px;
 `;
+
+export const ScButtonsContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 20px;
+`;

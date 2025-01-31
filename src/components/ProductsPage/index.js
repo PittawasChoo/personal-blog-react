@@ -16,9 +16,11 @@ import { FilterContext } from "contexts/FilterContext";
 
 import FilterPane from "./FilterPane";
 import {
+    ScColon,
     ScDynamicSizeHeaderContainer,
     ScErrorContainer,
     ScHeaderContainer,
+    ScHeaderLabel,
     ScHeaderToolsContainer,
     ScInput,
     ScNavbarSpaceReserve,
@@ -35,7 +37,7 @@ import {
 
 const ProductPage = ({ title, children }) => {
     // search params controller
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [, setSearchParams] = useSearchParams();
     const onFilterChange = () => {
         setSearchParams((searchParams) => {
             searchParams.delete("page");
@@ -239,8 +241,8 @@ const ProductPage = ({ title, children }) => {
                             animate={bigText ? "bigText" : "smallText"}
                             transition={{ duration: 0.2, ease: "linear" }}
                         >
-                            <span style={{ whiteSpace: "pre" }}>{title.split(" ").join("  ")}</span>
-                            <span style={{ color: "#ff4f00" }}>:</span>
+                            <ScHeaderLabel>{title.split(" ").join("  ")}</ScHeaderLabel>
+                            <ScColon>:</ScColon>
                         </motion.div>
 
                         <ScHeaderToolsContainer>

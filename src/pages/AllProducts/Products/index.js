@@ -65,7 +65,19 @@ const Products = ({ page, setCurrentPage, setPageCount, setShowPagination }) => 
         } else {
             setShowPagination(true);
         }
-    }, [searchParam, selectedBrands, selectedSizes, selectedTypes, sortBy, page, data, isError]);
+    }, [
+        data,
+        isError,
+        page,
+        searchParam,
+        selectedBrands,
+        selectedSizes,
+        selectedTypes,
+        setCurrentPage,
+        setPageCount,
+        setShowPagination,
+        sortBy,
+    ]);
 
     const products = get(data, "products", []);
     const shouldShowLoading = useDebounceLoading(isFetching, 1000);
@@ -109,6 +121,7 @@ const Products = ({ page, setCurrentPage, setPageCount, setShowPagination }) => 
                     return (
                         <ScCardContainer key={product.id}>
                             <BigCard
+                                id={product.id}
                                 imgUrl={`http://localhost:3001/images/${product.imgName}`}
                                 brand={product.brand}
                                 name={product.name}

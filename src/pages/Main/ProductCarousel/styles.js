@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const ScRoot = styled.div`
     display: flex;
@@ -141,4 +142,9 @@ export const ScCarouselContainer = styled.div`
 
 export const ScCarouselInnerContainer = styled.div`
     position: relative;
+`;
+
+export const ScTextLink = styled(Link)`
+    text-decoration: none;
+    color: inherit;
 `;

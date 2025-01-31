@@ -9,6 +9,8 @@ import { orderBy } from "lodash";
 
 import ErrorRetry from "components/ErrorRetry";
 
+import "react-sliding-pane/dist/react-sliding-pane.css";
+
 import "./stylesheet.css";
 import {
     ScErrorContainer,
@@ -25,8 +27,6 @@ import {
     ScResetButtonSpaceReserve,
     ScRoot,
 } from "./styles";
-
-import "react-sliding-pane/dist/react-sliding-pane.css";
 
 const FilterPane = ({
     brands,

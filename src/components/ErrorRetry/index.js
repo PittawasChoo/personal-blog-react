@@ -2,8 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
-import { ScButtonText, ScErrorContainer, ScErrorText } from "./styles";
+import { ScButtonsContainer, ScButtonText, ScErrorContainer, ScErrorText } from "./styles";
 
 const STYLES = {
     s: {
@@ -23,25 +24,40 @@ const STYLES = {
     },
 };
 
-const ErrorRetry = ({ label, onRetry, size = "s" }) => {
+const ErrorRetry = ({ label, onRetry, size = "s", showHomeButton = false }) => {
+    const navigate = useNavigate();
+
     const selectedSizeStyles = STYLES[size];
+
     return (
         <ScErrorContainer $fontSize={selectedSizeStyles.fontSize}>
             <ScErrorText>Unable to load {label}. Please try again.</ScErrorText>
-            <Button
-                size={selectedSizeStyles.buttonSize}
-                variant="text"
-                style={{ textTransform: "none" }}
-                onClick={onRetry}
-            >
-                <img
-                    src="/images/shared/reload.png"
-                    alt="close"
-                    width={selectedSizeStyles.iconSize}
-                    height={selectedSizeStyles.iconSize}
-                />
-                <ScButtonText>Retry</ScButtonText>
-            </Button>
+            <ScButtonsContainer>
+                <Button
+                    size={selectedSizeStyles.buttonSize}
+                    variant="outlined"
+                    style={{ textTransform: "none" }}
+                    onClick={onRetry}
+                >
+                    <img
+                        src="/images/shared/reload.png"
+                        alt="close"
+                        width={selectedSizeStyles.iconSize}
+                        height={selectedSizeStyles.iconSize}
+                    />
+                    <ScButtonText>Retry</ScButtonText>
+                </Button>
+                {showHomeButton && (
+                    <Button
+                        size={selectedSizeStyles.buttonSize}
+                        variant="text"
+                        style={{ textTransform: "none" }}
+                        onClick={() => navigate("/")}
+                    >
+                        Home
+                    </Button>
+                )}
+            </ScButtonsContainer>
         </ScErrorContainer>
     );
 };
@@ -50,6 +66,7 @@ ErrorRetry.propTypes = {
     label: PropTypes.string.isRequired,
     onRetry: PropTypes.func.isRequired,
     size: PropTypes.string,
+    showHomeButton: PropTypes.bool,
 };
 
 export default ErrorRetry;

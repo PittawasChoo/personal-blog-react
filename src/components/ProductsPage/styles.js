@@ -133,3 +133,11 @@ export const ScErrorContainer = styled.div`
     align-items: center;
     justify-content: center;
 `;
+
+export const ScHeaderLabel = styled.span`
+    white-space: pre;
+`;
+
+export const ScColon = styled.span`
+    color: #ff4f00;
+`;

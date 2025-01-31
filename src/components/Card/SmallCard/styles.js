@@ -88,3 +88,9 @@ export const ScCardShadow = styled.div`
     left: 5px;
     opacity: 0.07;
 `;
+
+export const ScPriceContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+`;
