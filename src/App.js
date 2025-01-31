@@ -10,11 +10,12 @@ import Layout from "components/Layout";
 import AboutUs from "pages/AboutUs";
 import AllProducts from "pages/AllProducts";
 import Cart from "pages/Cart";
+import CheckOut from "pages/CheckOut";
 import ContactUs from "pages/ContactUs";
 import Main from "pages/Main";
 import NewArrival from "pages/NewArrival";
-import Promotion from "pages/Promotion";
 import Product from "pages/Product";
+import Promotion from "pages/Promotion";
 
 // Create a client
 const THEME = createTheme({
@@ -41,6 +42,8 @@ const App = () => {
                             <Route path="/contact-us/*" element={<ContactUs />} />
                             <Route path="/product/*" element={<Product />} />
                             <Route path="/cart/*" element={<Cart />} />
+                            <Route path="/check-out/*" element={<CheckOut />} />
+
                             {/* Todo: not found page */}
                             {/* <Route path="*" element={<PageNotFound />} /> */}
                         </Routes>

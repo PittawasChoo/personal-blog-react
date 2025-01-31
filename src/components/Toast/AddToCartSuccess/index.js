@@ -18,8 +18,13 @@ import {
     ScProductPriceContainer,
 } from "./styles";
 
-const AddToCartSuccess = ({ addedProduct, productsCount }) => {
+const AddToCartSuccess = ({ onClose, addedProduct, productsCount }) => {
     const navigate = useNavigate();
+
+    const viewCart = () => {
+        navigate("/cart");
+        onClose();
+    };
 
     return (
         <div>
@@ -50,12 +55,13 @@ const AddToCartSuccess = ({ addedProduct, productsCount }) => {
                 </ScProductDetailContainer>
             </ScProductContainer>
 
-            <ScButton onClick={() => navigate("/cart")}>View Cart ({productsCount})</ScButton>
+            <ScButton onClick={viewCart}>View Cart ({productsCount})</ScButton>
         </div>
     );
 };
 
 AddToCartSuccess.propTypes = {
+    onClose: PropTypes.func.isRequired,
     addedProduct: PropTypes.object.isRequired,
     productsCount: PropTypes.number.isRequired,
 };

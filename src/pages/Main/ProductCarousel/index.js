@@ -2,10 +2,11 @@ import React, { useRef } from "react";
 import PropTypes from "prop-types";
 
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 import SmallCard from "components/Card/SmallCard";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import {
     ScBottomContentContainer,

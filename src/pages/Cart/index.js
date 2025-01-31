@@ -1,14 +1,99 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-import { useLocation } from "react-router-dom";
+import { orderBy } from "lodash";
 
-const Product = () => {
-    const location = useLocation();
+import { FormatToLocaleString } from "modules/number/formatToLocaleString";
+
+import CartItem from "./CartItem";
+import {
+    ScBody,
+    ScButton,
+    ScColon,
+    ScContentContainer,
+    ScHeader,
+    ScLabel,
+    ScLine,
+    ScPrice,
+    ScPricingContainer,
+    ScRoot,
+    ScStickySummary,
+    ScSummaryContainer,
+    ScSummaryHeader,
+    ScTotalPrice,
+} from "./styles";
+
+const Cart = () => {
+    const [cart, setCart] = useState([]);
+
     useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [location.search]);
+        const getCart = () => {
+            const cartInLocalStorage = JSON.parse(localStorage.getItem("cart")) || [];
+            const orderedCart = orderBy(cartInLocalStorage, ["name", "timestamp"], "asc");
+            setCart(orderedCart);
+        };
 
-    return <div>Cart</div>;
+        getCart();
+
+        const handleStorageChange = (event) => {
+            if (event.key === "cart") getCart();
+        };
+
+        window.addEventListener("storage", handleStorageChange);
+
+        const handleCustomEvent = () => getCart();
+        window.addEventListener("cartUpdated", handleCustomEvent);
+
+        return () => {
+            window.removeEventListener("storage", handleStorageChange);
+            window.removeEventListener("cartUpdated", handleCustomEvent);
+        };
+    }, []);
+
+    const getSubtotalPrice = () => {
+        return cart.reduce((acc, cur) => {
+            const productPrice = cur.promotionPrice || cur.price;
+            return acc + productPrice * cur.quantity;
+        }, 0);
+    };
+
+    return (
+        <ScRoot>
+            <ScBody>
+                <ScHeader>
+                    CART<ScColon>:</ScColon>
+                </ScHeader>
+
+                <ScContentContainer>
+                    <div>
+                        {cart.map((product) => (
+                            <CartItem key={product.id + product.size} product={product} />
+                        ))}
+                    </div>
+
+                    <ScSummaryContainer>
+                        <ScStickySummary>
+                            <ScSummaryHeader>SUMMARY</ScSummaryHeader>
+                            <ScPricingContainer>
+                                <ScLabel $showMargin>Subtotal:</ScLabel>
+                                <ScPrice>
+                                    $ {FormatToLocaleString(Number(getSubtotalPrice()))}
+                                </ScPrice>
+                                <ScLabel>Delivery Fee:</ScLabel>
+                                <ScPrice>Free</ScPrice>
+                            </ScPricingContainer>
+                            <ScLine />
+                            <ScTotalPrice>
+                                <div>Total</div>
+                                <div>$ {FormatToLocaleString(Number(getSubtotalPrice()))}</div>
+                            </ScTotalPrice>
+                            <ScLine />
+                            <ScButton to="/check-out">Check out</ScButton>
+                        </ScStickySummary>
+                    </ScSummaryContainer>
+                </ScContentContainer>
+            </ScBody>
+        </ScRoot>
+    );
 };
 
-export default Product;
+export default Cart;

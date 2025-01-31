@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export const ScRoot = styled.nav`
     width: 100vw;

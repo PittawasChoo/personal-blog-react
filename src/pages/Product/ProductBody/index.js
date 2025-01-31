@@ -48,7 +48,7 @@ import {
 } from "./styles";
 
 const ProductBody = () => {
-    const { notifySuccess, notifyError, notifyAddToCartSuccess } = useToast();
+    const { notifyError, notifyAddToCartSuccess } = useToast();
     const [quantity, setQuantity] = useState(1);
     const [selectedSize, setSelectedSize] = useState({});
 
@@ -88,7 +88,6 @@ const ProductBody = () => {
         );
 
         if (existedProduct) {
-            // TODO: Error when add exceed max stock
             if (existedProduct.quantity + quantity > selectedSize.stock) {
                 notifyError("Oops! Not enough stock for your order.");
             } else {
@@ -103,12 +102,17 @@ const ProductBody = () => {
                 const enhancedExistedProduct = {
                     ...existedProduct,
                     quantity: existedProduct.quantity + quantity,
+                    timestamp: Date.now(),
                 };
 
                 newCart.push(enhancedExistedProduct);
                 localStorage.setItem("cart", JSON.stringify(newCart));
 
-                notifyAddToCartSuccess(enhancedExistedProduct, newCart.length);
+                const itemsCount = cart.reduce((acc, cur) => {
+                    return acc + cur.quantity;
+                }, 0);
+
+                notifyAddToCartSuccess(enhancedExistedProduct, itemsCount);
                 window.dispatchEvent(new Event("cartUpdated"));
             }
         } else {
@@ -116,12 +120,17 @@ const ProductBody = () => {
                 ...product,
                 size: selectedSize.size,
                 quantity: quantity,
+                timestamp: Date.now(),
             };
 
             cart.push(addedProduct);
             localStorage.setItem("cart", JSON.stringify(cart));
 
-            notifyAddToCartSuccess(addedProduct, cart.length);
+            const itemsCount = cart.reduce((acc, cur) => {
+                return acc + cur.quantity;
+            }, 0);
+
+            notifyAddToCartSuccess(addedProduct, itemsCount);
             window.dispatchEvent(new Event("cartUpdated"));
         }
     };
@@ -210,7 +219,12 @@ const ProductBody = () => {
                                     }
                                 }}
                             >
-                                -
+                                <img
+                                    src="/images/shared/minus.png"
+                                    alt="minus"
+                                    width={16}
+                                    height={16}
+                                />
                             </ScQuantityButton>
                             <ScQuantityInputContainer>
                                 <ScQuantityInput
@@ -229,7 +243,12 @@ const ProductBody = () => {
                                     }
                                 }}
                             >
-                                +
+                                <img
+                                    src="/images/shared/plus.png"
+                                    alt="plus"
+                                    width={16}
+                                    height={16}
+                                />
                             </ScQuantityButton>
                         </ScQuantityContainer>
                         {selectedSize.stock && (

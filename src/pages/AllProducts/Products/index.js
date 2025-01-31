@@ -96,7 +96,7 @@ const Products = ({ page, setCurrentPage, setPageCount, setShowPagination }) => 
         );
     }
 
-    if (isError) {
+    if (!isError) {
         return (
             <ScNoItemBodyContainer>
                 <ScNoItemBody>

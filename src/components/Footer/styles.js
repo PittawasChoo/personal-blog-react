@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const ScRoot = styled.div`
-    background-color: #222222;
+    background-color: black;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,6 +34,7 @@ export const ScPagesPortalContainer = styled.div`
 
 export const ScPagesPortalHeader = styled.div`
     font-weight: 800;
+    margin-bottom: 24px;
 `;
 
 export const ScTextLink = styled(Link)`
@@ -42,7 +43,7 @@ export const ScTextLink = styled(Link)`
 `;
 
 export const ScPagePortal = styled.div`
-    margin-top: 30px;
+    margin-top: 10px;
 `;
 
 export const ScSectionLine = styled.div`

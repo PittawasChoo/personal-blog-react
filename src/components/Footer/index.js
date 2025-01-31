@@ -49,6 +49,9 @@ const Footer = () => {
                         <ScTextLink to="/promotion">
                             <ScPagePortal>Promotion</ScPagePortal>
                         </ScTextLink>
+                        <ScTextLink to="/cart">
+                            <ScPagePortal>Cart</ScPagePortal>
+                        </ScTextLink>
                     </div>
                     <div>
                         <ScPagesPortalHeader>Other</ScPagesPortalHeader>

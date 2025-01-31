@@ -3,8 +3,6 @@ import React from "react";
 import { get } from "lodash";
 import { useQuery } from "@tanstack/react-query";
 
-import Footer from "components/Footer";
-import Navbar from "components/Navbar";
 import RecommendProducts from "components/RecommendProducts";
 
 import Banner from "./Banner";
@@ -12,7 +10,7 @@ import Banner2 from "./Banner2";
 import Marquee from "./Marquee";
 import ProductCarousel from "./ProductCarousel";
 
-import { ScBanner2Container, ScFooterContainer, ScRoot, ScTrendingContainer } from "./styles";
+import { ScBanner2Container, ScTrendingContainer } from "./styles";
 
 const Main = () => {
     const {

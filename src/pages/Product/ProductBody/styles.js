@@ -206,14 +206,17 @@ export const ScQuantityContainer = styled.div`
     display: inline-flex;
     border: 1px solid #00000040;
     border-radius: 5px;
+    align-items: center;
 `;
 
 export const ScQuantityButton = styled.div`
     font-weight: 500;
     height: 100%;
     padding: 10px 10px;
-    font-size: 18px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 export const ScQuantityInputContainer = styled.div`
@@ -284,7 +287,7 @@ export const ScTextLink = styled(Link)`
 `;
 
 export const ScErrorContainer = styled.div`
-    height: calc(100vh - 140px);
+    height: calc(100vh - 190px);
     display: flex;
     align-items: center;
     justify-content: center;

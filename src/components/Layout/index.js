@@ -8,14 +8,8 @@ import { ScBody, ScNavbarSpaceReserve, ScRoot } from "./styles";
 const Layout = ({ children }) => {
     const location = useLocation();
 
-    console.log("location.pathname", location.pathname);
-
     // Define routes where the Navbar should start with transparent
     const transparentNavBarRoutes = ["/"];
-    console.log(
-        "transparentNavBarRoutes.includes(location.pathname)",
-        transparentNavBarRoutes.includes(location.pathname)
-    );
     const alwaysShowBackground = !transparentNavBarRoutes.includes(location.pathname);
 
     return (
