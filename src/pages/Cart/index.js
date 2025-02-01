@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { orderBy } from "lodash";
+import { useNavigate } from "react-router-dom";
+
+import { AuthContext } from "contexts/AuthContext";
 
 import { FormatToLocaleString } from "modules/number/formatToLocaleString";
 
@@ -23,7 +26,9 @@ import {
 } from "./styles";
 
 const Cart = () => {
+    const { user } = useContext(AuthContext);
     const [cart, setCart] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getCart = () => {
@@ -54,6 +59,10 @@ const Cart = () => {
             const productPrice = cur.promotionPrice || cur.price;
             return acc + productPrice * cur.quantity;
         }, 0);
+    };
+
+    const handleCheckout = () => {
+        navigate(user ? "/check-out" : "/login", { state: { redirectTo: "/check-out" } });
     };
 
     return (
@@ -87,7 +96,7 @@ const Cart = () => {
                                 <div>$ {FormatToLocaleString(Number(getSubtotalPrice()))}</div>
                             </ScTotalPrice>
                             <ScLine />
-                            <ScButton to="/check-out">Check out</ScButton>
+                            <ScButton onClick={handleCheckout}>Check out</ScButton>
                         </ScStickySummary>
                     </ScSummaryContainer>
                 </ScContentContainer>

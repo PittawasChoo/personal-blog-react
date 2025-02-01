@@ -1,9 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import EditIcon from "@mui/icons-material/Edit";
+import HistoryIcon from "@mui/icons-material/History";
+import LogoutIcon from "@mui/icons-material/Logout";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import { useMotionValueEvent, useScroll } from "framer-motion";
 
 import Logo from "components/Logo";
+
+import { AuthContext } from "contexts/AuthContext";
 
 import {
     ScCartItems,
@@ -16,10 +24,18 @@ import {
     ScProductsMenuContainer,
     ScRoot,
     ScTextLink,
+    ScProfileOptionContainer,
 } from "./styles";
 
 const Navbar = ({ alwaysShowBackground = false }) => {
+    const { user, logout } = useContext(AuthContext);
     const [showBackground, setShowBackground] = useState(false);
+
+    // profile options controller
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => setAnchorEl(event.currentTarget);
+    const handleClose = () => setAnchorEl(null);
 
     const { scrollY } = useScroll();
     useMotionValueEvent(scrollY, "change", (latest) => {
@@ -113,16 +129,55 @@ const Navbar = ({ alwaysShowBackground = false }) => {
                     <ScMenuContainer>
                         <ScTextLink to="/cart">
                             <ScMenuLabel>
-                                CART
+                                <img
+                                    src="/images/shared/cart.png"
+                                    alt="cart"
+                                    width={24}
+                                    height={24}
+                                />
                                 <ScCartItems $showCount={cartCount > 0}>{cartCount}</ScCartItems>
                             </ScMenuLabel>
                         </ScTextLink>
-                        <ScTextLink to="/login">
-                            <ScMenuLabel>LOGIN</ScMenuLabel>
-                        </ScTextLink>
-                        <ScTextLink to="/register">
-                            <ScMenuLabel>REGISTER</ScMenuLabel>
-                        </ScTextLink>
+                        {user ? (
+                            <AccountCircleIcon
+                                sx={{ fontSize: "32px", cursor: "pointer" }}
+                                onClick={handleClick}
+                            />
+                        ) : (
+                            <>
+                                <ScTextLink to="/login">
+                                    <ScMenuLabel>LOG IN</ScMenuLabel>
+                                </ScTextLink>
+                                <ScTextLink to="/register">
+                                    <ScMenuLabel>REGISTER</ScMenuLabel>
+                                </ScTextLink>
+                            </>
+                        )}
+                        <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+                            <MenuItem onClick={() => {}}>
+                                <ScProfileOptionContainer>
+                                    <EditIcon sx={{ fontSize: "16px", color: "#000000DE" }} />{" "}
+                                    <span>Edit Profile</span>
+                                </ScProfileOptionContainer>
+                            </MenuItem>
+                            <MenuItem onClick={() => {}}>
+                                <ScProfileOptionContainer>
+                                    <HistoryIcon sx={{ fontSize: "16px", color: "#000000DE" }} />{" "}
+                                    <span>History</span>
+                                </ScProfileOptionContainer>
+                            </MenuItem>
+                            <MenuItem
+                                onClick={() => {
+                                    logout();
+                                    handleClose();
+                                }}
+                            >
+                                <ScProfileOptionContainer>
+                                    <LogoutIcon sx={{ fontSize: "16px", color: "#000000DE" }} />{" "}
+                                    <span>Log Out</span>
+                                </ScProfileOptionContainer>
+                            </MenuItem>
+                        </Menu>
                     </ScMenuContainer>
                 </ScOtherMenuContainer>
             </ScGridContainer>

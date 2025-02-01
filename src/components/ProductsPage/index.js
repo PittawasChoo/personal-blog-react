@@ -297,15 +297,7 @@ const ProductPage = ({ title, children }) => {
                         </ScToolButtonContainer>
 
                         {/* Sorting Options */}
-                        <Menu
-                            id="basic-menu"
-                            anchorEl={anchorEl}
-                            open={open}
-                            onClose={handleClose}
-                            MenuListProps={{
-                                "aria-labelledby": "basic-button",
-                            }}
-                        >
+                        <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
                             {getSortingOptionsPopover()}
                         </Menu>
                     </ScHeaderToolsContainer>

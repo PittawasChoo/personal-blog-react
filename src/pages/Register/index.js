@@ -1,11 +1,15 @@
 import React from "react";
 
 import { Formik, Form } from "formik";
+import { motion } from "framer-motion";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 import Button from "components/Fields/Button";
 import DatePicker from "components/Fields/DatePicker";
 import PasswordField from "components/Fields/PasswordField";
 import RadioGroup from "components/Fields/RadioGroup";
+import SubmitErrorBox from "components/SubmitErrorBox";
 import TextField from "components/Fields/TextField";
 
 import { validationSchema } from "./validationSchema";
@@ -25,16 +29,47 @@ const GENDER_OPTIONS = [
     { value: "female", label: "Female" },
     { value: "other", label: "Other" },
 ];
+const INITIAL_FORM_VALUES = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    dob: null,
+    gender: "",
+};
 
 const Register = () => {
-    const initialFormValues = {
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        dob: null,
-        gender: "",
-    };
+    const navigate = useNavigate();
+
+    const { mutate, isPending, isError, error } = useMutation({
+        mutationKey: ["register"],
+        mutationFn: async ({ email, password, firstName, lastName, dob, gender }) => {
+            const response = await fetch("http://localhost:3001/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email,
+                    password,
+                    firstName,
+                    lastName,
+                    dateOfBirth: dob,
+                    gender,
+                }),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || "Register failed");
+            }
+
+            return await response.json();
+        },
+        onSuccess: (data) => {
+            navigate("/register-success");
+        },
+    });
 
     return (
         <ScRoot>
@@ -42,10 +77,17 @@ const Register = () => {
                 <ScHeader>CREATE ACCOUNT</ScHeader>
                 <ScDescription>Please fill the following form:</ScDescription>
                 <Formik
-                    initialValues={initialFormValues}
+                    initialValues={INITIAL_FORM_VALUES}
                     validationSchema={validationSchema}
                     onSubmit={(values) => {
-                        // TODO: handle submit
+                        mutate({
+                            email: values.email,
+                            password: values.password,
+                            firstName: values.firstName,
+                            lastName: values.lastName,
+                            dob: values.dob,
+                            gender: values.gender,
+                        });
                     }}
                 >
                     {(formProps) => (
@@ -99,7 +141,18 @@ const Register = () => {
                                 </ScRadioGroupContainer>
                             </ScInputContainer>
 
-                            <Button type="submit">Register</Button>
+                            {isError && (
+                                <motion.div
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: "auto" }}
+                                    style={{ marginBottom: "10px", maxWidth: "500px" }}
+                                >
+                                    <SubmitErrorBox>
+                                        Unable to login: {error.message}
+                                    </SubmitErrorBox>
+                                </motion.div>
+                            )}
+                            <Button isLoading={isPending}>Register</Button>
                         </Form>
                     )}
                 </Formik>

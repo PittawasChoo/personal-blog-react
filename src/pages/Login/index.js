@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { Formik, Form } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useMutation } from "@tanstack/react-query";
 
 import Button from "components/Fields/Button";
 import PasswordField from "components/Fields/PasswordField";
+import SubmitErrorBox from "components/SubmitErrorBox";
 import TextField from "components/Fields/TextField";
+
+import { AuthContext } from "contexts/AuthContext";
 
 import { validationSchema } from "./validationSchema";
 import {
@@ -18,11 +23,42 @@ import {
     ScRoot,
 } from "./styles";
 
+const INITIAL_FORM_VALUES = {
+    email: "",
+    password: "",
+};
+
 const Login = () => {
-    const initialFormValues = {
-        email: "",
-        password: "",
-    };
+    const { login } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const { mutate, isPending, isError, error } = useMutation({
+        mutationKey: ["login"],
+        mutationFn: async ({ email, password }) => {
+            const response = await fetch("http://localhost:3001/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email,
+                    password,
+                }),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || "Login failed");
+            }
+
+            return await response.json();
+        },
+        onSuccess: (data) => {
+            login(data.token);
+            navigate(location.state?.redirectTo || "/");
+        },
+    });
 
     return (
         <ScRoot>
@@ -33,10 +69,10 @@ const Login = () => {
                     activate your membership.
                 </ScDescription>
                 <Formik
-                    initialValues={initialFormValues}
+                    initialValues={INITIAL_FORM_VALUES}
                     validationSchema={validationSchema}
                     onSubmit={(values) => {
-                        // TODO: handle submit
+                        mutate({ email: values.email, password: values.password });
                     }}
                 >
                     {(formProps) => (
@@ -47,7 +83,18 @@ const Login = () => {
                             <ScPasswordFieldContainer>
                                 <PasswordField label="Password" formProps={formProps} />
                             </ScPasswordFieldContainer>
-                            <Button>LOG IN</Button>
+                            {isError && (
+                                <motion.div
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: "auto" }}
+                                    style={{ marginBottom: "10px" }}
+                                >
+                                    <SubmitErrorBox>
+                                        Unable to login: {error.message}
+                                    </SubmitErrorBox>
+                                </motion.div>
+                            )}
+                            <Button isLoading={isPending}>LOG IN</Button>
                         </Form>
                     )}
                 </Formik>

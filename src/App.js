@@ -7,6 +7,8 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import Layout from "components/Layout";
 
+import { AuthProvider } from "contexts/AuthContext";
+
 import AboutUs from "pages/AboutUs";
 import AllProducts from "pages/AllProducts";
 import Cart from "pages/Cart";
@@ -18,6 +20,7 @@ import NewArrival from "pages/NewArrival";
 import Product from "pages/Product";
 import Promotion from "pages/Promotion";
 import Register from "pages/Register";
+import RegisterSuccess from "pages/RegisterSuccess.js";
 
 // Create a client
 const THEME = createTheme({
@@ -34,24 +37,27 @@ const App = () => {
             <ThemeProvider theme={THEME}>
                 <CssBaseline />
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <Layout>
-                        <Routes>
-                            <Route path="/" element={<Main />} />
-                            <Route path="/all-products/*" element={<AllProducts />} />
-                            <Route path="/new-arrival/*" element={<NewArrival />} />
-                            <Route path="/promotion/*" element={<Promotion />} />
-                            <Route path="/about-us/*" element={<AboutUs />} />
-                            <Route path="/contact-us/*" element={<ContactUs />} />
-                            <Route path="/product/*" element={<Product />} />
-                            <Route path="/cart/*" element={<Cart />} />
-                            <Route path="/check-out/*" element={<CheckOut />} />
-                            <Route path="/login/*" element={<Login />} />
-                            <Route path="/register/*" element={<Register />} />
+                    <AuthProvider>
+                        <Layout>
+                            <Routes>
+                                <Route path="/" element={<Main />} />
+                                <Route path="/all-products/*" element={<AllProducts />} />
+                                <Route path="/new-arrival/*" element={<NewArrival />} />
+                                <Route path="/promotion/*" element={<Promotion />} />
+                                <Route path="/about-us/*" element={<AboutUs />} />
+                                <Route path="/contact-us/*" element={<ContactUs />} />
+                                <Route path="/product/*" element={<Product />} />
+                                <Route path="/cart/*" element={<Cart />} />
+                                <Route path="/check-out/*" element={<CheckOut />} />
+                                <Route path="/login/*" element={<Login />} />
+                                <Route path="/register/*" element={<Register />} />
+                                <Route path="/register-success/*" element={<RegisterSuccess />} />
 
-                            {/* Todo: not found page */}
-                            {/* <Route path="*" element={<PageNotFound />} /> */}
-                        </Routes>
-                    </Layout>
+                                {/* Todo: not found page */}
+                                {/* <Route path="*" element={<PageNotFound />} /> */}
+                            </Routes>
+                        </Layout>
+                    </AuthProvider>
                 </LocalizationProvider>
             </ThemeProvider>
         </QueryClientProvider>

@@ -7,6 +7,8 @@ import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
+const ICON_STYLES = { fontSize: 20 };
+const INPUT_ADORMENT_STYLES = { marginRight: "-11px" };
 const TEXT_FIELD_STYLES = {
     width: "500px",
     "& .MuiOutlinedInput-root": {
@@ -15,8 +17,6 @@ const TEXT_FIELD_STYLES = {
     "& .MuiInputBase-input:focus": { color: "black" },
     "& .MuiFormLabel-root.Mui-focused": { color: "black" },
 };
-const INPUT_ADORMENT_STYLES = { marginRight: "-11px" };
-const FONT_STYLES = { fontSize: 20 };
 
 const PasswordField = ({ formProps, label = "" }) => {
     const [showPassword, setShowPassword] = useState(false);
@@ -40,9 +40,9 @@ const PasswordField = ({ formProps, label = "" }) => {
                     <InputAdornment position="end" sx={INPUT_ADORMENT_STYLES}>
                         <IconButton onClick={togglePasswordIcon}>
                             {showPassword ? (
-                                <Visibility sx={FONT_STYLES} />
+                                <Visibility sx={ICON_STYLES} />
                             ) : (
-                                <VisibilityOff sx={FONT_STYLES} />
+                                <VisibilityOff sx={ICON_STYLES} />
                             )}
                         </IconButton>
                     </InputAdornment>

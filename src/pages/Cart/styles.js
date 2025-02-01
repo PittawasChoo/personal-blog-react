@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 export const ScRoot = styled.div`
     width: 100%;
@@ -98,7 +97,7 @@ export const ScTotalPrice = styled.div`
     justify-content: space-between;
 `;
 
-export const ScButton = styled(Link)`
+export const ScButton = styled.div`
     margin-top: 30px;
     display: flex;
     align-items: center;

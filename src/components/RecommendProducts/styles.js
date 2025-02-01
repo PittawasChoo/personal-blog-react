@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ScRoot = styled.div`
-    background-image: url(/images/samples/Circle.png);
+    background-image: url(/images/shared/background-circle.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;

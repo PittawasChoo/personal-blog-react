@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import CircularProgress from "@mui/material/CircularProgress";
 import MuiButton from "@mui/material/Button";
 
 const BUTTON_STYLES = {
@@ -17,17 +18,19 @@ const BUTTON_STYLES = {
     justifyContent: "center",
 };
 
-const Button = ({ children }) => {
+const Button = ({ children, isLoading }) => {
     return (
-        <MuiButton type="submit" style={BUTTON_STYLES}>
+        <MuiButton type="submit" style={BUTTON_STYLES} disabled={isLoading}>
+            {isLoading && (
+                <CircularProgress size="18px" style={{ color: "grey", marginRight: "20px" }} />
+            )}
             {children}
         </MuiButton>
     );
 };
 
 Button.propTypes = {
-    formProps: PropTypes.object.isRequired,
-    name: PropTypes.string.isRequired,
+    isLoading: PropTypes.bool,
 };
 
 export default Button;

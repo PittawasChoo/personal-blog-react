@@ -46,6 +46,7 @@ export const ScOtherMenuContainer = styled.div`
 export const ScMenuContainer = styled.div`
     display: flex;
     gap: 25px;
+    align-items: center;
 `;
 
 export const ScMenuLabel = styled.div`
@@ -75,4 +76,12 @@ export const ScCartItems = styled(motion.div)`
     font-family: oxanium;
     border: 1px solid black;
     opacity: ${(props) => (props.$showCount ? "1" : "0")};
+`;
+
+export const ScProfileOptionContainer = styled.div`
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 16px;
+    line-height: 16px;
 `;
