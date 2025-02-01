@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { get } from "lodash";
 import { motion } from "framer-motion";
@@ -68,14 +68,6 @@ const ProductBody = () => {
             return await response.json();
         },
     });
-
-    if (isError) {
-        return (
-            <ScErrorContainer>
-                <ErrorRetry label="products" onRetry={refetch} size="l" showHomeButton />
-            </ScErrorContainer>
-        );
-    }
 
     const product = data || {};
 
@@ -152,6 +144,24 @@ const ProductBody = () => {
         return stock - selectedInCart;
     };
 
+    // If there is only 1 size option, pre-select that option.
+    useEffect(() => {
+        const product = data || {};
+        const sizesInStock = get(product, "stock", []);
+
+        if (sizesInStock.length === 1) {
+            setSelectedSize(sizesInStock[0]);
+        }
+    }, [data]);
+
+    if (isError) {
+        return (
+            <ScErrorContainer>
+                <ErrorRetry label="products" onRetry={refetch} size="l" showHomeButton />
+            </ScErrorContainer>
+        );
+    }
+
     return (
         <ScRoot>
             <ScBodyContainer>
@@ -203,7 +213,6 @@ const ProductBody = () => {
                                     onClick={() => setSelectedSize(stock)}
                                 >
                                     {stock.size}
-                                    {/* {stock.stock} */}
                                 </ScSizeButton>
                             ))}
                         </ScSizeOptionsContainer>

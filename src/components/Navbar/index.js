@@ -117,8 +117,12 @@ const Navbar = ({ alwaysShowBackground = false }) => {
                                 <ScCartItems $showCount={cartCount > 0}>{cartCount}</ScCartItems>
                             </ScMenuLabel>
                         </ScTextLink>
-                        <ScMenuLabel>LOGIN</ScMenuLabel>
-                        <ScMenuLabel>REGISTER</ScMenuLabel>
+                        <ScTextLink to="/login">
+                            <ScMenuLabel>LOGIN</ScMenuLabel>
+                        </ScTextLink>
+                        <ScTextLink to="/register">
+                            <ScMenuLabel>REGISTER</ScMenuLabel>
+                        </ScTextLink>
                     </ScMenuContainer>
                 </ScOtherMenuContainer>
             </ScGridContainer>
