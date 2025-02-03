@@ -4,11 +4,14 @@ import { orderBy } from "lodash";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
+import ErrorRetry from "components/ErrorRetry";
+
 import { AuthContext } from "contexts/AuthContext";
 
 import { FormatToLocaleString } from "modules/number/formatToLocaleString";
 
 import CartItem from "./CartItem";
+import CartItemSkeleton from "./CardItemSkeleton";
 import {
     ScBody,
     ScButton,
@@ -30,7 +33,7 @@ import {
 
 const Cart = () => {
     const { user } = useContext(AuthContext);
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")) || []);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -62,7 +65,12 @@ const Cart = () => {
     };
 
     const ids = cart.map((cartItem) => cartItem.id);
-    const { data, isError, isLoading, refetch } = useQuery({
+    const {
+        data,
+        isError,
+        isFetching: isLoading,
+        refetch,
+    } = useQuery({
         queryKey: ["cart", ids],
         queryFn: async () => {
             const response = await fetch("http://localhost:3001/cart", {
@@ -97,45 +105,66 @@ const Cart = () => {
         <ScRoot>
             <ScBody>
                 <ScHeader>CART</ScHeader>
-                {enhancedCart.length > 0 ? (
-                    <ScContentContainer>
-                        <div>
-                            {enhancedCart.map((product) => (
-                                <CartItem key={product.id + product.size} product={product} />
-                            ))}
-                        </div>
-
-                        <ScSummaryContainer>
-                            <ScStickySummary>
-                                <ScSummaryHeader>SUMMARY</ScSummaryHeader>
-                                <ScPricingContainer>
-                                    <ScLabel $showMargin>Subtotal:</ScLabel>
-                                    <ScPrice>
-                                        $ {FormatToLocaleString(Number(getSubtotalPrice()))}
-                                    </ScPrice>
-                                    <ScLabel>Delivery Fee:</ScLabel>
-                                    <ScPrice>Free</ScPrice>
-                                </ScPricingContainer>
-                                <ScLine />
-                                <ScTotalPrice>
-                                    <div>Total</div>
-                                    <div>$ {FormatToLocaleString(Number(getSubtotalPrice()))}</div>
-                                </ScTotalPrice>
-                                <ScLine />
-                                <ScButton onClick={handleCheckout}>Checkout</ScButton>
-                            </ScStickySummary>
-                        </ScSummaryContainer>
-                    </ScContentContainer>
-                ) : (
+                {isError ? (
                     <div>
                         <ScNoItemsContainer>
-                            <ScNoItemsLabel>There Are No Items In This Cart. :(</ScNoItemsLabel>
-
-                            <ScNoItemsButton onClick={() => navigate("/all-products")}>
-                                View All Products
-                            </ScNoItemsButton>
+                            <ErrorRetry label="cart item" onRetry={refetch} size="l" />
                         </ScNoItemsContainer>
                     </div>
+                ) : (
+                    <>
+                        {cart.length > 0 ? (
+                            <ScContentContainer>
+                                <div>
+                                    {isLoading
+                                        ? Array.apply(null, { length: 2 }).map((e, i) => (
+                                              <CartItemSkeleton />
+                                          ))
+                                        : enhancedCart.map((product) => (
+                                              <CartItem
+                                                  key={product.id + product.size}
+                                                  product={product}
+                                              />
+                                          ))}
+                                </div>
+
+                                <ScSummaryContainer>
+                                    <ScStickySummary>
+                                        <ScSummaryHeader>SUMMARY</ScSummaryHeader>
+                                        <ScPricingContainer>
+                                            <ScLabel $showMargin>Subtotal:</ScLabel>
+                                            <ScPrice>
+                                                $ {FormatToLocaleString(Number(getSubtotalPrice()))}
+                                            </ScPrice>
+                                            <ScLabel>Delivery Fee:</ScLabel>
+                                            <ScPrice>Free</ScPrice>
+                                        </ScPricingContainer>
+                                        <ScLine />
+                                        <ScTotalPrice>
+                                            <div>Total</div>
+                                            <div>
+                                                $ {FormatToLocaleString(Number(getSubtotalPrice()))}
+                                            </div>
+                                        </ScTotalPrice>
+                                        <ScLine />
+                                        <ScButton onClick={handleCheckout}>Checkout</ScButton>
+                                    </ScStickySummary>
+                                </ScSummaryContainer>
+                            </ScContentContainer>
+                        ) : (
+                            <div>
+                                <ScNoItemsContainer>
+                                    <ScNoItemsLabel>
+                                        There Are No Items In This Cart. :(
+                                    </ScNoItemsLabel>
+
+                                    <ScNoItemsButton onClick={() => navigate("/all-products")}>
+                                        View All Products
+                                    </ScNoItemsButton>
+                                </ScNoItemsContainer>
+                            </div>
+                        )}
+                    </>
                 )}
             </ScBody>
         </ScRoot>

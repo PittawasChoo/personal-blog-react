@@ -114,6 +114,7 @@ export const ScSummaryContainer = styled.div`
     display: flex;
     justify-content: flex-end;
     margin-top: 5px;
+    margin-bottom: 40px;
 `;
 
 export const ScSummaryRow = styled.div`
@@ -152,5 +153,17 @@ export const ScSummaryBoxUnderLine = styled.div`
 export const ScButtonContainer = styled.div`
     display: flex;
     justify-content: flex-end;
-    margin-top: 50px;
+    align-items: center;
+    gap: 20px;
+`;
+
+export const ScSecondaryButton = styled.div`
+    cursor: pointer;
+`;
+
+export const ScErrorContainer = styled.div`
+    padding: 40px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;

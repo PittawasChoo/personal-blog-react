@@ -99,3 +99,28 @@ export const ScTotalPrice = styled.div`
 export const ScCheckoutFormContainer = styled.div`
     width: 800px;
 `;
+
+export const ScLoadingPriceContainer = styled.div`
+    display: flex;
+    justify-content: flex-end;
+`;
+
+export const ScLoadingPrice = styled.div`
+    width: 80px;
+    height: 18px;
+    background: linear-gradient(to right, #fcfcfc, #e9e9e9, #dedede, #e9e9e9, #fcfcfc);
+    background-size: 300% 100%;
+    animation: gradient 3s linear infinite;
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 0%;
+        }
+        50% {
+            background-position: 100% 0%;
+        }
+        100% {
+            background-position: 0% 0%;
+        }
+    }
+`;

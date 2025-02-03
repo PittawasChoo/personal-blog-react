@@ -22,7 +22,7 @@ export const ScHeader = styled.span`
 
 export const ScFieldsContainer = styled.div`
     display: flex;
-    justifycontent: center;
+    justify-content: center;
 `;
 
 export const ScButtonsContainer = styled.div`
@@ -31,7 +31,7 @@ export const ScButtonsContainer = styled.div`
     margin-bottom: 20px;
 `;
 
-export const ScPrimaryButton = styled.div`
+export const ScPrimaryButton = styled.button`
     padding: 4px 20px;
     background-color: #111111;
     color: white;

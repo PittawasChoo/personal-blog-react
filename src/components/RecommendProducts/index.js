@@ -4,6 +4,8 @@ import { get } from "lodash";
 import { useQuery } from "@tanstack/react-query";
 
 import BigCard from "components/Card/BigCard";
+import ErrorRetry from "components/ErrorRetry";
+import Skeleton from "components/Card/Skeleton";
 
 import {
     ScBottomArtContainer,
@@ -20,8 +22,8 @@ import {
 const RecommendProducts = () => {
     const {
         data: recommendProducts,
-        isError: isErrorFetchingRecommend,
-        isFetching: isFetchingRecommend,
+        isError: isLoadingRecommendError,
+        isFetching: isLoadingRecommend,
         refetch: refetchRecommend,
     } = useQuery({
         queryKey: ["recommend"],
@@ -50,21 +52,36 @@ const RecommendProducts = () => {
                 </ScDotsContainer>
             </ScHeaderContainer>
 
-            <ScCardsContainer>
-                {products.map((product) => {
-                    return (
-                        <BigCard
-                            key={product.id}
-                            id={product.id}
-                            imgUrl={`http://localhost:3001/images/${product.imgName}`}
-                            brand={product.brand}
-                            name={product.name}
-                            price={Number(product.price)}
-                            promotionPrice={Number(product.promotionPrice)}
-                        />
-                    );
-                })}
-            </ScCardsContainer>
+            {isLoadingRecommendError ? (
+                <div
+                    style={{
+                        height: "450px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                    }}
+                >
+                    <ErrorRetry label="recommend products" onRetry={refetchRecommend} size="l" />
+                </div>
+            ) : (
+                <ScCardsContainer>
+                    {isLoadingRecommend
+                        ? Array.apply(null, { length: 4 }).map((e, i) => <Skeleton />)
+                        : products.map((product) => {
+                              return (
+                                  <BigCard
+                                      key={product.id}
+                                      id={product.id}
+                                      imgUrl={`http://localhost:3001/images/${product.imgName}`}
+                                      brand={product.brand}
+                                      name={product.name}
+                                      price={Number(product.price)}
+                                      promotionPrice={Number(product.promotionPrice)}
+                                  />
+                              );
+                          })}
+                </ScCardsContainer>
+            )}
 
             <ScBottomArtContainer>
                 <ScLine />

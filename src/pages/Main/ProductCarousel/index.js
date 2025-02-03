@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 
 import Slider from "react-slick";
 
+import ErrorRetry from "components/ErrorRetry";
+import Skeleton from "components/Card/Skeleton";
 import SmallCard from "components/Card/SmallCard";
 
 import "slick-carousel/slick/slick.css";
@@ -18,6 +20,7 @@ import {
     ScCenterBox,
     ScCenterBoxContentContainer,
     ScDot,
+    ScErrorContainer,
     ScHeaderContainer,
     ScHeaderLabel,
     ScLeftBox,
@@ -30,7 +33,7 @@ import {
     ScTextLink,
 } from "./styles";
 
-const ProductCarousel = ({ header, products, linkTo }) => {
+const ProductCarousel = ({ isLoading, isError, refetch, header, products, linkTo }) => {
     let sliderRef = useRef(null);
     const next = () => {
         sliderRef.slickNext();
@@ -103,37 +106,50 @@ const ProductCarousel = ({ header, products, linkTo }) => {
             <ScRightBox />
 
             {/* carousel */}
-            <ScCarouselContainer>
-                <ScCarouselInnerContainer>
-                    <div className="slider-container">
-                        <Slider
-                            {...settings}
-                            ref={(slider) => {
-                                sliderRef = slider;
-                            }}
-                        >
-                            {products.map((product) => {
-                                return (
-                                    <SmallCard
-                                        key={product.id}
-                                        id={product.id}
-                                        imgUrl={`http://localhost:3001/images/${product.imgName}`}
-                                        brand={product.brand}
-                                        name={product.name}
-                                        price={Number(product.price)}
-                                        promotionPrice={Number(product.promotionPrice)}
-                                    />
-                                );
-                            })}
-                        </Slider>
-                    </div>
-                </ScCarouselInnerContainer>
-            </ScCarouselContainer>
+            {isError ? (
+                <ScErrorContainer>
+                    <ErrorRetry label={header} onRetry={refetch} size="l" />
+                </ScErrorContainer>
+            ) : (
+                <ScCarouselContainer>
+                    <ScCarouselInnerContainer>
+                        <div className="slider-container">
+                            <Slider
+                                {...settings}
+                                ref={(slider) => {
+                                    sliderRef = slider;
+                                }}
+                            >
+                                {isLoading
+                                    ? Array.apply(null, { length: 20 }).map((e, i) => (
+                                          <Skeleton isSmall />
+                                      ))
+                                    : products.map((product) => {
+                                          return (
+                                              <SmallCard
+                                                  key={product.id}
+                                                  id={product.id}
+                                                  imgUrl={`http://localhost:3001/images/${product.imgName}`}
+                                                  brand={product.brand}
+                                                  name={product.name}
+                                                  price={Number(product.price)}
+                                                  promotionPrice={Number(product.promotionPrice)}
+                                              />
+                                          );
+                                      })}
+                            </Slider>
+                        </div>
+                    </ScCarouselInnerContainer>
+                </ScCarouselContainer>
+            )}
         </ScRoot>
     );
 };
 
 ProductCarousel.propTypes = {
+    isLoading: PropTypes.bool.isRequired,
+    isError: PropTypes.bool.isRequired,
+    refetch: PropTypes.func.isRequired,
     header: PropTypes.string.isRequired,
     products: PropTypes.array.isRequired,
     linkTo: PropTypes.string.isRequired,

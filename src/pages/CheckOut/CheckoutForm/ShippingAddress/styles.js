@@ -22,7 +22,7 @@ export const ScHeader = styled.span`
 
 export const ScFieldsContainer = styled.div`
     display: flex;
-    justifycontent: center;
+    justify-content: center;
 `;
 
 export const ScButtonsContainer = styled.div`

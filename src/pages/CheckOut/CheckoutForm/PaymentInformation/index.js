@@ -131,7 +131,7 @@ const PaymentInformation = ({ name, expandingPanel, handleChange, formProps }) =
                             <ScSecondaryButton onClick={() => handleChange("panel2")}>
                                 Back
                             </ScSecondaryButton>
-                            <ScPrimaryButton>Place Order</ScPrimaryButton>
+                            <ScPrimaryButton type="submit">Place Order</ScPrimaryButton>
                         </ScButtonsContainer>
                     </div>
                 </ScFieldsContainer>

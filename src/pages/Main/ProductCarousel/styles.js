@@ -47,6 +47,7 @@ export const ScHeaderLabel = styled.div`
     font-family: space-explorer;
     line-height: 76px;
     margin-right: 50px;
+    text-transform: uppercase;
 `;
 
 export const ScButtonLabel = styled.div`
@@ -147,4 +148,14 @@ export const ScCarouselInnerContainer = styled.div`
 export const ScTextLink = styled(Link)`
     text-decoration: none;
     color: inherit;
+`;
+
+export const ScErrorContainer = styled.div`
+    position: absolute;
+    width: 100%;
+    top: 140px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;

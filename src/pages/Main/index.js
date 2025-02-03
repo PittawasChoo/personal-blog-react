@@ -67,7 +67,14 @@ const Main = () => {
                 <RecommendProducts />
             </ScTrendingContainer>
 
-            <ProductCarousel header="NEW ARRIVAL" products={newArrival} linkTo="/new-arrival" />
+            <ProductCarousel
+                isLoading={isLoadingNewArrival}
+                isError={isLoadingNewArrivalError}
+                retry={refetchNewArrival}
+                header="new arrival"
+                products={newArrival}
+                linkTo="/new-arrival"
+            />
 
             <ScBanner2Container>
                 <Marquee />
@@ -75,7 +82,14 @@ const Main = () => {
                 <Marquee reverse />
             </ScBanner2Container>
 
-            <ProductCarousel header="PROMOTION" products={promotion} linkTo="/promotion" />
+            <ProductCarousel
+                isLoading={isLoadingPromotion}
+                isError={isLoadingPromotionError}
+                retry={refetchPromotion}
+                header="promotion"
+                products={promotion}
+                linkTo="/promotion"
+            />
         </>
     );
 };

@@ -13,6 +13,8 @@ import {
     ScHeader,
     ScLabel,
     ScLine,
+    ScLoadingPrice,
+    ScLoadingPriceContainer,
     ScPrice,
     ScPricingContainer,
     ScRoot,
@@ -24,7 +26,7 @@ import {
 import OrderSummaryModal from "./OrderSummaryModal";
 
 const Checkout = () => {
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")) || []);
     const [orderSummary, setOrderSummary] = useState({});
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -116,6 +118,9 @@ const Checkout = () => {
                     orderSummary={orderSummary}
                     cart={enhancedCart}
                     onClose={() => setIsModalOpen(false)}
+                    isLoading={isLoadingCart}
+                    isError={isLoadingCartError}
+                    refetch={refetchCart}
                 />
 
                 <ScHeader>CHECKOUT</ScHeader>
@@ -134,16 +139,27 @@ const Checkout = () => {
                             <ScSummaryHeader>SUMMARY</ScSummaryHeader>
                             <ScPricingContainer>
                                 <ScLabel $showMargin>Subtotal:</ScLabel>
-                                <ScPrice>
-                                    $ {FormatToLocaleString(Number(getSubtotalPrice()))}
-                                </ScPrice>
+                                {isLoadingCart ? (
+                                    <ScLoadingPriceContainer>
+                                        <ScLoadingPrice />
+                                    </ScLoadingPriceContainer>
+                                ) : (
+                                    <ScPrice>
+                                        $ {FormatToLocaleString(Number(getSubtotalPrice()))}
+                                    </ScPrice>
+                                )}
+
                                 <ScLabel>Delivery Fee:</ScLabel>
                                 <ScPrice>Free</ScPrice>
                             </ScPricingContainer>
                             <ScLine />
                             <ScTotalPrice>
                                 <div>Total</div>
-                                <div>$ {FormatToLocaleString(Number(getSubtotalPrice()))}</div>
+                                {isLoadingCart ? (
+                                    <ScLoadingPrice />
+                                ) : (
+                                    <div>$ {FormatToLocaleString(Number(getSubtotalPrice()))}</div>
+                                )}
                             </ScTotalPrice>
                         </ScStickySummary>
                     </ScSummaryContainer>
