@@ -8,6 +8,7 @@ import { FormatToLocaleString } from "modules/number/formatToLocaleString";
 import CheckoutForm from "./CheckoutForm";
 import {
     ScBody,
+    ScCheckoutFormContainer,
     ScContentContainer,
     ScHeader,
     ScLabel,
@@ -120,13 +121,13 @@ const Checkout = () => {
                 <ScHeader>CHECKOUT</ScHeader>
 
                 <ScContentContainer>
-                    <div style={{ width: "800px" }}>
+                    <ScCheckoutFormContainer>
                         <CheckoutForm
                             setOrderSummary={setOrderSummary}
                             setIsModalOpen={setIsModalOpen}
                             userData={user}
                         />
-                    </div>
+                    </ScCheckoutFormContainer>
 
                     <ScSummaryContainer>
                         <ScStickySummary>

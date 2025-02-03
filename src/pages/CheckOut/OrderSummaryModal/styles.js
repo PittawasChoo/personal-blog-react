@@ -148,3 +148,9 @@ export const ScSummaryBoxUnderLine = styled.div`
     background-color: #ff4f00;
     margin-top: 4px;
 `;
+
+export const ScButtonContainer = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 50px;
+`;

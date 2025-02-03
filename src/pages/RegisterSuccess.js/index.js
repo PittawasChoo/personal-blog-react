@@ -4,7 +4,14 @@ import Button from "@mui/material/Button";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { useNavigate } from "react-router-dom";
 
-import { ScBody, ScButtonsContainer, ScButtonText, ScRoot } from "./styles";
+import {
+    ScBody,
+    ScButtonsContainer,
+    ScButtonText,
+    ScFirstLineText,
+    ScRoot,
+    ScSecondLineText,
+} from "./styles";
 
 const RegisterSuccess = () => {
     const navigate = useNavigate();
@@ -13,12 +20,8 @@ const RegisterSuccess = () => {
         <ScRoot>
             <ScBody>
                 <CheckCircleIcon sx={{ fontSize: "200px", color: "green" }} />
-                <div style={{ fontSize: "40px", marginBottom: "10px", fontFamily: "oxanium" }}>
-                    Account Successfully Created
-                </div>
-                <div style={{ fontSize: "22px", marginBottom: "50px", fontFamily: "oxanium" }}>
-                    Welcome To CyberWear Online Store Family
-                </div>
+                <ScFirstLineText>Account Successfully Created</ScFirstLineText>
+                <ScSecondLineText>Welcome To CyberWear Online Store Family</ScSecondLineText>
                 <ScButtonsContainer>
                     <Button
                         size="large"

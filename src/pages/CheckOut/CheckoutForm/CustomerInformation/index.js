@@ -2,13 +2,21 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import TextField from "components/Fields/TextField";
 
-import { ScFieldLabel, ScRequireMark, ScInputContainer } from "./styles";
+import {
+    ScButtonsContainer,
+    ScFieldLabel,
+    ScFieldsContainer,
+    ScHeader,
+    ScInputContainer,
+    ScPrimaryButton,
+    ScRequireMark,
+} from "./styles";
 
 const CustomerInformation = ({ name, expandingPanel, handleChange, formProps }) => {
     const handleKeyDownForNumber = (e) => {
@@ -38,14 +46,14 @@ const CustomerInformation = ({ name, expandingPanel, handleChange, formProps }) 
             }}
         >
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <span style={{ fontSize: "22px", fontWeight: 600 }}>CUSTOMER INFORMATION</span>
+                <ScHeader>CUSTOMER INFORMATION</ScHeader>
             </AccordionSummary>
             <AccordionDetails
                 sx={{
                     borderTop: "1px solid #00000020",
                 }}
             >
-                <div style={{ display: "flex", justifyContent: "center" }}>
+                <ScFieldsContainer>
                     <div>
                         <ScFieldLabel>
                             First Name <ScRequireMark>*</ScRequireMark>
@@ -100,28 +108,13 @@ const CustomerInformation = ({ name, expandingPanel, handleChange, formProps }) 
                                 onKeyDown={handleKeyDownForNumber}
                             />
                         </ScInputContainer>
-                        <div
-                            style={{
-                                display: "flex",
-                                justifyContent: "flex-end",
-                                marginBottom: "20px",
-                            }}
-                        >
-                            <div
-                                style={{
-                                    padding: "4px 20px",
-                                    backgroundColor: "#111111",
-                                    color: "white",
-                                    borderRadius: "5px",
-                                    cursor: "pointer",
-                                }}
-                                onClick={() => handleChange("panel2")}
-                            >
+                        <ScButtonsContainer>
+                            <ScPrimaryButton onClick={() => handleChange("panel2")}>
                                 Next
-                            </div>
-                        </div>
+                            </ScPrimaryButton>
+                        </ScButtonsContainer>
                     </div>
-                </div>
+                </ScFieldsContainer>
             </AccordionDetails>
         </Accordion>
     );

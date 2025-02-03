@@ -4,7 +4,14 @@ import Button from "@mui/material/Button";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { useNavigate } from "react-router-dom";
 
-import { ScBody, ScButtonsContainer, ScButtonText, ScRoot } from "./styles";
+import {
+    ScBody,
+    ScButtonsContainer,
+    ScButtonText,
+    ScFirstLineText,
+    ScRoot,
+    ScSecondLineText,
+} from "./styles";
 
 const PurchaseSuccess = () => {
     const navigate = useNavigate();
@@ -13,12 +20,8 @@ const PurchaseSuccess = () => {
         <ScRoot>
             <ScBody>
                 <CheckCircleIcon sx={{ fontSize: "200px", color: "green" }} />
-                <div style={{ fontSize: "40px", marginBottom: "10px", fontFamily: "oxanium" }}>
-                    Your Order Has Been Placed
-                </div>
-                <div style={{ fontSize: "22px", marginBottom: "50px", fontFamily: "oxanium" }}>
-                    Thank You For Shopping With Us
-                </div>
+                <ScFirstLineText>Your Order Has Been Placed</ScFirstLineText>
+                <ScSecondLineText>Thank You For Shopping With Us</ScSecondLineText>
                 <ScButtonsContainer>
                     <Button
                         size="large"

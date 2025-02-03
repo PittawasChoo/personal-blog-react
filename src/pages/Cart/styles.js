@@ -21,7 +21,7 @@ export const ScRoot = styled.div`
 export const ScBody = styled.div`
     width: 1500px;
     max-width: 1500px;
-    padding: 80px 200px;
+    padding: 80px 170px;
 `;
 
 export const ScHeader = styled.div`
@@ -110,4 +110,32 @@ export const ScButton = styled.div`
     cursor: pointer;
     color: inherit;
     text-decoration: none;
+`;
+
+export const ScNoItemsContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 260px;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const ScNoItemsLabel = styled.div`
+    font-size: 30px;
+    font-family: oxanium;
+`;
+
+export const ScNoItemsButton = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    background-color: black;
+    padding: 15px 30px;
+    border-radius: 15px;
+    margin-top: 30px;
+    font-family: oxanium;
+    cursor: pointer;
 `;

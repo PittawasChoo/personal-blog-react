@@ -55,7 +55,6 @@ const ProductBody = () => {
     const [searchParams] = useSearchParams();
     const id = searchParams.get("id");
 
-    console.log("id", id);
     const {
         data,
         isError,

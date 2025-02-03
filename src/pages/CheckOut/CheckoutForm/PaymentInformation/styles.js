@@ -14,3 +14,41 @@ export const ScRequireMark = styled.span`
 export const ScInputContainer = styled.div`
     margin-bottom: 20px;
 `;
+
+export const ScHeader = styled.span`
+    font-size: 22px;
+    font-weight: 600;
+`;
+
+export const ScFieldsContainer = styled.div`
+    display: flex;
+    justifycontent: center;
+`;
+
+export const ScButtonsContainer = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+`;
+
+export const ScPrimaryButton = styled.div`
+    padding: 4px 20px;
+    background-color: #111111;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+`;
+
+export const ScSecondaryButton = styled.div`
+    padding: 4px 20px;
+    cursor: pointer;
+`;
+
+export const ScDoubleFieldsContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+`;
+
+export const ScSmallFieldContainer = styled.div`
+    width: 230px;
+`;

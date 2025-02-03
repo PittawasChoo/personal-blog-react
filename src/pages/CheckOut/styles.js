@@ -95,3 +95,7 @@ export const ScTotalPrice = styled.div`
     display: flex;
     justify-content: space-between;
 `;
+
+export const ScCheckoutFormContainer = styled.div`
+    width: 800px;
+`;

@@ -28,3 +28,15 @@ export const ScButtonsContainer = styled.div`
     width: 100%;
     gap: 20px;
 `;
+
+export const ScFirstLineText = styled.div`
+    font-size: 40px;
+    margin-bottom: 10px;
+    font-family: oxanium;
+`;
+
+export const ScSecondLineText = styled.div`
+    font-size: 22px;
+    margin-bottom: 50px;
+    font-family: oxanium;
+`;

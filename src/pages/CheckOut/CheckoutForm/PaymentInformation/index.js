@@ -2,14 +2,25 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import DatePicker from "components/Fields/DatePicker";
 import TextField from "components/Fields/TextField";
 
-import { ScFieldLabel, ScRequireMark, ScInputContainer } from "./styles";
+import {
+    ScButtonsContainer,
+    ScDoubleFieldsContainer,
+    ScFieldLabel,
+    ScFieldsContainer,
+    ScHeader,
+    ScInputContainer,
+    ScPrimaryButton,
+    ScRequireMark,
+    ScSecondaryButton,
+    ScSmallFieldContainer,
+} from "./styles";
 
 const PaymentInformation = ({ name, expandingPanel, handleChange, formProps }) => {
     const handleKeyDown = (e) => {
@@ -39,14 +50,14 @@ const PaymentInformation = ({ name, expandingPanel, handleChange, formProps }) =
             }}
         >
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <span style={{ fontSize: "22px", fontWeight: 600 }}>PAYMENT INFORMATION</span>
+                <ScHeader>PAYMENT INFORMATION</ScHeader>
             </AccordionSummary>
             <AccordionDetails
                 sx={{
                     borderTop: "1px solid #00000020",
                 }}
             >
-                <div style={{ display: "flex", justifyContent: "center" }}>
+                <ScFieldsContainer>
                     <div>
                         <ScFieldLabel>
                             Cardholder's Full Name <ScRequireMark>*</ScRequireMark>
@@ -80,8 +91,8 @@ const PaymentInformation = ({ name, expandingPanel, handleChange, formProps }) =
                             />
                         </ScInputContainer>
 
-                        <div style={{ display: "flex", justifyContent: "space-between" }}>
-                            <div style={{ width: "230px" }}>
+                        <ScDoubleFieldsContainer>
+                            <ScSmallFieldContainer>
                                 <ScFieldLabel>
                                     Expiration Date <ScRequireMark>*</ScRequireMark>
                                 </ScFieldLabel>
@@ -95,8 +106,8 @@ const PaymentInformation = ({ name, expandingPanel, handleChange, formProps }) =
                                         format="MM/YY"
                                     />
                                 </ScInputContainer>
-                            </div>
-                            <div style={{ width: "230px" }}>
+                            </ScSmallFieldContainer>
+                            <ScSmallFieldContainer>
                                 <ScFieldLabel>
                                     CVV <ScRequireMark>*</ScRequireMark>
                                 </ScFieldLabel>
@@ -114,39 +125,16 @@ const PaymentInformation = ({ name, expandingPanel, handleChange, formProps }) =
                                         onKeyDown={handleKeyDown}
                                     />
                                 </ScInputContainer>
-                            </div>
-                        </div>
-                        <div
-                            style={{
-                                display: "flex",
-                                justifyContent: "flex-end",
-                                marginBottom: "20px",
-                            }}
-                        >
-                            <div
-                                style={{
-                                    padding: "4px 20px",
-                                    cursor: "pointer",
-                                }}
-                                onClick={() => handleChange("panel2")}
-                            >
+                            </ScSmallFieldContainer>
+                        </ScDoubleFieldsContainer>
+                        <ScButtonsContainer>
+                            <ScSecondaryButton onClick={() => handleChange("panel2")}>
                                 Back
-                            </div>
-                            <button
-                                type="submit"
-                                style={{
-                                    padding: "4px 20px",
-                                    backgroundColor: "#111111",
-                                    color: "white",
-                                    borderRadius: "5px",
-                                    cursor: "pointer",
-                                }}
-                            >
-                                Place Order
-                            </button>
-                        </div>
+                            </ScSecondaryButton>
+                            <ScPrimaryButton>Place Order</ScPrimaryButton>
+                        </ScButtonsContainer>
                     </div>
-                </div>
+                </ScFieldsContainer>
             </AccordionDetails>
         </Accordion>
     );

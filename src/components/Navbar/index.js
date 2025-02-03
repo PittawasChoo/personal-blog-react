@@ -23,9 +23,9 @@ import {
     ScMenuNumber,
     ScOtherMenuContainer,
     ScProductsMenuContainer,
+    ScProfileOptionContainer,
     ScRoot,
     ScTextLink,
-    ScProfileOptionContainer,
 } from "./styles";
 
 const Navbar = ({ alwaysShowBackground = false }) => {

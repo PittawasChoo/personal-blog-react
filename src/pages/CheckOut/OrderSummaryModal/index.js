@@ -10,31 +10,32 @@ import { useNavigate } from "react-router-dom";
 import { FormatToLocaleString } from "modules/number/formatToLocaleString";
 
 import {
-    ScRoot,
-    ScSummaryHeader,
-    ScRecieptHeader,
     ScAddressHeader,
-    ScRecieptDetailContainer,
-    ScRecieptDetailRow,
-    ScRecieptDetailHeader,
-    ScTableContainer,
-    ScQtyHeader,
-    ScProductHeader,
-    ScUnitHeader,
-    ScAmountHeader,
-    ScTableItemContainer,
-    ScQty,
-    ScProduct,
-    ScUnit,
     ScAmount,
-    ScTableUnderLine,
-    ScSummaryContainer,
-    ScSummaryRow,
+    ScAmountHeader,
+    ScButtonContainer,
+    ScProduct,
+    ScProductHeader,
+    ScQty,
+    ScQtyHeader,
+    ScRecieptDetailContainer,
+    ScRecieptDetailHeader,
+    ScRecieptDetailRow,
+    ScRecieptHeader,
+    ScRoot,
     ScSummaryBoxHeader,
-    ScSummaryBoxValue,
     ScSummaryBoxLine,
     ScSummaryBoxTotalHeader,
     ScSummaryBoxUnderLine,
+    ScSummaryBoxValue,
+    ScSummaryContainer,
+    ScSummaryHeader,
+    ScSummaryRow,
+    ScTableContainer,
+    ScTableItemContainer,
+    ScTableUnderLine,
+    ScUnit,
+    ScUnitHeader,
 } from "./styles";
 
 const OrderSummaryModal = ({ isModalOpen, orderSummary, cart, onClose }) => {
@@ -94,6 +95,8 @@ const OrderSummaryModal = ({ isModalOpen, orderSummary, cart, onClose }) => {
             return await response.json();
         },
         onSuccess: (data) => {
+            localStorage.removeItem("cart");
+            window.dispatchEvent(new Event("cartUpdated"));
             navigate("/purchase-success");
         },
     });
@@ -116,10 +119,6 @@ const OrderSummaryModal = ({ isModalOpen, orderSummary, cart, onClose }) => {
                     </div>
 
                     <ScRecieptDetailContainer>
-                        <ScRecieptDetailRow>
-                            <ScRecieptDetailHeader>Reciept #</ScRecieptDetailHeader>
-                            <div>XXXXXXXX</div>
-                        </ScRecieptDetailRow>
                         <ScRecieptDetailRow>
                             <ScRecieptDetailHeader>Reciept Date</ScRecieptDetailHeader>
                             <div>{dayjs().format("DD MMMM YYYY")}</div>
@@ -171,13 +170,7 @@ const OrderSummaryModal = ({ isModalOpen, orderSummary, cart, onClose }) => {
                         <ScSummaryBoxUnderLine />
                     </div>
                 </ScSummaryContainer>
-                <div
-                    style={{
-                        display: "flex",
-                        justifyContent: "flex-end",
-                        marginTop: "50px",
-                    }}
-                >
+                <ScButtonContainer>
                     <Button
                         style={{
                             padding: "4px 20px",
@@ -212,7 +205,7 @@ const OrderSummaryModal = ({ isModalOpen, orderSummary, cart, onClose }) => {
                             "Purchase"
                         )}
                     </Button>
-                </div>
+                </ScButtonContainer>
             </ScRoot>
         </Modal>
     );

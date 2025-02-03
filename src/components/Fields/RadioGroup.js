@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormHelperText from "@mui/material/FormHelperText";
-import Radio from "@mui/material/Radio";
 import MuiRadioGroup from "@mui/material/RadioGroup";
+import Radio from "@mui/material/Radio";
 
 const RADIO_STYLES = {
     "& .MuiSvgIcon-root": {

@@ -16,6 +16,9 @@ import {
     ScHeader,
     ScLabel,
     ScLine,
+    ScNoItemsButton,
+    ScNoItemsContainer,
+    ScNoItemsLabel,
     ScPrice,
     ScPricingContainer,
     ScRoot,
@@ -94,35 +97,46 @@ const Cart = () => {
         <ScRoot>
             <ScBody>
                 <ScHeader>CART</ScHeader>
+                {enhancedCart.length > 0 ? (
+                    <ScContentContainer>
+                        <div>
+                            {enhancedCart.map((product) => (
+                                <CartItem key={product.id + product.size} product={product} />
+                            ))}
+                        </div>
 
-                <ScContentContainer>
+                        <ScSummaryContainer>
+                            <ScStickySummary>
+                                <ScSummaryHeader>SUMMARY</ScSummaryHeader>
+                                <ScPricingContainer>
+                                    <ScLabel $showMargin>Subtotal:</ScLabel>
+                                    <ScPrice>
+                                        $ {FormatToLocaleString(Number(getSubtotalPrice()))}
+                                    </ScPrice>
+                                    <ScLabel>Delivery Fee:</ScLabel>
+                                    <ScPrice>Free</ScPrice>
+                                </ScPricingContainer>
+                                <ScLine />
+                                <ScTotalPrice>
+                                    <div>Total</div>
+                                    <div>$ {FormatToLocaleString(Number(getSubtotalPrice()))}</div>
+                                </ScTotalPrice>
+                                <ScLine />
+                                <ScButton onClick={handleCheckout}>Checkout</ScButton>
+                            </ScStickySummary>
+                        </ScSummaryContainer>
+                    </ScContentContainer>
+                ) : (
                     <div>
-                        {enhancedCart.map((product) => (
-                            <CartItem key={product.id + product.size} product={product} />
-                        ))}
-                    </div>
+                        <ScNoItemsContainer>
+                            <ScNoItemsLabel>There Are No Items In This Cart. :(</ScNoItemsLabel>
 
-                    <ScSummaryContainer>
-                        <ScStickySummary>
-                            <ScSummaryHeader>SUMMARY</ScSummaryHeader>
-                            <ScPricingContainer>
-                                <ScLabel $showMargin>Subtotal:</ScLabel>
-                                <ScPrice>
-                                    $ {FormatToLocaleString(Number(getSubtotalPrice()))}
-                                </ScPrice>
-                                <ScLabel>Delivery Fee:</ScLabel>
-                                <ScPrice>Free</ScPrice>
-                            </ScPricingContainer>
-                            <ScLine />
-                            <ScTotalPrice>
-                                <div>Total</div>
-                                <div>$ {FormatToLocaleString(Number(getSubtotalPrice()))}</div>
-                            </ScTotalPrice>
-                            <ScLine />
-                            <ScButton onClick={handleCheckout}>Checkout</ScButton>
-                        </ScStickySummary>
-                    </ScSummaryContainer>
-                </ScContentContainer>
+                            <ScNoItemsButton onClick={() => navigate("/all-products")}>
+                                View All Products
+                            </ScNoItemsButton>
+                        </ScNoItemsContainer>
+                    </div>
+                )}
             </ScBody>
         </ScRoot>
     );
