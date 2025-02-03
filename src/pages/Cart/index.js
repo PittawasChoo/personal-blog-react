@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { orderBy } from "lodash";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 import { AuthContext } from "contexts/AuthContext";
 
@@ -11,7 +12,6 @@ import CartItem from "./CartItem";
 import {
     ScBody,
     ScButton,
-    ScColon,
     ScContentContainer,
     ScHeader,
     ScLabel,
@@ -54,27 +54,50 @@ const Cart = () => {
         };
     }, []);
 
+    const handleCheckout = () => {
+        navigate(user ? "/checkout" : "/login", { state: { redirectTo: "/checkout" } });
+    };
+
+    const ids = cart.map((cartItem) => cartItem.id);
+    const { data, isError, isLoading, refetch } = useQuery({
+        queryKey: ["cart", ids],
+        queryFn: async () => {
+            const response = await fetch("http://localhost:3001/cart", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ ids: ids }),
+            });
+            return await response.json();
+        },
+    });
+
+    const productsData = data || [];
+
+    const enhancedCart = cart.map((cartItem) => {
+        const data = productsData.find((product) => product.id === cartItem.id);
+        return {
+            ...data,
+            ...cartItem,
+        };
+    });
+
     const getSubtotalPrice = () => {
-        return cart.reduce((acc, cur) => {
+        return enhancedCart.reduce((acc, cur) => {
             const productPrice = cur.promotionPrice || cur.price;
             return acc + productPrice * cur.quantity;
         }, 0);
     };
 
-    const handleCheckout = () => {
-        navigate(user ? "/check-out" : "/login", { state: { redirectTo: "/check-out" } });
-    };
-
     return (
         <ScRoot>
             <ScBody>
-                <ScHeader>
-                    CART<ScColon>:</ScColon>
-                </ScHeader>
+                <ScHeader>CART</ScHeader>
 
                 <ScContentContainer>
                     <div>
-                        {cart.map((product) => (
+                        {enhancedCart.map((product) => (
                             <CartItem key={product.id + product.size} product={product} />
                         ))}
                     </div>
@@ -96,7 +119,7 @@ const Cart = () => {
                                 <div>$ {FormatToLocaleString(Number(getSubtotalPrice()))}</div>
                             </ScTotalPrice>
                             <ScLine />
-                            <ScButton onClick={handleCheckout}>Check out</ScButton>
+                            <ScButton onClick={handleCheckout}>Checkout</ScButton>
                         </ScStickySummary>
                     </ScSummaryContainer>
                 </ScContentContainer>

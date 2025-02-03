@@ -23,7 +23,12 @@ const Products = ({ page, setCurrentPage, setPageCount, setShowPagination }) => 
     const { searchParam, selectedBrands, selectedSizes, selectedTypes, sortBy } =
         useContext(FilterContext);
 
-    const { data, isError, isFetching, refetch } = useQuery({
+    const {
+        data,
+        isError,
+        isFetching: isLoading,
+        refetch,
+    } = useQuery({
         queryKey: [
             "products",
             searchParam,
@@ -80,7 +85,7 @@ const Products = ({ page, setCurrentPage, setPageCount, setShowPagination }) => 
     ]);
 
     const products = get(data, "products", []);
-    const shouldShowLoading = useDebounceLoading(isFetching, 1000);
+    const shouldShowLoading = useDebounceLoading(isLoading, 1000);
 
     if (shouldShowLoading) {
         return (

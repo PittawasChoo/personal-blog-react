@@ -15,8 +15,8 @@ import { ScBanner2Container, ScTrendingContainer } from "./styles";
 const Main = () => {
     const {
         data: newArrivalData,
-        isError: isErrorFetchingNewArrival,
-        isFetching: isFetchingNewArrival,
+        isError: isLoadingNewArrivalError,
+        isFetching: isLoadingNewArrival,
         refetch: refetchNewArrival,
     } = useQuery({
         queryKey: ["new-arrival"],
@@ -36,8 +36,8 @@ const Main = () => {
 
     const {
         data: promotionData,
-        isError: isErrorFetchingPromotion,
-        isFetching: isFetchingPromotion,
+        isError: isLoadingPromotionError,
+        isFetching: isLoadingPromotion,
         refetch: refetchPromotion,
     } = useQuery({
         queryKey: ["promotion"],

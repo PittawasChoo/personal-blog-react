@@ -29,14 +29,6 @@ const GENDER_OPTIONS = [
     { value: "female", label: "Female" },
     { value: "other", label: "Other" },
 ];
-const INITIAL_FORM_VALUES = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    dob: null,
-    gender: "",
-};
 
 const Register = () => {
     const navigate = useNavigate();
@@ -71,13 +63,28 @@ const Register = () => {
         },
     });
 
+    const initialValues = {
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        dob: null,
+        gender: "",
+    };
+
+    const handleKeyDownForAlphabet = (e) => {
+        if (e.key.length === 1 && !/[a-zA-Z\u0E00-\u0E7F\s.]/.test(e.key)) {
+            e.preventDefault();
+        }
+    };
+
     return (
         <ScRoot>
             <ScBody>
                 <ScHeader>CREATE ACCOUNT</ScHeader>
                 <ScDescription>Please fill the following form:</ScDescription>
                 <Formik
-                    initialValues={INITIAL_FORM_VALUES}
+                    initialValues={initialValues}
                     validationSchema={validationSchema}
                     onSubmit={(values) => {
                         mutate({
@@ -96,14 +103,28 @@ const Register = () => {
                                 First Name <ScRequireMark>*</ScRequireMark>
                             </ScFieldLabel>
                             <ScInputContainer>
-                                <TextField name="firstName" formProps={formProps} />
+                                <TextField
+                                    name="firstName"
+                                    formProps={formProps}
+                                    onKeyDown={handleKeyDownForAlphabet}
+                                    inputProps={{
+                                        inputMode: "text",
+                                    }}
+                                />
                             </ScInputContainer>
 
                             <ScFieldLabel>
                                 Last Name <ScRequireMark>*</ScRequireMark>
                             </ScFieldLabel>
                             <ScInputContainer>
-                                <TextField name="lastName" formProps={formProps} />
+                                <TextField
+                                    name="lastName"
+                                    formProps={formProps}
+                                    onKeyDown={handleKeyDownForAlphabet}
+                                    inputProps={{
+                                        inputMode: "text",
+                                    }}
+                                />
                             </ScInputContainer>
 
                             <ScFieldLabel>
@@ -124,7 +145,7 @@ const Register = () => {
                                 Date of Birth <ScRequireMark>*</ScRequireMark>
                             </ScFieldLabel>
                             <ScInputContainer>
-                                <DatePicker name="dob" formProps={formProps} />
+                                <DatePicker name="dob" formProps={formProps} disableFuture />
                             </ScInputContainer>
 
                             <ScFieldLabel>

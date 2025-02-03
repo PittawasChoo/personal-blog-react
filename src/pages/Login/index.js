@@ -23,11 +23,6 @@ import {
     ScRoot,
 } from "./styles";
 
-const INITIAL_FORM_VALUES = {
-    email: "",
-    password: "",
-};
-
 const Login = () => {
     const { login } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -60,6 +55,11 @@ const Login = () => {
         },
     });
 
+    const initialValues = {
+        email: "",
+        password: "",
+    };
+
     return (
         <ScRoot>
             <ScBody>
@@ -69,7 +69,7 @@ const Login = () => {
                     activate your membership.
                 </ScDescription>
                 <Formik
-                    initialValues={INITIAL_FORM_VALUES}
+                    initialValues={initialValues}
                     validationSchema={validationSchema}
                     onSubmit={(values) => {
                         mutate({ email: values.email, password: values.password });

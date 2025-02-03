@@ -55,7 +55,13 @@ const ProductBody = () => {
     const [searchParams] = useSearchParams();
     const id = searchParams.get("id");
 
-    const { data, isError, isFetching, refetch } = useQuery({
+    console.log("id", id);
+    const {
+        data,
+        isError,
+        isFetching: isLoading,
+        refetch,
+    } = useQuery({
         queryKey: ["product", id],
         queryFn: async () => {
             const response = await fetch("http://localhost:3001/product", {
@@ -69,7 +75,7 @@ const ProductBody = () => {
         },
     });
 
-    const product = data || {};
+    const product = get(data, "[0]", {});
 
     const addToCart = () => {
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -100,29 +106,29 @@ const ProductBody = () => {
                 newCart.push(enhancedExistedProduct);
                 localStorage.setItem("cart", JSON.stringify(newCart));
 
-                const itemsCount = cart.reduce((acc, cur) => {
+                const itemsCount = newCart.reduce((acc, cur) => {
                     return acc + cur.quantity;
                 }, 0);
 
-                notifyAddToCartSuccess(enhancedExistedProduct, itemsCount);
+                notifyAddToCartSuccess(product, itemsCount);
                 window.dispatchEvent(new Event("cartUpdated"));
             }
         } else {
-            const addedProduct = {
-                ...product,
+            const newCartItem = {
+                id: product.id,
                 size: selectedSize.size,
                 quantity: quantity,
                 timestamp: Date.now(),
             };
 
-            cart.push(addedProduct);
+            cart.push(newCartItem);
             localStorage.setItem("cart", JSON.stringify(cart));
 
             const itemsCount = cart.reduce((acc, cur) => {
                 return acc + cur.quantity;
             }, 0);
 
-            notifyAddToCartSuccess(addedProduct, itemsCount);
+            notifyAddToCartSuccess(product, itemsCount);
             window.dispatchEvent(new Event("cartUpdated"));
         }
     };
@@ -146,13 +152,12 @@ const ProductBody = () => {
 
     // If there is only 1 size option, pre-select that option.
     useEffect(() => {
-        const product = data || {};
         const sizesInStock = get(product, "stock", []);
 
         if (sizesInStock.length === 1) {
             setSelectedSize(sizesInStock[0]);
         }
-    }, [data]);
+    }, [product]);
 
     if (isError) {
         return (
@@ -162,11 +167,13 @@ const ProductBody = () => {
         );
     }
 
+    console.log("product", product);
+
     return (
         <ScRoot>
             <ScBodyContainer>
                 <ScImageContainer>
-                    {isFetching ? (
+                    {isLoading ? (
                         <ScStickyLoadingImage />
                     ) : (
                         <ScStickyImage
@@ -175,13 +182,13 @@ const ProductBody = () => {
                     )}
                 </ScImageContainer>
                 <ScProductDetailContainer>
-                    {isFetching ? <ScLoadingBrand /> : <ScBrand>{product.brand}</ScBrand>}
-                    {isFetching ? <ScLoadingName /> : <ScName>{product.name}</ScName>}
+                    {isLoading ? <ScLoadingBrand /> : <ScBrand>{product.brand}</ScBrand>}
+                    {isLoading ? <ScLoadingName /> : <ScName>{product.name}</ScName>}
                     <ScLine />
                     <ScDetailContainer>
                         <ScLabel>PRICE:</ScLabel>
                         <ScPriceText>
-                            {isFetching ? (
+                            {isLoading ? (
                                 <ScLoadingPrice />
                             ) : (
                                 <>
@@ -203,11 +210,11 @@ const ProductBody = () => {
                     </ScDetailContainer>
 
                     <ScLabel>SIZE:</ScLabel>
-                    {isFetching ? (
+                    {isLoading ? (
                         <ScLoadingSize />
                     ) : (
                         <ScSizeOptionsContainer>
-                            {product.stock.map((stock) => (
+                            {get(product, "stock", []).map((stock) => (
                                 <ScSizeButton
                                     $isSelected={selectedSize.size === stock.size}
                                     onClick={() => setSelectedSize(stock)}
@@ -269,7 +276,7 @@ const ProductBody = () => {
                             </motion.div>
                         )}
                     </ScDetailContainer>
-                    {isFetching || !selectedSize.size ? (
+                    {isLoading || !selectedSize.size ? (
                         <ScDisabledButton>Add to Cart</ScDisabledButton>
                     ) : (
                         <ScAddToCartButton onClick={addToCart}>Add to Cart</ScAddToCartButton>

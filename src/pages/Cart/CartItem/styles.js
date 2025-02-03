@@ -46,6 +46,11 @@ export const ScProductSize = styled.div`
     color: #707070;
 `;
 
+export const ScSelectedSize = styled.span`
+    color: #000000de;
+    font-weight: 800;
+`;
+
 export const ScQuantityContainer = styled.div`
     display: inline-flex;
     border: 1px solid #00000040;

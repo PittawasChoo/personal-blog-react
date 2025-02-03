@@ -18,15 +18,13 @@ import {
     ScQuantityContainer,
     ScQuantityInput,
     ScQuantityInputContainer,
+    ScSelectedSize,
     ScTextLink,
 } from "./styles";
 
-const CartItem = ({ product }) => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
+const CartItem = ({ product, cart }) => {
     const getMaxQuantity = () => {
-        const productStock = cart.find((item) => item.id === product.id).stock;
-        const sizeStock = productStock.find((stock) => stock.size === product.size).stock;
+        const sizeStock = product.stock.find((stock) => stock.size === product.size).stock;
 
         return sizeStock;
     };
@@ -85,7 +83,9 @@ const CartItem = ({ product }) => {
                         </ScTextLink>
                         <ScProductBrand>{product.brand}</ScProductBrand>
                     </div>
-                    <ScProductSize>SIZE: {product.size}</ScProductSize>
+                    <ScProductSize>
+                        SIZE: <ScSelectedSize>{product.size}</ScSelectedSize>
+                    </ScProductSize>
                 </ScProductDetailContainer>
 
                 <div>
@@ -129,11 +129,14 @@ const CartItem = ({ product }) => {
 
                 <ScProductPriceContainer>
                     <ScProductPrice $hasPromotionPrice={!!product.promotionPrice}>
-                        $ {FormatToLocaleString(Number(product.promotionPrice || product.price))}
+                        ${" "}
+                        {FormatToLocaleString(
+                            Number(product.promotionPrice || product.price) * product.quantity
+                        )}
                     </ScProductPrice>
                     {product.promotionPrice && (
                         <ScPriceBeforePromotion>
-                            $ {FormatToLocaleString(Number(product.price))}
+                            $ {FormatToLocaleString(Number(product.price) * product.quantity)}
                         </ScPriceBeforePromotion>
                     )}
                 </ScProductPriceContainer>
@@ -145,6 +148,7 @@ const CartItem = ({ product }) => {
 
 CartItem.propTypes = {
     product: PropTypes.object.isRequired,
+    cart: PropTypes.array.isRequired,
 };
 
 export default CartItem;

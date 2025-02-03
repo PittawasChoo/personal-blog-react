@@ -185,7 +185,6 @@ export const ScSizeButton = styled.div`
     cursor: pointer;
 
     ${(props) => {
-        console.log("props.$isSelected", props.$isSelected);
         if (props.$isSelected) {
             return `
                 border-width: 2px;

@@ -100,7 +100,7 @@ const ProductPage = ({ title, children }) => {
     // get filter and sorting options
     const {
         data: brandsData,
-        isError: isBrandsFetchingError,
+        isError: isLoadingBrandsError,
         isFetching: isLoadingBrands,
         refetch: refetchBrands,
     } = useQuery({
@@ -112,7 +112,7 @@ const ProductPage = ({ title, children }) => {
     });
     const {
         data: typesData,
-        isError: isTypesFetchingError,
+        isError: isLoadingTypesError,
         isFetching: isLoadingTypes,
         refetch: refetchTypes,
     } = useQuery({
@@ -124,7 +124,7 @@ const ProductPage = ({ title, children }) => {
     });
     const {
         data: sizesData,
-        isError: isSizesFetchingError,
+        isError: isLoadingSizeError,
         isFetching: isLoadingSizes,
         refetch: refetchSizes,
     } = useQuery({
@@ -136,7 +136,7 @@ const ProductPage = ({ title, children }) => {
     });
     const {
         data: sortingOptionsData,
-        isError: isSortingOptionsFetchingError,
+        isError: isLoadngSortingOptionsError,
         isFetching: isLoadingSortingOptions,
         refetch: refetchSortingOptions,
     } = useQuery({
@@ -153,8 +153,8 @@ const ProductPage = ({ title, children }) => {
     const sortingOptions = sortingOptionsData || [];
 
     const isLoadingFilterOptions = isLoadingBrands || isLoadingTypes || isLoadingSizes;
-    const isFilterOptionsFetchingError =
-        isBrandsFetchingError || isTypesFetchingError || isSizesFetchingError;
+    const isLoadingFilterOptionsError =
+        isLoadingBrandsError || isLoadingTypesError || isLoadingSizeError;
     const refetchFilterOptions = () => {
         refetchBrands();
         refetchTypes();
@@ -168,7 +168,7 @@ const ProductPage = ({ title, children }) => {
                     <CircularProgress style={{ color: "grey" }} />
                 </ScSortingLoadingContainer>
             );
-        } else if (isSortingOptionsFetchingError) {
+        } else if (isLoadngSortingOptionsError) {
             return (
                 <ScErrorContainer>
                     <ErrorRetry label="sorting options" onRetry={refetchSortingOptions} />
@@ -208,7 +208,7 @@ const ProductPage = ({ title, children }) => {
                 selectedTypes={selectedTypes}
                 setSelectedTypes={setSelectedTypes}
                 isLoading={isLoadingFilterOptions}
-                isError={isFilterOptionsFetchingError}
+                isError={isLoadingFilterOptionsError}
                 refetch={refetchFilterOptions}
                 onFilterChange={onFilterChange}
             />

@@ -12,13 +12,15 @@ import { AuthProvider } from "contexts/AuthContext";
 import AboutUs from "pages/AboutUs";
 import AllProducts from "pages/AllProducts";
 import Cart from "pages/Cart";
-import CheckOut from "pages/CheckOut";
+import Checkout from "pages/Checkout";
 import ContactUs from "pages/ContactUs";
+import History from "pages/History";
 import Login from "pages/Login";
 import Main from "pages/Main";
 import NewArrival from "pages/NewArrival";
 import Product from "pages/Product";
 import Promotion from "pages/Promotion";
+import PurchaseSuccess from "pages/PurchaseSuccess";
 import Register from "pages/Register";
 import RegisterSuccess from "pages/RegisterSuccess.js";
 
@@ -48,10 +50,12 @@ const App = () => {
                                 <Route path="/contact-us/*" element={<ContactUs />} />
                                 <Route path="/product/*" element={<Product />} />
                                 <Route path="/cart/*" element={<Cart />} />
-                                <Route path="/check-out/*" element={<CheckOut />} />
+                                <Route path="/checkout/*" element={<Checkout />} />
+                                <Route path="/purchase-success/*" element={<PurchaseSuccess />} />
                                 <Route path="/login/*" element={<Login />} />
                                 <Route path="/register/*" element={<Register />} />
                                 <Route path="/register-success/*" element={<RegisterSuccess />} />
+                                <Route path="/history/*" element={<History />} />
 
                                 {/* Todo: not found page */}
                                 {/* <Route path="*" element={<PageNotFound />} /> */}

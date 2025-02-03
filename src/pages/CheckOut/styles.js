@@ -95,19 +95,3 @@ export const ScTotalPrice = styled.div`
     display: flex;
     justify-content: space-between;
 `;
-
-export const ScButton = styled.div`
-    margin-top: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #00000080;
-    padding: 5px 0;
-    border-radius: 20px;
-    font-family: oxanium;
-    font-size: 15px;
-    font-weight: 800;
-    cursor: pointer;
-    color: inherit;
-    text-decoration: none;
-`;
