@@ -56,9 +56,11 @@ const Checkout = () => {
 
     const {
         data: userData,
-        isError: isLoadingUserDataError,
-        isFetching: isLoadingUserData,
-        refetch: refetchUserData,
+        // Used for making initial value can skip for now
+        // Todo: handle these keys
+        // isError: isLoadingUserDataError,
+        // isFetching: isLoadingUserData,
+        // refetch: refetchUserData,
     } = useQuery({
         queryKey: ["profile"],
         queryFn: async () => {
