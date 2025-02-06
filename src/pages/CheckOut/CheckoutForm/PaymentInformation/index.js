@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import Alert from "@mui/material/Alert";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -59,8 +60,17 @@ const PaymentInformation = ({ name, expandingPanel, handleChange, formProps }) =
             >
                 <ScFieldsContainer>
                     <div>
+                        <Alert
+                            variant="filled"
+                            severity="info"
+                            sx={{ width: "500px", marginBottom: "20px" }}
+                        >
+                            This website is for demonstration purposes only. The payment info will
+                            not be stored or even sent to backend. Please feel free to enter random
+                            information in the fields below.
+                        </Alert>
                         <ScFieldLabel>
-                            Cardholder's Full Name <ScRequireMark>*</ScRequireMark>
+                            Cardholder's Name <ScRequireMark>*</ScRequireMark>
                         </ScFieldLabel>
                         <ScInputContainer>
                             <TextField

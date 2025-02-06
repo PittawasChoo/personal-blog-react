@@ -23,6 +23,7 @@ export const ScHeader = styled.span`
 export const ScFieldsContainer = styled.div`
     display: flex;
     justify-content: center;
+    padding-top: 10px;
 `;
 
 export const ScButtonsContainer = styled.div`
