@@ -42,7 +42,6 @@ import {
     ScSaleBadge,
     ScSizeButton,
     ScSizeOptionsContainer,
-    ScStickyImage,
     ScStickyLoadingImage,
     ScStock,
     ScTextLink,
