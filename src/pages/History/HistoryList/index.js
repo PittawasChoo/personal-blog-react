@@ -111,7 +111,7 @@ const HistoryList = ({ setModal }) => {
 };
 
 HistoryList.propTypes = {
-    HistoryList: PropTypes.func.isRequired,
+    setModal: PropTypes.func.isRequired,
 };
 
 export default HistoryList;

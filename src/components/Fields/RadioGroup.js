@@ -33,6 +33,7 @@ const RadioGroup = ({ formProps, name, options, row = false }) => {
             >
                 {options.map((option) => (
                     <FormControlLabel
+                        key={option.label}
                         value={option.value}
                         control={<Radio sx={RADIO_STYLES} />}
                         label={option.label}

@@ -77,7 +77,7 @@ const OrderSummaryModal = ({
                         {products.map((product) => {
                             const productPrice = product.promotionPrice || product.price;
                             return (
-                                <ScTableItemContainer>
+                                <ScTableItemContainer key={product.id + product.size}>
                                     <ScQty>{product.quantity}</ScQty>
                                     <ScProduct>{product.name}</ScProduct>
                                     <ScUnit>$ {formatToLocaleString(Number(productPrice))}</ScUnit>
@@ -125,7 +125,7 @@ OrderSummaryModal.propTypes = {
     shippingInfo: PropTypes.object,
     products: PropTypes.array,
     onClose: PropTypes.func,
-    totalPrice: PropTypes.number,
+    totalPrice: PropTypes.string,
     date: PropTypes.string,
 };
 

@@ -173,7 +173,7 @@ const OrderSummaryModal = ({
                                         const productPrice =
                                             product.promotionPrice || product.price;
                                         return (
-                                            <ScTableItemContainer>
+                                            <ScTableItemContainer key={product.id + product.size}>
                                                 <ScQty>{product.quantity}</ScQty>
                                                 <ScProduct>{product.name}</ScProduct>
                                                 <ScUnit>

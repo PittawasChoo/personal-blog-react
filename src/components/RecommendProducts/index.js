@@ -68,7 +68,7 @@ const RecommendProducts = () => {
             ) : (
                 <ScCardsContainer>
                     {isLoadingRecommend
-                        ? Array.apply(null, { length: 4 }).map((e, i) => <Skeleton />)
+                        ? Array.apply(null, { length: 4 }).map((e, i) => <Skeleton key={i} />)
                         : products.map((product) => {
                               return (
                                   <BigCard

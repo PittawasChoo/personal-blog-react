@@ -124,7 +124,7 @@ const ProductCarousel = ({ isLoading, isError, refetch, header, products, linkTo
                             >
                                 {isLoading
                                     ? Array.apply(null, { length: 20 }).map((e, i) => (
-                                          <Skeleton isSmall />
+                                          <Skeleton key={i} isSmall />
                                       ))
                                     : products.map((product) => {
                                           return (

@@ -120,7 +120,7 @@ const Cart = () => {
                                 <div>
                                     {isLoading
                                         ? Array.apply(null, { length: 2 }).map((e, i) => (
-                                              <CartItemSkeleton />
+                                              <CartItemSkeleton key={i} />
                                           ))
                                         : enhancedCart.map((product) => (
                                               <CartItem

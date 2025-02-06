@@ -172,7 +172,6 @@ const ProductBody = () => {
 
     const sortByProductSizes = (stock) => {
         const sizes = stock.map((item) => item.size);
-        console.log("sizes", sizes);
 
         if (sizes.some((size) => SIZE_ORDER.includes(size.toLowerCase()))) {
             return stock.sort((acc, cur) => {
@@ -238,6 +237,7 @@ const ProductBody = () => {
                         <ScSizeOptionsContainer>
                             {sortByProductSizes(get(product, "stock", [])).map((stock) => (
                                 <ScSizeButton
+                                    key={stock.id}
                                     $isSelected={selectedSize.size === stock.size}
                                     onClick={() => setSelectedSize(stock)}
                                 >

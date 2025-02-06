@@ -8,7 +8,9 @@ export const validationSchema = Yup.object({
     lastName: Yup.string()
         .required("Required")
         .matches(/[a-zA-Z\u0E00-\u0E7F\s.]/, "Only letters, spaces, and dots are allowed."),
-    email: Yup.string().email("Please enter a valid email address").required("Required"),
+    email: Yup.string()
+        .required("Required")
+        .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Please enter a valid email address"),
     phoneNumber: Yup.string()
         .required("Required")
         .matches(/^[0-9]{10}$/, "Please enter a valid phone number"),
