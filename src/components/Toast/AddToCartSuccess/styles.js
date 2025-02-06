@@ -14,16 +14,6 @@ export const ScProductContainer = styled.div`
     margin-bottom: 20px;
 `;
 
-export const ScProductImage = styled.div`
-    width: 100px;
-    height: 100px;
-    background-image: url(${(props) => props.$imgUrl || ""});
-    background-size: cover;
-    background-position: bottom;
-    flex-shrink: 0;
-    border-radius: 5px;
-`;
-
 export const ScProductDetailContainer = styled.div`
     display: flex;
     flex-direction: column;

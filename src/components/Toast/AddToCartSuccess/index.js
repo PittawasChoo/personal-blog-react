@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { useNavigate } from "react-router-dom";
 
+import LazyImage from "components/LazyImage";
 import { formatToLocaleString } from "modules/number/formatToLocaleString";
 
 import {
@@ -11,7 +12,6 @@ import {
     ScHeaderContainer,
     ScProductContainer,
     ScProductDetailContainer,
-    ScProductImage,
     ScProductLabelPrimary,
     ScProductLabelSecondary,
     ScProductPriceBefore,
@@ -36,7 +36,17 @@ const AddToCartSuccess = ({ onClose, addedProduct, productsCount }) => {
             </ScHeaderContainer>
 
             <ScProductContainer>
-                <ScProductImage $imgUrl={`${BACKEND_URL}/images/${addedProduct.imgName}`} />
+                <LazyImage
+                    src={`${BACKEND_URL}/images/${addedProduct.imgName}`}
+                    alt={`product-${addedProduct.id}-image`}
+                    style={{
+                        width: "100px",
+                        height: "100px",
+                        flexShrink: 0,
+                        borderRadius: "5px",
+                        overflow: "hidden",
+                    }}
+                />
                 <ScProductDetailContainer>
                     <ScProductLabelPrimary>{addedProduct.name}</ScProductLabelPrimary>
                     <ScProductLabelSecondary>{addedProduct.brand}</ScProductLabelSecondary>

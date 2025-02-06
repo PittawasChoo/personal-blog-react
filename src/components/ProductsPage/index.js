@@ -265,6 +265,7 @@ const ProductPage = ({ title, children }) => {
                                             alt="filter"
                                             width={8}
                                             height={8}
+                                            loading="lazy"
                                         />
                                     </ScRemoveIconContainer>
                                 )}
@@ -274,6 +275,7 @@ const ProductPage = ({ title, children }) => {
                                     src="/images/shared/search.png"
                                     alt="filter"
                                     width={12}
+                                    loading="lazy"
                                     height={12}
                                 />
                             </ScSearchIconContainer>
@@ -286,6 +288,7 @@ const ProductPage = ({ title, children }) => {
                                 alt="filter"
                                 width={16}
                                 height={16}
+                                loading="lazy"
                             />
                             FILTER
                             {hasFilter && <ScOrangeDot />}
@@ -293,7 +296,13 @@ const ProductPage = ({ title, children }) => {
 
                         {/* Sort */}
                         <ScToolButtonContainer onClick={handleClick}>
-                            <img src="/images/shared/sort.png" alt="sort" width={16} height={16} />
+                            <img
+                                src="/images/shared/sort.png"
+                                alt="sort"
+                                width={16}
+                                height={16}
+                                loading="lazy"
+                            />
                             SORT
                             {sortBy !== "featured" && <ScOrangeDot />}
                         </ScToolButtonContainer>

@@ -9,15 +9,6 @@ export const ScProductContainer = styled.div`
     font-size: 20px;
 `;
 
-export const ScProductImage = styled.div`
-    height: 130px;
-    width: 130px;
-    background-image: url(${(props) => props.$imgUrl || ""});
-    background-size: cover;
-    background-position: bottom;
-    border-radius: 5px;
-`;
-
 export const ScTextLink = styled(Link)`
     text-decoration: none;
     color: inherit;

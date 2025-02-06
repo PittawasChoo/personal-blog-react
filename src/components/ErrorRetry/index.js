@@ -44,6 +44,7 @@ const ErrorRetry = ({ label, onRetry, size = "s", showHomeButton = false }) => {
                         alt="close"
                         width={selectedSizeStyles.iconSize}
                         height={selectedSizeStyles.iconSize}
+                        loading="lazy"
                     />
                     <ScButtonText>Retry</ScButtonText>
                 </Button>

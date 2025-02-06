@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import { Link } from "react-router-dom";
 
+import LazyImage from "components/LazyImage";
 import { formatToLocaleString } from "modules/number/formatToLocaleString";
 
 import {
@@ -10,7 +11,6 @@ import {
     ScCardBorder,
     ScCardBrand,
     ScCardDetailContainer,
-    ScCardImage,
     ScCardName,
     ScCardPrice,
     ScCardPriceBeforePromotion,
@@ -26,7 +26,11 @@ const BigCard = ({ id, imgUrl, brand, name, price, promotionPrice }) => {
             <ScRoot>
                 <ScCardBorder>
                     <ScCard>
-                        <ScCardImage $imgUrl={imgUrl} />
+                        <LazyImage
+                            src={imgUrl}
+                            alt={`product-${id}-image`}
+                            style={{ width: "308px", height: "300px" }}
+                        />
                         <ScCardDetailContainer>
                             <div>
                                 <ScCardBrand>{brand}</ScCardBrand>

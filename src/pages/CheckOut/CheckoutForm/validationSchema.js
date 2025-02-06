@@ -31,7 +31,7 @@ export const validationSchema = Yup.object({
         .matches(/[a-zA-Z\u0E00-\u0E7F\s.]/, "Only letters, spaces, and dots are allowed."),
     cardNumber: Yup.string()
         .required("Required")
-        .matches(/^[0-9]{16}$/, "Please enter a valid credit card number"),
+        .matches(/^[0-9]{16}$/, "Please enter a valid credit card number format (16 digits)"),
     expDate: Yup.string().required("Required"),
     cvv: Yup.string()
         .required("Required")

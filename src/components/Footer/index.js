@@ -93,6 +93,7 @@ const Footer = () => {
                             alt="LinkedIn"
                             width={16}
                             height={16}
+                            loading="lazy"
                         />
                     </Link>
                     <Link
@@ -100,7 +101,13 @@ const Footer = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        <img src="/images/shared/github.png" alt="GitHub" width={16} height={16} />
+                        <img
+                            src="/images/shared/github.png"
+                            alt="GitHub"
+                            width={16}
+                            height={16}
+                            loading="lazy"
+                        />
                     </Link>
                     <Link
                         to="https://www.facebook.com/pittawas.boom/"
@@ -112,6 +119,7 @@ const Footer = () => {
                             alt="Facebook"
                             width={16}
                             height={16}
+                            loading="lazy"
                         />
                     </Link>
                     <Link
@@ -124,6 +132,7 @@ const Footer = () => {
                             alt="Instagram"
                             width={16}
                             height={16}
+                            loading="lazy"
                         />
                     </Link>
                 </ScSocialMediaLogosContainer>

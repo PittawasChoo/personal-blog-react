@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 
+import LazyImage from "components/LazyImage";
 import ErrorRetry from "components/ErrorRetry";
 
 import useToast from "hooks/useToast";
@@ -89,8 +90,10 @@ const ProductBody = () => {
         );
 
         if (existedProduct) {
-            if (existedProduct.quantity + quantity > selectedSize.stock) {
-                notifyError("Oops! Not enough stock for your order.");
+            if (existedProduct.quantity + quantity > 10) {
+                notifyError(
+                    "Oops! Max 10 items per account. The selected quantity exceed to maximum."
+                );
             } else {
                 let newCart = cart.filter(
                     (productInCart) =>
@@ -117,22 +120,28 @@ const ProductBody = () => {
                 window.dispatchEvent(new Event("cartUpdated"));
             }
         } else {
-            const newCartItem = {
-                id: product.id,
-                size: selectedSize.size,
-                quantity: quantity,
-                timestamp: Date.now(),
-            };
+            if (quantity > 10) {
+                notifyError(
+                    "Oops! Max 10 items per account. The selected quantity exceed to maximum."
+                );
+            } else {
+                const newCartItem = {
+                    id: product.id,
+                    size: selectedSize.size,
+                    quantity: quantity,
+                    timestamp: Date.now(),
+                };
 
-            cart.push(newCartItem);
-            localStorage.setItem("cart", JSON.stringify(cart));
+                cart.push(newCartItem);
+                localStorage.setItem("cart", JSON.stringify(cart));
 
-            const itemsCount = cart.reduce((acc, cur) => {
-                return acc + cur.quantity;
-            }, 0);
+                const itemsCount = cart.reduce((acc, cur) => {
+                    return acc + cur.quantity;
+                }, 0);
 
-            notifyAddToCartSuccess(product, itemsCount);
-            window.dispatchEvent(new Event("cartUpdated"));
+                notifyAddToCartSuccess(product, itemsCount);
+                window.dispatchEvent(new Event("cartUpdated"));
+            }
         }
     };
 
@@ -148,9 +157,9 @@ const ProductBody = () => {
         );
 
         const selectedInCart = get(existedProductInCart, "quantity", 0);
-        const stock = selectedSize.stock;
 
-        return stock - selectedInCart;
+        // max 10
+        return 10 - selectedInCart;
     };
 
     // If there is only 1 size option, pre-select that option.
@@ -199,7 +208,19 @@ const ProductBody = () => {
                     {isLoading ? (
                         <ScStickyLoadingImage />
                     ) : (
-                        <ScStickyImage $imgUrl={`${BACKEND_URL}/images/${product.imgName}`} />
+                        <LazyImage
+                            src={`${BACKEND_URL}/images/${product.imgName}`}
+                            alt={`product-${id}-image`}
+                            style={{
+                                width: "500px",
+                                height: "500px",
+                                borderRadius: "5px",
+                                overflow: "hidden",
+                                position: "sticky",
+                                top: "120px",
+                            }}
+                        />
+                        // <ScStickyImage $imgUrl={`${BACKEND_URL}/images/${product.imgName}`} />
                     )}
                 </ScImageContainer>
                 <ScProductDetailContainer>
@@ -262,6 +283,7 @@ const ProductBody = () => {
                                     alt="minus"
                                     width={16}
                                     height={16}
+                                    loading="lazy"
                                 />
                             </ScQuantityButton>
                             <ScQuantityInputContainer>
@@ -270,7 +292,7 @@ const ProductBody = () => {
                                     min={1}
                                     max={getMaxQuantity()}
                                     value={quantity}
-                                    onChange={(e) => setQuantity(e.target.value)}
+                                    onChange={(e) => setQuantity(Number(e.target.value))}
                                 />
                             </ScQuantityInputContainer>
                             <ScQuantityButton
@@ -286,6 +308,7 @@ const ProductBody = () => {
                                     alt="plus"
                                     width={16}
                                     height={16}
+                                    loading="lazy"
                                 />
                             </ScQuantityButton>
                         </ScQuantityContainer>
@@ -294,7 +317,9 @@ const ProductBody = () => {
                                 initial={{ opacity: 0, height: 0 }}
                                 animate={{ opacity: 1, height: "auto" }}
                             >
-                                <ScStock>Stock: {selectedSize.stock}</ScStock>
+                                <ScStock>
+                                    Stock: {formatToLocaleString(Number(selectedSize.stock))}
+                                </ScStock>
                             </motion.div>
                         )}
                     </ScDetailContainer>

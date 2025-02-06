@@ -29,13 +29,6 @@ export const ScCard = styled.div`
     top: 1px;
 `;
 
-export const ScCardImage = styled.div`
-    height: 280px;
-    background-image: url(${(props) => props.$imgUrl || ""});
-    background-size: cover;
-    background-position: bottom;
-`;
-
 export const ScCardDetailContainer = styled.div`
     height: 120px;
     padding: 20px;

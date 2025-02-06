@@ -213,6 +213,7 @@ const FilterPane = ({
                         width={16}
                         height={16}
                         onClick={onClose}
+                        loading="lazy"
                     />
                 </ScFixedHeader>
                 <ScPaneHeaderSpaceReserve />

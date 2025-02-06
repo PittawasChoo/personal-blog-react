@@ -31,17 +31,6 @@ export const ScImageContainer = styled.div`
     position: relative;
 `;
 
-export const ScStickyImage = styled.div`
-    position: sticky;
-    width: 500px;
-    height: 500px;
-    background-image: url(${(props) => props.$imgUrl || ""});
-    background-size: cover;
-    background-position: bottom;
-    top: 120px;
-    border-radius: 5px;
-`;
-
 export const ScStickyLoadingImage = styled.div`
     position: sticky;
     width: 500px;

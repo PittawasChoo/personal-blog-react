@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import LazyImage from "components/LazyImage";
 import { formatToLocaleString } from "modules/number/formatToLocaleString";
 
 import {
@@ -9,7 +10,6 @@ import {
     ScProductBrand,
     ScProductContainer,
     ScProductDetailContainer,
-    ScProductImage,
     ScProductName,
     ScProductPrice,
     ScProductPriceContainer,
@@ -25,12 +25,6 @@ import {
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const CartItem = ({ product, cart }) => {
-    const getMaxQuantity = () => {
-        const sizeStock = product.stock.find((stock) => stock.size === product.size).stock;
-
-        return sizeStock;
-    };
-
     const updateCart = (quantityFunction) => {
         const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -75,7 +69,16 @@ const CartItem = ({ product, cart }) => {
         <>
             <ScProductContainer>
                 <ScTextLink to={`/product?id=${product.id}`}>
-                    <ScProductImage $imgUrl={`${BACKEND_URL}/images/${product.imgName}`} />
+                    <LazyImage
+                        src={`${BACKEND_URL}/images/${product.imgName}`}
+                        alt={`product-${product.id}-image`}
+                        style={{
+                            width: "130px",
+                            height: "130px",
+                            borderRadius: "5px",
+                            overflow: "hidden",
+                        }}
+                    />
                 </ScTextLink>
 
                 <ScProductDetailContainer>
@@ -110,6 +113,7 @@ const CartItem = ({ product, cart }) => {
                                 alt={product.quantity === 1 ? "remove" : "minus"}
                                 width={16}
                                 height={16}
+                                loading="lazy"
                             />
                         </ScQuantityButton>
                         <ScQuantityInputContainer>
@@ -117,14 +121,18 @@ const CartItem = ({ product, cart }) => {
                         </ScQuantityInputContainer>
                         <ScQuantityButton
                             onClick={() => {
-                                const max = getMaxQuantity();
-
-                                if (product.quantity < max) {
+                                if (product.quantity < 10) {
                                     updateCart((quantity) => quantity + 1);
                                 }
                             }}
                         >
-                            <img src="/images/shared/plus.png" alt="plus" width={16} height={16} />
+                            <img
+                                src="/images/shared/plus.png"
+                                alt="plus"
+                                width={16}
+                                height={16}
+                                loading="lazy"
+                            />
                         </ScQuantityButton>
                     </ScQuantityContainer>
                 </div>

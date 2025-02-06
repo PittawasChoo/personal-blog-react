@@ -77,6 +77,7 @@ const ProductCarousel = ({ isLoading, isError, refetch, header, products, linkTo
                                             alt="view all"
                                             width={16}
                                             height={16}
+                                            loading="lazy"
                                         />
                                     </ScButton>
                                 </ScTextLink>
@@ -91,6 +92,7 @@ const ProductCarousel = ({ isLoading, isError, refetch, header, products, linkTo
                                 alt="previous"
                                 width={10}
                                 height={10}
+                                loading="lazy"
                             />
                         </ScPreviousButton>
                         <ScNextButton onClick={next}>
@@ -99,6 +101,7 @@ const ProductCarousel = ({ isLoading, isError, refetch, header, products, linkTo
                                 alt="next"
                                 width={10}
                                 height={10}
+                                loading="lazy"
                             />
                         </ScNextButton>
                     </ScBottomContentContainer>

@@ -54,7 +54,7 @@ const Navbar = ({ alwaysShowBackground = false }) => {
         const getCartCount = () => {
             const cart = JSON.parse(localStorage.getItem("cart")) || [];
             const itemsCount = cart.reduce((acc, cur) => {
-                return acc + cur.quantity;
+                return acc + Number(cur.quantity);
             }, 0);
             setCartCount(itemsCount);
         };
@@ -137,6 +137,7 @@ const Navbar = ({ alwaysShowBackground = false }) => {
                                     alt="cart"
                                     width={24}
                                     height={24}
+                                    loading="lazy"
                                 />
                                 <ScCartItems $showCount={cartCount > 0}>{cartCount}</ScCartItems>
                             </ScMenuLabel>
