@@ -8,7 +8,7 @@ import ErrorRetry from "components/ErrorRetry";
 
 import { AuthContext } from "contexts/AuthContext";
 
-import { FormatToLocaleString } from "modules/number/formatToLocaleString";
+import { formatToLocaleString } from "modules/number/formatToLocaleString";
 
 import CartItem from "./CartItem";
 import CartItemSkeleton from "./CardItemSkeleton";
@@ -134,7 +134,7 @@ const Cart = () => {
                                         <ScPricingContainer>
                                             <ScLabel $showMargin>Subtotal:</ScLabel>
                                             <ScPrice>
-                                                $ {FormatToLocaleString(Number(getSubtotalPrice()))}
+                                                $ {formatToLocaleString(Number(getSubtotalPrice()))}
                                             </ScPrice>
                                             <ScLabel>Delivery Fee:</ScLabel>
                                             <ScPrice>Free</ScPrice>
@@ -143,7 +143,7 @@ const Cart = () => {
                                         <ScTotalPrice>
                                             <div>Total</div>
                                             <div>
-                                                $ {FormatToLocaleString(Number(getSubtotalPrice()))}
+                                                $ {formatToLocaleString(Number(getSubtotalPrice()))}
                                             </div>
                                         </ScTotalPrice>
                                         <ScLine />

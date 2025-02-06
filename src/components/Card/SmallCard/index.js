@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { Link } from "react-router-dom";
 
-import { FormatToLocaleString } from "modules/number/formatToLocaleString";
+import { formatToLocaleString } from "modules/number/formatToLocaleString";
 
 import {
     ScCard,
@@ -35,16 +35,16 @@ const SmallCard = ({ id, imgUrl, brand, name, price, promotionPrice }) => {
                             {promotionPrice ? (
                                 <ScPriceContainer>
                                     <ScCardPromotionPrice>
-                                        ${FormatToLocaleString(promotionPrice)}
+                                        ${formatToLocaleString(promotionPrice)}
                                     </ScCardPromotionPrice>
                                     {promotionPrice && (
                                         <ScCardPriceBeforePromotion>
-                                            <s>${FormatToLocaleString(price)}</s>
+                                            <s>${formatToLocaleString(price)}</s>
                                         </ScCardPriceBeforePromotion>
                                     )}
                                 </ScPriceContainer>
                             ) : (
-                                <ScCardPrice>${FormatToLocaleString(price)}</ScCardPrice>
+                                <ScCardPrice>${formatToLocaleString(price)}</ScCardPrice>
                             )}
                         </ScCardDetailContainer>
                     </ScCard>

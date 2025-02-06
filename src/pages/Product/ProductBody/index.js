@@ -9,7 +9,7 @@ import ErrorRetry from "components/ErrorRetry";
 
 import useToast from "hooks/useToast";
 
-import { FormatToLocaleString } from "modules/number/formatToLocaleString";
+import { formatToLocaleString } from "modules/number/formatToLocaleString";
 
 import {
     ScAddToCartButton,
@@ -194,12 +194,12 @@ const ProductBody = () => {
                                     <ScPrice $fontColor={product.promotionPrice ? "red" : "black"}>
                                         ${" "}
                                         {product.promotionPrice
-                                            ? FormatToLocaleString(Number(product.promotionPrice))
-                                            : FormatToLocaleString(Number(product.price))}
+                                            ? formatToLocaleString(Number(product.promotionPrice))
+                                            : formatToLocaleString(Number(product.price))}
                                     </ScPrice>
                                     {product.promotionPrice && (
                                         <ScBeforePromotionPrice>
-                                            $ {FormatToLocaleString(Number(product.price))}
+                                            $ {formatToLocaleString(Number(product.price))}
                                         </ScBeforePromotionPrice>
                                     )}
                                 </>

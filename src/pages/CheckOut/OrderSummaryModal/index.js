@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 import SubmitErrorBox from "components/SubmitErrorBox";
 
-import { FormatToLocaleString } from "modules/number/formatToLocaleString";
+import { formatToLocaleString } from "modules/number/formatToLocaleString";
 
 import {
     ScAddressHeader,
@@ -175,11 +175,11 @@ const OrderSummaryModal = ({
                                                 <ScQty>{product.quantity}</ScQty>
                                                 <ScProduct>{product.name}</ScProduct>
                                                 <ScUnit>
-                                                    $ {FormatToLocaleString(Number(productPrice))}
+                                                    $ {formatToLocaleString(Number(productPrice))}
                                                 </ScUnit>
                                                 <ScAmount>
                                                     ${" "}
-                                                    {FormatToLocaleString(
+                                                    {formatToLocaleString(
                                                         Number(productPrice * product.quantity)
                                                     )}
                                                 </ScAmount>
@@ -193,7 +193,7 @@ const OrderSummaryModal = ({
                                         <ScSummaryRow>
                                             <ScSummaryBoxHeader>Subtotal</ScSummaryBoxHeader>
                                             <ScSummaryBoxValue>
-                                                $ {FormatToLocaleString(Number(getSubtotalPrice()))}
+                                                $ {formatToLocaleString(Number(getSubtotalPrice()))}
                                             </ScSummaryBoxValue>
                                         </ScSummaryRow>
                                         <ScSummaryRow>
@@ -204,7 +204,7 @@ const OrderSummaryModal = ({
                                         <ScSummaryRow>
                                             <ScSummaryBoxTotalHeader>Total</ScSummaryBoxTotalHeader>
                                             <ScSummaryBoxValue>
-                                                $ {FormatToLocaleString(Number(getSubtotalPrice()))}
+                                                $ {formatToLocaleString(Number(getSubtotalPrice()))}
                                             </ScSummaryBoxValue>
                                         </ScSummaryRow>
                                         <ScSummaryBoxUnderLine />

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { useNavigate } from "react-router-dom";
 
-import { FormatToLocaleString } from "modules/number/formatToLocaleString";
+import { formatToLocaleString } from "modules/number/formatToLocaleString";
 
 import {
     ScButton,
@@ -43,12 +43,12 @@ const AddToCartSuccess = ({ onClose, addedProduct, productsCount }) => {
                         <ScProductLabelPrimary>
                             $
                             {addedProduct.promotionPrice
-                                ? FormatToLocaleString(Number(addedProduct.promotionPrice))
-                                : FormatToLocaleString(Number(addedProduct.price))}
+                                ? formatToLocaleString(Number(addedProduct.promotionPrice))
+                                : formatToLocaleString(Number(addedProduct.price))}
                         </ScProductLabelPrimary>
                         {addedProduct.promotionPrice && (
                             <ScProductPriceBefore>
-                                ${FormatToLocaleString(Number(addedProduct.price))}
+                                ${formatToLocaleString(Number(addedProduct.price))}
                             </ScProductPriceBefore>
                         )}
                     </ScProductPriceContainer>

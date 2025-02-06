@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import { orderBy } from "lodash";
 import { useQuery } from "@tanstack/react-query";
 
-import { FormatToLocaleString } from "modules/number/formatToLocaleString";
+import { formatToLocaleString } from "modules/number/formatToLocaleString";
 
 import CheckoutForm from "./CheckoutForm";
+import OrderSummaryModal from "./OrderSummaryModal";
 import {
     ScBody,
     ScCheckoutFormContainer,
@@ -23,7 +24,6 @@ import {
     ScSummaryHeader,
     ScTotalPrice,
 } from "./styles";
-import OrderSummaryModal from "./OrderSummaryModal";
 
 const Checkout = () => {
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")) || []);
@@ -147,7 +147,7 @@ const Checkout = () => {
                                     </ScLoadingPriceContainer>
                                 ) : (
                                     <ScPrice>
-                                        $ {FormatToLocaleString(Number(getSubtotalPrice()))}
+                                        $ {formatToLocaleString(Number(getSubtotalPrice()))}
                                     </ScPrice>
                                 )}
 
@@ -160,7 +160,7 @@ const Checkout = () => {
                                 {isLoadingCart ? (
                                     <ScLoadingPrice />
                                 ) : (
-                                    <div>$ {FormatToLocaleString(Number(getSubtotalPrice()))}</div>
+                                    <div>$ {formatToLocaleString(Number(getSubtotalPrice()))}</div>
                                 )}
                             </ScTotalPrice>
                         </ScStickySummary>

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { FormatToLocaleString } from "modules/number/formatToLocaleString";
+import { formatToLocaleString } from "modules/number/formatToLocaleString";
 
 import {
     ScLine,
@@ -130,13 +130,13 @@ const CartItem = ({ product, cart }) => {
                 <ScProductPriceContainer>
                     <ScProductPrice $hasPromotionPrice={!!product.promotionPrice}>
                         ${" "}
-                        {FormatToLocaleString(
+                        {formatToLocaleString(
                             Number(product.promotionPrice || product.price) * product.quantity
                         )}
                     </ScProductPrice>
                     {product.promotionPrice && (
                         <ScPriceBeforePromotion>
-                            $ {FormatToLocaleString(Number(product.price) * product.quantity)}
+                            $ {formatToLocaleString(Number(product.price) * product.quantity)}
                         </ScPriceBeforePromotion>
                     )}
                 </ScProductPriceContainer>
