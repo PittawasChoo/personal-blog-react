@@ -157,7 +157,7 @@ const Cart = () => {
                             <div>
                                 <ScNoItemsContainer>
                                     <ScNoItemsLabel>
-                                        There Are No Items In This Cart. :(
+                                        There Are No Items In This Cart :(
                                     </ScNoItemsLabel>
 
                                     <ScNoItemsButton onClick={() => navigate("/all-products")}>

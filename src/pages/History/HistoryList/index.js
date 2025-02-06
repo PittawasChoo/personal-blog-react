@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import { get, orderBy } from "lodash";
@@ -20,12 +21,17 @@ import {
     ScTableHeaderContainer,
     ScTableHeaderItems,
     ScTableHeaderTotalPrice,
+    ScNoItemsContainer,
+    ScNoItemsLabel,
+    ScNoItemsButton,
 } from "./styles";
 import ErrorRetry from "components/ErrorRetry";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const HistoryList = ({ setModal }) => {
+    const navigate = useNavigate();
+
     const {
         data,
         isError,
@@ -60,6 +66,21 @@ const HistoryList = ({ setModal }) => {
         );
     }
     const history = get(data, "history", []);
+
+    if (history.length === 0) {
+        return (
+            <div>
+                <ScNoItemsContainer>
+                    <ScNoItemsLabel>No Order History :(</ScNoItemsLabel>
+
+                    <ScNoItemsButton onClick={() => navigate("/all-products")}>
+                        Let's Go Shopping
+                    </ScNoItemsButton>
+                </ScNoItemsContainer>
+            </div>
+        );
+    }
+
     const orderedHistory = orderBy(history, "timestamp", "desc");
 
     return (

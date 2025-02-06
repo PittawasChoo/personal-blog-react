@@ -6,6 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import Layout from "components/Layout";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import { AuthProvider } from "contexts/AuthContext";
 
@@ -50,12 +51,33 @@ const App = () => {
                                 <Route path="/contact-us/*" element={<ContactUs />} />
                                 <Route path="/product/*" element={<Product />} />
                                 <Route path="/cart/*" element={<Cart />} />
-                                <Route path="/checkout/*" element={<Checkout />} />
-                                <Route path="/purchase-success/*" element={<PurchaseSuccess />} />
+                                <Route
+                                    path="/checkout/*"
+                                    element={
+                                        <ProtectedRoute>
+                                            <Checkout />
+                                        </ProtectedRoute>
+                                    }
+                                />
+                                <Route
+                                    path="/purchase-success/*"
+                                    element={
+                                        <ProtectedRoute>
+                                            <PurchaseSuccess />
+                                        </ProtectedRoute>
+                                    }
+                                />
                                 <Route path="/login/*" element={<Login />} />
                                 <Route path="/register/*" element={<Register />} />
                                 <Route path="/register-success/*" element={<RegisterSuccess />} />
-                                <Route path="/history/*" element={<History />} />
+                                <Route
+                                    path="/history/*"
+                                    element={
+                                        <ProtectedRoute>
+                                            <History />
+                                        </ProtectedRoute>
+                                    }
+                                />
 
                                 {/* Todo: not found page */}
                                 {/* <Route path="*" element={<PageNotFound />} /> */}

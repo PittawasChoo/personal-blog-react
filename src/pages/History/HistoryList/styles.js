@@ -59,3 +59,31 @@ export const ScNotFullyLoadedContainer = styled.div`
     justify-content: center;
     padding-top: 150px;
 `;
+
+export const ScNoItemsContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 260px;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const ScNoItemsLabel = styled.div`
+    font-size: 30px;
+    font-family: oxanium;
+`;
+
+export const ScNoItemsButton = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    background-color: black;
+    padding: 15px 30px;
+    border-radius: 15px;
+    margin-top: 30px;
+    font-family: oxanium;
+    cursor: pointer;
+`;
