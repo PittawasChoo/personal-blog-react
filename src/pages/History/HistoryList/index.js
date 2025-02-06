@@ -60,7 +60,7 @@ const HistoryList = ({ setModal }) => {
         );
     }
     const history = get(data, "history", []);
-    const orderedHistory = orderBy(history, "timestamp", "asc");
+    const orderedHistory = orderBy(history, "timestamp", "desc");
 
     return (
         <>

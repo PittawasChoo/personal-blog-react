@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { get } from "lodash";
+import { get, orderBy } from "lodash";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
@@ -48,6 +48,8 @@ import {
 } from "./styles";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const SIZE_ORDER = ["xs", "s", "m", "l", "xl", "xxl"];
+const SHOES_SIZE_ORDER = ["6 us", "7 us", "8 us", "9 us", "10 us", "11 us", "12 us"];
 
 const ProductBody = () => {
     const { notifyError, notifyAddToCartSuccess } = useToast();
@@ -168,7 +170,28 @@ const ProductBody = () => {
         );
     }
 
-    console.log("product", product);
+    const sortByProductSizes = (stock) => {
+        const sizes = stock.map((item) => item.size);
+        console.log("sizes", sizes);
+
+        if (sizes.some((size) => SIZE_ORDER.includes(size.toLowerCase()))) {
+            return stock.sort((acc, cur) => {
+                const previousIndex = SIZE_ORDER.indexOf(acc.size.toLowerCase());
+                const currentIndex = SIZE_ORDER.indexOf(cur.size.toLowerCase());
+                return previousIndex - currentIndex;
+            });
+        }
+
+        if (sizes.some((size) => SHOES_SIZE_ORDER.includes(size.toLowerCase()))) {
+            return stock.sort((acc, cur) => {
+                const previousIndex = SHOES_SIZE_ORDER.indexOf(acc.size.toLowerCase());
+                const currentIndex = SHOES_SIZE_ORDER.indexOf(cur.size.toLowerCase());
+                return previousIndex - currentIndex;
+            });
+        }
+
+        return orderBy(stock, "size", "asc");
+    };
 
     return (
         <ScRoot>
@@ -213,7 +236,7 @@ const ProductBody = () => {
                         <ScLoadingSize />
                     ) : (
                         <ScSizeOptionsContainer>
-                            {get(product, "stock", []).map((stock) => (
+                            {sortByProductSizes(get(product, "stock", [])).map((stock) => (
                                 <ScSizeButton
                                     $isSelected={selectedSize.size === stock.size}
                                     onClick={() => setSelectedSize(stock)}
