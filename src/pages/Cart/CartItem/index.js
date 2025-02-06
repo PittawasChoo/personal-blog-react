@@ -22,6 +22,8 @@ import {
     ScTextLink,
 } from "./styles";
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 const CartItem = ({ product, cart }) => {
     const getMaxQuantity = () => {
         const sizeStock = product.stock.find((stock) => stock.size === product.size).stock;
@@ -73,7 +75,7 @@ const CartItem = ({ product, cart }) => {
         <>
             <ScProductContainer>
                 <ScTextLink to={`/product?id=${product.id}`}>
-                    <ScProductImage $imgUrl={`http://localhost:3001/images/${product.imgName}`} />
+                    <ScProductImage $imgUrl={`${BACKEND_URL}/images/${product.imgName}`} />
                 </ScTextLink>
 
                 <ScProductDetailContainer>

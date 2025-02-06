@@ -19,6 +19,8 @@ import {
     ScNoItemBodyContainer,
 } from "./styles";
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 const Products = ({ page, setCurrentPage, setPageCount, setShowPagination }) => {
     const { searchParam, selectedBrands, selectedSizes, selectedTypes, sortBy } =
         useContext(FilterContext);
@@ -39,7 +41,7 @@ const Products = ({ page, setCurrentPage, setPageCount, setShowPagination }) => 
             page,
         ],
         queryFn: async () => {
-            const response = await fetch("http://localhost:3001/products", {
+            const response = await fetch(`${BACKEND_URL}/products`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -127,7 +129,7 @@ const Products = ({ page, setCurrentPage, setPageCount, setShowPagination }) => 
                         <ScCardContainer key={product.id}>
                             <BigCard
                                 id={product.id}
-                                imgUrl={`http://localhost:3001/images/${product.imgName}`}
+                                imgUrl={`${BACKEND_URL}/images/${product.imgName}`}
                                 brand={product.brand}
                                 name={product.name}
                                 price={Number(product.price)}

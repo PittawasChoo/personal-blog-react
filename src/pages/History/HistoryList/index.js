@@ -23,6 +23,8 @@ import {
 } from "./styles";
 import ErrorRetry from "components/ErrorRetry";
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 const HistoryList = ({ setModal }) => {
     const {
         data,
@@ -32,7 +34,7 @@ const HistoryList = ({ setModal }) => {
     } = useQuery({
         queryKey: ["history"],
         queryFn: async () => {
-            const response = await fetch("http://localhost:3001/history", {
+            const response = await fetch(`${BACKEND_URL}/history`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

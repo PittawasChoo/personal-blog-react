@@ -31,6 +31,8 @@ import {
     ScTotalPrice,
 } from "./styles";
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 const Cart = () => {
     const { user } = useContext(AuthContext);
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")) || []);
@@ -73,7 +75,7 @@ const Cart = () => {
     } = useQuery({
         queryKey: ["cart", ids],
         queryFn: async () => {
-            const response = await fetch("http://localhost:3001/cart", {
+            const response = await fetch(`${BACKEND_URL}/cart`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

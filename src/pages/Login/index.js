@@ -23,6 +23,8 @@ import {
     ScRoot,
 } from "./styles";
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 const Login = () => {
     const { login } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -31,7 +33,7 @@ const Login = () => {
     const { mutate, isPending, isError, error } = useMutation({
         mutationKey: ["login"],
         mutationFn: async ({ email, password }) => {
-            const response = await fetch("http://localhost:3001/login", {
+            const response = await fetch(`${BACKEND_URL}/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

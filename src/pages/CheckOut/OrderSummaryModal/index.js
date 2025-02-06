@@ -45,6 +45,8 @@ import {
 } from "./styles";
 import ErrorRetry from "components/ErrorRetry";
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 const OrderSummaryModal = ({
     isModalOpen,
     orderSummary,
@@ -80,7 +82,7 @@ const OrderSummaryModal = ({
             province,
             postalCode,
         }) => {
-            const response = await fetch("http://localhost:3001/purchase", {
+            const response = await fetch(`${BACKEND_URL}/purchase`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -1,10 +1,12 @@
 import React, { createContext, useState, useEffect } from "react";
 
+import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+    const navigate = useNavigate();
     const [user, setUser] = useState(() => {
         const storedUserId = localStorage.getItem("userId");
         return storedUserId ? storedUserId : null;
@@ -31,6 +33,7 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
         localStorage.removeItem("userId");
         localStorage.removeItem("authToken");
+        navigate("/");
     };
 
     const contextValue = { user, login, logout };

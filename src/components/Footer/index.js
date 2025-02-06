@@ -58,9 +58,10 @@ const Footer = () => {
                         <ScTextLink to="/about-us">
                             <ScPagePortal>About Us</ScPagePortal>
                         </ScTextLink>
-                        <ScTextLink to="/contact-us">
+                        {/* Todo: Contact Us Page */}
+                        {/* <ScTextLink to="/contact-us">
                             <ScPagePortal>Contact Us</ScPagePortal>
-                        </ScTextLink>
+                        </ScTextLink> */}
                     </div>
                 </ScPagesPortalContainer>
             </ScTopSectionContainer>

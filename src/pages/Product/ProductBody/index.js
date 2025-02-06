@@ -47,6 +47,8 @@ import {
     ScTextLink,
 } from "./styles";
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 const ProductBody = () => {
     const { notifyError, notifyAddToCartSuccess } = useToast();
     const [quantity, setQuantity] = useState(1);
@@ -63,7 +65,7 @@ const ProductBody = () => {
     } = useQuery({
         queryKey: ["product", id],
         queryFn: async () => {
-            const response = await fetch("http://localhost:3001/product", {
+            const response = await fetch(`${BACKEND_URL}/product`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -175,9 +177,7 @@ const ProductBody = () => {
                     {isLoading ? (
                         <ScStickyLoadingImage />
                     ) : (
-                        <ScStickyImage
-                            $imgUrl={`http://localhost:3001/images/${product.imgName}`}
-                        />
+                        <ScStickyImage $imgUrl={`${BACKEND_URL}/images/${product.imgName}`} />
                     )}
                 </ScImageContainer>
                 <ScProductDetailContainer>

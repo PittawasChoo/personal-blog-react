@@ -31,6 +31,8 @@ import {
     ScToolButtonContainer,
 } from "./styles";
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 const ProductPage = ({ title, children }) => {
     // search params controller
     const [, setSearchParams] = useSearchParams();
@@ -106,7 +108,7 @@ const ProductPage = ({ title, children }) => {
     } = useQuery({
         queryKey: ["brands"],
         queryFn: async () => {
-            const response = await fetch("http://localhost:3001/brands");
+            const response = await fetch(`${BACKEND_URL}/brands`);
             return await response.json();
         },
     });
@@ -118,7 +120,7 @@ const ProductPage = ({ title, children }) => {
     } = useQuery({
         queryKey: ["types"],
         queryFn: async () => {
-            const response = await fetch("http://localhost:3001/types");
+            const response = await fetch(`${BACKEND_URL}/types`);
             return await response.json();
         },
     });
@@ -130,7 +132,7 @@ const ProductPage = ({ title, children }) => {
     } = useQuery({
         queryKey: ["sizes"],
         queryFn: async () => {
-            const response = await fetch("http://localhost:3001/sizes");
+            const response = await fetch(`${BACKEND_URL}/sizes`);
             return await response.json();
         },
     });
@@ -142,7 +144,7 @@ const ProductPage = ({ title, children }) => {
     } = useQuery({
         queryKey: ["sortings"],
         queryFn: async () => {
-            const response = await fetch("http://localhost:3001/sorting-options");
+            const response = await fetch(`${BACKEND_URL}/sorting-options`);
             return await response.json();
         },
     });

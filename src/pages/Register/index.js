@@ -24,6 +24,8 @@ import {
     ScRoot,
 } from "./styles";
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 const GENDER_OPTIONS = [
     { value: "male", label: "Male" },
     { value: "female", label: "Female" },
@@ -36,7 +38,7 @@ const Register = () => {
     const { mutate, isPending, isError, error } = useMutation({
         mutationKey: ["register"],
         mutationFn: async ({ email, password, firstName, lastName, dob, gender }) => {
-            const response = await fetch("http://localhost:3001/register", {
+            const response = await fetch(`${BACKEND_URL}/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

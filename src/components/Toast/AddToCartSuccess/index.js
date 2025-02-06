@@ -18,6 +18,8 @@ import {
     ScProductPriceContainer,
 } from "./styles";
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 const AddToCartSuccess = ({ onClose, addedProduct, productsCount }) => {
     const navigate = useNavigate();
 
@@ -34,7 +36,7 @@ const AddToCartSuccess = ({ onClose, addedProduct, productsCount }) => {
             </ScHeaderContainer>
 
             <ScProductContainer>
-                <ScProductImage $imgUrl={`http://localhost:3001/images/${addedProduct.imgName}`} />
+                <ScProductImage $imgUrl={`${BACKEND_URL}/images/${addedProduct.imgName}`} />
                 <ScProductDetailContainer>
                     <ScProductLabelPrimary>{addedProduct.name}</ScProductLabelPrimary>
                     <ScProductLabelSecondary>{addedProduct.brand}</ScProductLabelSecondary>

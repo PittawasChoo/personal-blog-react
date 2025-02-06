@@ -123,9 +123,10 @@ const Navbar = ({ alwaysShowBackground = false }) => {
                             </ScMenuLabel>
                         </ScTextLink>
                         <ScTextLink to="/contact-us">
-                            <ScMenuLabel>
+                            {/* Todo: Contact Us Page */}
+                            {/* <ScMenuLabel>
                                 CONTACT US<ScMenuNumber>05</ScMenuNumber>
-                            </ScMenuLabel>
+                            </ScMenuLabel> */}
                         </ScTextLink>
                     </ScMenuContainer>
                     <ScMenuContainer>
@@ -163,7 +164,12 @@ const Navbar = ({ alwaysShowBackground = false }) => {
                                     <span>Edit Profile</span>
                                 </ScProfileOptionContainer>
                             </MenuItem> */}
-                            <MenuItem onClick={() => navigate("/history")}>
+                            <MenuItem
+                                onClick={() => {
+                                    navigate("/history");
+                                    handleClose();
+                                }}
+                            >
                                 <ScProfileOptionContainer>
                                     <HistoryIcon sx={{ fontSize: "16px", color: "#000000DE" }} />{" "}
                                     <span>History</span>

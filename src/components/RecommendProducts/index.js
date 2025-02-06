@@ -19,6 +19,8 @@ import {
     ScSmallDot,
 } from "./styles";
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 const RecommendProducts = () => {
     const {
         data: recommendProducts,
@@ -28,7 +30,7 @@ const RecommendProducts = () => {
     } = useQuery({
         queryKey: ["recommend"],
         queryFn: async () => {
-            const response = await fetch("http://localhost:3001/recommend", {
+            const response = await fetch(`${BACKEND_URL}/recommend`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -72,7 +74,7 @@ const RecommendProducts = () => {
                                   <BigCard
                                       key={product.id}
                                       id={product.id}
-                                      imgUrl={`http://localhost:3001/images/${product.imgName}`}
+                                      imgUrl={`${BACKEND_URL}/images/${product.imgName}`}
                                       brand={product.brand}
                                       name={product.name}
                                       price={Number(product.price)}

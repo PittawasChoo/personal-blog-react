@@ -12,6 +12,8 @@ import ProductCarousel from "./ProductCarousel";
 
 import { ScBanner2Container, ScTrendingContainer } from "./styles";
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 const Main = () => {
     const {
         data: newArrivalData,
@@ -21,7 +23,7 @@ const Main = () => {
     } = useQuery({
         queryKey: ["new-arrival"],
         queryFn: async () => {
-            const response = await fetch("http://localhost:3001/new-arrival", {
+            const response = await fetch(`${BACKEND_URL}/new-arrival`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -42,7 +44,7 @@ const Main = () => {
     } = useQuery({
         queryKey: ["promotion"],
         queryFn: async () => {
-            const response = await fetch("http://localhost:3001/promotion", {
+            const response = await fetch(`${BACKEND_URL}/promotion`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

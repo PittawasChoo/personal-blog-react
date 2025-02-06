@@ -25,6 +25,8 @@ import {
     ScTotalPrice,
 } from "./styles";
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 const Checkout = () => {
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")) || []);
     const [orderSummary, setOrderSummary] = useState({});
@@ -65,7 +67,7 @@ const Checkout = () => {
         queryKey: ["profile"],
         queryFn: async () => {
             const token = localStorage.getItem("authToken");
-            const response = await fetch("http://localhost:3001/profile", {
+            const response = await fetch(`${BACKEND_URL}/profile`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -86,7 +88,7 @@ const Checkout = () => {
     } = useQuery({
         queryKey: ["cart", ids],
         queryFn: async () => {
-            const response = await fetch("http://localhost:3001/cart", {
+            const response = await fetch(`${BACKEND_URL}/cart`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

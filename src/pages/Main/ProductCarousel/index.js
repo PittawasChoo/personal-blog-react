@@ -33,6 +33,8 @@ import {
     ScTextLink,
 } from "./styles";
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 const ProductCarousel = ({ isLoading, isError, refetch, header, products, linkTo }) => {
     let sliderRef = useRef(null);
     const next = () => {
@@ -129,7 +131,7 @@ const ProductCarousel = ({ isLoading, isError, refetch, header, products, linkTo
                                               <SmallCard
                                                   key={product.id}
                                                   id={product.id}
-                                                  imgUrl={`http://localhost:3001/images/${product.imgName}`}
+                                                  imgUrl={`${BACKEND_URL}/images/${product.imgName}`}
                                                   brand={product.brand}
                                                   name={product.name}
                                                   price={Number(product.price)}

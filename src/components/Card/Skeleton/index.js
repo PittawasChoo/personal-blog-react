@@ -63,7 +63,7 @@ const Skeleton = ({ isSmall = false }) => {
 };
 
 Skeleton.propTypes = {
-    isSmall: PropTypes.bool.isRequired,
+    isSmall: PropTypes.bool,
 };
 
 export default Skeleton;
