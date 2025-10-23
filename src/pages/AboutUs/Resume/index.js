@@ -61,6 +61,12 @@ const Resume = () => {
                                     linkedin.com/in/pittawas-choo
                                 </ScTextLink>
                             </ScContactDetail>
+                            <ScContactDetail>
+                                <LinkOutlinedIcon />
+                                <ScTextLink to="https://www.yearofculinaryjourneys.com/">
+                                    Year of Culinary Journeys Website
+                                </ScTextLink>
+                            </ScContactDetail>
                         </ShowInViewBox>
 
                         <ShowInViewBox>
@@ -74,6 +80,18 @@ const Resume = () => {
                                 <ScListItem>NodeJs</ScListItem>
                                 <ScListItem>Express</ScListItem>
                                 <ScListItem>PostgreSQL</ScListItem>
+                                <ScListItem>SAP BTP</ScListItem>
+                                <ScListItem>SAP CAP</ScListItem>
+                                <ScListItem>SAP Fiori (UI5)</ScListItem>
+                            </ul>
+                        </ShowInViewBox>
+                        <ShowInViewBox>
+                            <ScTopic>Certifications</ScTopic>
+                            <ul>
+                                <ScListItem>
+                                    SAP Certified Development Associate — SAP Cloud Application
+                                    Programming (CAP) (C_CPE_2409)
+                                </ScListItem>
                             </ul>
                         </ShowInViewBox>
                         <ShowInViewBox>
@@ -81,7 +99,6 @@ const Resume = () => {
                             <ul>
                                 <ScListItem>Thai | Native</ScListItem>
                                 <ScListItem>English | Intermediate</ScListItem>
-                                <ScListItem>Spanish | Beginner</ScListItem>
                             </ul>
                         </ShowInViewBox>
                     </ScLeftSectionContainer>
@@ -96,7 +113,7 @@ const Resume = () => {
                             <ScDescription>
                                 Passionate developer with over 3 years of experience in developing
                                 web applications. Proficient in both front-end technologies
-                                espicailly ReactJs and NextJs, and back-end technologies including
+                                especially ReactJs and NextJs, and back-end technologies including
                                 Node.js and Express. Seeking to leverage my skills in a dynamic team
                                 environment to drive innovation and deliver high-quality software
                                 solutions.
@@ -105,6 +122,56 @@ const Resume = () => {
 
                         <ShowInViewBox>
                             <ScTopic>MY JOURNEY</ScTopic>
+                            <ScJourneyHeaderContainer>
+                                <div>
+                                    <ScJourneyHeader>SOFTWARE ENGINEER STUDENT</ScJourneyHeader>
+                                    <ScJourneyPlace>
+                                        Faculty of Information Technology, King Mongkut's Institute
+                                        of Technology Ladkrabang | Bangkok
+                                    </ScJourneyPlace>
+                                </div>
+                                <ScJourneyPeriod>2017 - 2021</ScJourneyPeriod>
+                            </ScJourneyHeaderContainer>
+                            <ul>
+                                <ScListItem>
+                                    Used NextJs with NodeJs to create website for senior project
+                                    subject.
+                                </ScListItem>
+                            </ul>
+                        </ShowInViewBox>
+
+                        <ShowInViewBox>
+                            <ScJourneyHeaderContainer>
+                                <div>
+                                    <ScJourneyHeader>APPRENTICE SOFTWARE DEVELOPER</ScJourneyHeader>
+                                    <ScJourneyPlace>VenueE | Bangkok</ScJourneyPlace>
+                                </div>
+                                <ScJourneyPeriod>JUN 2019 - JUL 2019</ScJourneyPeriod>
+                            </ScJourneyHeaderContainer>
+                            <ul>
+                                <ScListItem>
+                                    Created interactive user interfaces with React and NextJs
+                                    framework.
+                                </ScListItem>
+                                <ScListItem>
+                                    Developed and executed automated test scripts using Cypress.io
+                                </ScListItem>
+                                <ScListItem>
+                                    Collaborated closely with UX/UI designers to implement design
+                                    concepts.
+                                </ScListItem>
+                                <ScListItem>
+                                    Collaborated closely with back-end developers to ensure seamless
+                                    integration of front-end and back-end code.
+                                </ScListItem>
+                                <ScListItem>
+                                    Optimized website performance through code refactoring and
+                                    caching techniques.
+                                </ScListItem>
+                            </ul>
+                        </ShowInViewBox>
+
+                        <ShowInViewBox>
                             <ScJourneyHeaderContainer>
                                 <div>
                                     <ScJourneyHeader>SOFTWARE DEVELOPER</ScJourneyHeader>
@@ -138,51 +205,67 @@ const Resume = () => {
                                 </ScListItem>
                             </ul>
                         </ShowInViewBox>
+
                         <ShowInViewBox>
                             <ScJourneyHeaderContainer>
                                 <div>
-                                    <ScJourneyHeader>APPRENTICE SOFTWARE DEVELOPER</ScJourneyHeader>
-                                    <ScJourneyPlace>VenueE | Bangkok</ScJourneyPlace>
+                                    <ScJourneyHeader>
+                                        FRONTEND DEVELOPER (PART TIME)
+                                    </ScJourneyHeader>
+                                    <ScJourneyPlace>Year of Culinary Journeys |</ScJourneyPlace>
+                                    <ScJourneyPlace>
+                                        Tourism Authority of Thailand (TAT):
+                                        การท่องเที่ยวแห่งประเทศไทย (ททท)
+                                    </ScJourneyPlace>
                                 </div>
-                                <ScJourneyPeriod>JUN 2019 - JUL 2019</ScJourneyPeriod>
+                                <ScJourneyPeriod>AUG 2025 - OCT 2025</ScJourneyPeriod>
                             </ScJourneyHeaderContainer>
                             <ul>
                                 <ScListItem>
-                                    Created interactive user interfaces with React and NextJs
-                                    framework.
+                                    Delivered a responsive NextJs + Tailwind static site for mobile
+                                    and desktop.
                                 </ScListItem>
                                 <ScListItem>
-                                    Developed and executed automated test scripts using Cypress.io
+                                    Integrated Google Maps Platform to display locations and pins in
+                                    website.
+                                </ScListItem>
+                                <ScListItem>
+                                    Optimized website to share quiz result to Facebook, X, and
+                                    Instagram.
                                 </ScListItem>
                                 <ScListItem>
                                     Collaborated closely with UX/UI designers to implement design
-                                    concepts.
-                                </ScListItem>
-                                <ScListItem>
-                                    Collaborated closely with back-end developers to ensure seamless
-                                    integration of front-end and back-end code.
-                                </ScListItem>
-                                <ScListItem>
-                                    Optimized website performance through code refactoring and
-                                    caching techniques.
+                                    concepts. And also collaborated closely with graphic designers
+                                    to decorate the website with best art works.
                                 </ScListItem>
                             </ul>
                         </ShowInViewBox>
+
                         <ShowInViewBox>
                             <ScJourneyHeaderContainer>
                                 <div>
-                                    <ScJourneyHeader>SOFTWARE ENGINEER STUDENT</ScJourneyHeader>
-                                    <ScJourneyPlace>
-                                        Faculty of Information Technology, King Mongkut's Institute
-                                        of Technology Ladkrabang | Bangkok
-                                    </ScJourneyPlace>
+                                    <ScJourneyHeader>FULL-STACK DEVELOPER</ScJourneyHeader>
+                                    <ScJourneyPlace>Avally Thailand | Bangkok</ScJourneyPlace>
                                 </div>
-                                <ScJourneyPeriod>2017 - 2021</ScJourneyPeriod>
+                                <ScJourneyPeriod>MAR 2025 - PRESENT</ScJourneyPeriod>
                             </ScJourneyHeaderContainer>
                             <ul>
                                 <ScListItem>
-                                    Used NextJs with NodeJs to create website for senior project
-                                    subject.
+                                    Built SAP Fiori apps on SAP BTP (Fiori Elements/UI5).
+                                </ScListItem>
+                                <ScListItem>
+                                    Delivered SAP CAP services (Node.js/CDS, HANA Cloud, OData v4).
+                                </ScListItem>
+                                <ScListItem>
+                                    Developed React frontends and optimized to BTP via App
+                                    Router/Destinations.
+                                </ScListItem>
+                                <ScListItem>
+                                    Optimized queries & payloads (annotations, $select/$expand).
+                                </ScListItem>
+                                <ScListItem>
+                                    Shipped on Cloud Foundry (MTA) with basic CI, logging, and
+                                    monitoring.
                                 </ScListItem>
                             </ul>
                         </ShowInViewBox>
